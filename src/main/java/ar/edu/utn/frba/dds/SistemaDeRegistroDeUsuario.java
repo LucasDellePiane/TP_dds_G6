@@ -2,9 +2,13 @@ package ar.edu.utn.frba.dds;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Stream;
 
 public class SistemaDeRegistroDeUsuario {
 
@@ -51,9 +55,9 @@ public class SistemaDeRegistroDeUsuario {
     return true;
   }
 
-  private boolean validarConPeoresContrasenias(String contrasenia) throws FileNotFoundException {
+  public boolean validarConPeoresContrasenias(String contrasenia) throws FileNotFoundException {
     boolean sinRepetir = true;
-    File archivoContraseniasPeligrosas = new File("contraseniasMasUsadas.txt");
+    File archivoContraseniasPeligrosas = new File("src\\main\\resources\\vulnerable_passwords.txt");
     Scanner scanner = new Scanner(archivoContraseniasPeligrosas);
 
     while (scanner.hasNextLine()) {
@@ -65,6 +69,8 @@ public class SistemaDeRegistroDeUsuario {
     scanner.close();
     return sinRepetir;
   }
+
+
 
 
   private boolean validarTamanio(String contrasenia) {
