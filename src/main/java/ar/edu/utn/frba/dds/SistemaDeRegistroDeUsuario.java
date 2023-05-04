@@ -27,7 +27,7 @@ public class SistemaDeRegistroDeUsuario {
 
 
   public boolean validarContrasenia(String nombreUsuario, String contrasenia) throws FileNotFoundException {
-    return this.validarTamanio(contrasenia) && /**this.validarConPeoresContrasenias(contrasenia) &&*/
+    return this.validarTamanio(contrasenia) && this.validarConPeoresContrasenias(contrasenia) &&
         this.validacionCaracteresRepetidos(contrasenia) && validarCredenciales(nombreUsuario,contrasenia);
   }
 /*
