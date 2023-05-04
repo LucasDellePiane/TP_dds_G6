@@ -14,22 +14,34 @@ public class ValidacionDeContraseniaTest {
 
   @Test
   public void unaContraseniaConCaracteresIgualesNoSirve() throws FileNotFoundException {
-    assertFalse(sistema.validarContrasenia("batman", "muchosaaa"));
+    assertThrows(RuntimeException.class, () -> {
+      // Aquí debes llamar a tu método que lanza la excepción
+      // Por ejemplo, si tu método se llama lanzarExcepcion(), puedes hacer:
+      sistema.validarContrasenia("batman", "muchosaaa");
+    });
   }
 
   @Test
   public void contraseniaInvalidaPorLongitudMenorAOcho() throws FileNotFoundException {
-    assertFalse(sistema.validarContrasenia("Batman", "abc"));
+    assertThrows(RuntimeException.class, () -> {
+      // Aquí debes llamar a tu método que lanza la excepción
+      // Por ejemplo, si tu método se llama lanzarExcepcion(), puedes hacer:
+      sistema.validarContrasenia("batman", "abc");
+    });
   }
 
   @Test
   public void contraseniaInvalidaPorUsoDeCredenciales() throws FileNotFoundException {
-    assertFalse(sistema.validarContrasenia("soyBatman", "soyBatman"));
+    assertThrows(RuntimeException.class, () -> {
+      // Aquí debes llamar a tu método que lanza la excepción
+      // Por ejemplo, si tu método se llama lanzarExcepcion(), puedes hacer:
+      sistema.validarContrasenia("soybatman", "soybatman");
+    });
   }
 
   @Test
   public void contraseniaValida() throws FileNotFoundException {
-    assertTrue(sistema.validarContrasenia("batman", "supercalifragilisticoespialidoso"));
+    sistema.validarContrasenia("soybatman", "elmascapodelmundo");
   }
 }
 

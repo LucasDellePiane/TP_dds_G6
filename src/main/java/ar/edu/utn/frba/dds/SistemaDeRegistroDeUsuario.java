@@ -15,70 +15,53 @@ public class SistemaDeRegistroDeUsuario {
   private List<Usuario> usuariosDeLaPlataforma = new ArrayList<>();
 
   public void registrarUsuario(String nombreUsuario, String contrasenia) throws FileNotFoundException {
-    if(this.validarContrasenia(nombreUsuario, contrasenia)) {
-      // guardar usuario y contrasenia
-      usuariosDeLaPlataforma.add(new Usuario(nombreUsuario, contrasenia));
-    }
-    else {
-      throw new RuntimeException("La contrasenia no es segura");
-      //tirar excepcion de contra invalida
-    }
+    this.validarContrasenia(nombreUsuario, contrasenia);
+    usuariosDeLaPlataforma.add(new Usuario(nombreUsuario, contrasenia));
   }
 
-
-  public boolean validarContrasenia(String nombreUsuario, String contrasenia) throws FileNotFoundException {
-    return this.validarTamanio(contrasenia) && this.validarConPeoresContrasenias(contrasenia) &&
-        this.validacionCaracteresRepetidos(contrasenia) && validarCredenciales(nombreUsuario,contrasenia);
+  public void validarContrasenia(String nombreUsuario, String contrasenia) throws FileNotFoundException {
+    this.validarTamanio(contrasenia);
+    this.validarConPeoresContrasenias(contrasenia);
+    this.validacionCaracteresRepetidos(contrasenia);
+    this.validarCredenciales(nombreUsuario,contrasenia);
   }
-/*
-  private boolean validacionCaracteresRepetidos(String contrasenia){
-    boolean tieneCaracterRepetido = false;
-    for (int i = 0; i < contrasenia.length()-1; i++) {
-      char caracter = contrasenia.charAt(i);
-      char otroCaracter = contrasenia.charAt(i+1);
-        if (caracter == otroCaracter) {
-          tieneCaracterRepetido = true;
-      }
-        i++;
-    }
-    return tieneCaracterRepetido;
-  }
-*/
 
-  private boolean validacionCaracteresRepetidos(String contrasenia) {
+  private void validacionCaracteresRepetidos(String contrasenia) {
     int len = contrasenia.length();
     for (int i = 0; i < len - 1; i++) {
       if (contrasenia.charAt(i) == contrasenia.charAt(i + 1)) {
-        return false; // si se encuentra un par de caracteres simultáneos repetidos, el string contiene caracteres simultáneos repetidos
+        throw new RuntimeException("La contrasenia tiene caracteres repetidos"); // si se encuentra un par de caracteres simultáneos repetidos, el string contiene caracteres simultáneos repetidos
       }
     }
-    return true;
   }
 
-  public boolean validarConPeoresContrasenias(String contrasenia) throws FileNotFoundException {
-    boolean sinRepetir = true;
+  public void validarConPeoresContrasenias(String contrasenia) throws FileNotFoundException {
+    //boolean sinRepetir = true;
     File archivoContraseniasPeligrosas = new File("src\\main\\resources\\vulnerable_passwords.txt");
     Scanner scanner = new Scanner(archivoContraseniasPeligrosas);
 
     while (scanner.hasNextLine()) {
       String linea = scanner.nextLine();
       if (contrasenia.equals(linea)) {
-        sinRepetir = false;
+        throw new RuntimeException("La contrasenia se encuentra entre las peores 10000");
       }
     }
     scanner.close();
-    return sinRepetir;
   }
 
-
-
-
-  private boolean validarTamanio(String contrasenia) {
-      return (contrasenia.length() >= 8  && contrasenia.length() <= 64);
+  private void validarTamanio(String contrasenia) {
+      if(contrasenia.length() <= 8) {
+        throw new RuntimeException("La contrasenia es demasiado corta");
+      };
   }
 
-  private boolean validarCredenciales(String nombreUsuario, String contrasenia) {
-    return !nombreUsuario.equals(contrasenia);
+  private void validarCredenciales(String nombreUsuario, String contrasenia) {
+    if (nombreUsuario.equals(contrasenia)) {
+      throw new RuntimeException("La contrasenia utiliza credenciales");
+    };
   }
-  
+
+  public List<Usuario> getUsuariosDeLaPlataforma() {
+    return usuariosDeLaPlataforma;
+  }
 }
