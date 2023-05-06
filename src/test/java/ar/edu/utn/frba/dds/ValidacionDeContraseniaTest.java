@@ -1,5 +1,8 @@
 package ar.edu.utn.frba.dds;
 
+import ar.edu.utn.frba.dds.exceptions.CaracteresRepetidosException;
+import ar.edu.utn.frba.dds.exceptions.ContraseniaMuyCortaException;
+import ar.edu.utn.frba.dds.exceptions.UsaCrendencialesException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -11,11 +14,11 @@ import java.io.IOException;
 
 public class ValidacionDeContraseniaTest {
 
-  private final SistemaDeRegistroDeUsuario sistema = new SistemaDeRegistroDeUsuario();
+  private final RepositorioDeUsuarios sistema = new RepositorioDeUsuarios();
 
   @Test
   public void unaContraseniaConCaracteresIgualesNoSirve() throws FileNotFoundException {
-    assertThrows(RuntimeException.class, () -> {
+    assertThrows(CaracteresRepetidosException.class, () -> {
       // Aquí debes llamar a tu método que lanza la excepción
       // Por ejemplo, si tu método se llama lanzarExcepcion(), puedes hacer:
       sistema.validarContrasenia("batman", "muchosaaa");
@@ -24,7 +27,7 @@ public class ValidacionDeContraseniaTest {
 
   @Test
   public void contraseniaInvalidaPorLongitudMenorAOcho() throws FileNotFoundException {
-    assertThrows(RuntimeException.class, () -> {
+    assertThrows(ContraseniaMuyCortaException.class, () -> {
       // Aquí debes llamar a tu método que lanza la excepción
       // Por ejemplo, si tu método se llama lanzarExcepcion(), puedes hacer:
       sistema.validarContrasenia("batman", "abc");
@@ -32,8 +35,8 @@ public class ValidacionDeContraseniaTest {
   }
 
   @Test
-  public void contraseniaInvalidaPorUsoDeCredenciales() throws FileNotFoundException {
-    assertThrows(RuntimeException.class, () -> {
+  public void contraseniaInvalidaPorUsoDeCredenciales() {
+    assertThrows(UsaCrendencialesException.class, () -> {
       // Aquí debes llamar a tu método que lanza la excepción
       // Por ejemplo, si tu método se llama lanzarExcepcion(), puedes hacer:
       sistema.validarContrasenia("soybatman", "soybatman");
@@ -41,8 +44,9 @@ public class ValidacionDeContraseniaTest {
   }
 
   @Test
-  public void contraseniaValida() throws IOException {
+  public void contraseniaValida() {
     sistema.validarContrasenia("soybatman", "elmascapodelmundo");
+
   }
 }
 

@@ -1,9 +1,9 @@
 package ar.edu.utn.frba.dds;
-  /*
+
 public class Usuario {
-  //private String nombre;
-  //private String apellido;
-  //private String email;
+  private String nombre;
+  private String apellido;
+  private String email;
   private String contrasenia;
   private String nombreUsuario;
 
@@ -14,4 +14,4 @@ public class Usuario {
 
 }
 
-   */
+
