@@ -19,7 +19,7 @@ public class ValidacionRegistroDeUsuario {
     Assertions.assertTrue(repousers.getUsuariosDeLaPlataforma().stream().anyMatch(usuario -> usuario.getNombreUsuario() == "soybatman" && usuario.getContrasenia() == "elmascapodelmundo"));
 }
 
-  @Test // Esta forma es la correcta? --> Preguntar a Rollinga
+  @Test // Esta forma es la correcta? --> Preguntar a Rolli
   public void unUsuarioNoSeRegistraSiNoSeValidaCorrectamenteLaContrasenia() {
     try{
       repousers.registrarUsuario("soybatman", "123456789");
