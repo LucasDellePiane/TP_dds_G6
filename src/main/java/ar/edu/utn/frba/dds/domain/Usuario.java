@@ -1,5 +1,8 @@
-package ar.edu.utn.frba.dds;
+package ar.edu.utn.frba.dds.domain;
 
+import lombok.Getter;
+
+@Getter
 public class Usuario {
   private String nombre;
   private String apellido;
