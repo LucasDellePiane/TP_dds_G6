@@ -16,7 +16,7 @@ public class ValidacionRegistroDeUsuario {
   @Test
   public void unUsuarioSeRegistraSiSeValidaCorrectamenteLaContrasenia() {
     repousers.registrarUsuario("soybatman", "elmascapodelmundo");
-    Assertions.assertTrue(repousers.getUsuariosDeLaPlataforma().stream().anyMatch(usuario -> usuario.getNombreUsuario() == "soybatman" && usuario.getContrasenia() == "elmascapodelmundo"));
+    Assertions.assertTrue(repousers.getUsuariosDeLaPlataforma().stream().anyMatch(usuario -> usuario.getNombreUsuario().equals("soybatman")  && usuario.getContrasenia().equals("elmascapodelmundo")));
 }
 
   @Test // Esta forma es la correcta? --> Preguntar a Rolli
@@ -24,7 +24,7 @@ public class ValidacionRegistroDeUsuario {
     try{
       repousers.registrarUsuario("soybatman", "123456789");
     }catch (Exception e){
-      Assertions.assertFalse(repousers.getUsuariosDeLaPlataforma().stream().anyMatch(usuario -> usuario.getNombreUsuario() == "soybatman" && usuario.getContrasenia() == "123456789"));
+      Assertions.assertFalse(repousers.getUsuariosDeLaPlataforma().stream().anyMatch(usuario -> usuario.getNombreUsuario().equals("soybatman") && usuario.getContrasenia().equals("123456789")));
     }
   }
 

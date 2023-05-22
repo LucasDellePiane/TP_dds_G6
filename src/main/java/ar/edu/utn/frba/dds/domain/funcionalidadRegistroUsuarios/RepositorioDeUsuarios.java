@@ -10,7 +10,7 @@ import java.util.List;
 
 public class RepositorioDeUsuarios {
   @Getter
-  private List<Usuario> usuariosDeLaPlataforma = new ArrayList<Usuario>();
+  private List<Usuario> usuariosDeLaPlataforma = new ArrayList<>();
 
   public void registrarUsuario(String nombreUsuario, String contrasenia) {
     this.validarContrasenia(nombreUsuario, contrasenia);
