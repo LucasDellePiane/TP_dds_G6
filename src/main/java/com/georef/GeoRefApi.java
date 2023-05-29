@@ -3,9 +3,9 @@ package com.georef;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
-import ar.edu.utn.frba.dds.domain.localizacion.ListadoDepartamentos;
-import ar.edu.utn.frba.dds.domain.localizacion.ListadoMuncipios;
-import ar.edu.utn.frba.dds.domain.localizacion.ListadoProvincias;
+import ar.edu.utn.frba.dds.domain.servicioLocalizacion.ListadoDepartamentos;
+import ar.edu.utn.frba.dds.domain.servicioLocalizacion.ListadoMuncipios;
+import ar.edu.utn.frba.dds.domain.servicioLocalizacion.ListadoProvincias;
 
 public interface GeoRefApi {
   @GET("provincias")

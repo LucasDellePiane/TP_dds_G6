@@ -9,4 +9,10 @@ import lombok.Setter;
 public class Localizacion {
   Provincia provincia;
   Division division;
+
+  public Localizacion(Provincia provincia,Division division){
+    this.division = division;
+    this.provincia = provincia;
+  }
+
 }
