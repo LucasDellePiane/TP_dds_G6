@@ -1,16 +1,50 @@
 package ar.edu.utn.frba.dds.domain.funcionalidadRegistroUsuarios;
 
+import ar.edu.utn.frba.dds.domain.servicio.Servicio;
 import ar.edu.utn.frba.dds.domain.usuario.Usuario;
+import ar.edu.utn.frba.dds.domain.usuario.UsuarioEmpresa;
 import ar.edu.utn.frba.dds.exceptions.CaracteresRepetidosException;
 import ar.edu.utn.frba.dds.exceptions.ContraseniaMuyCortaException;
 import ar.edu.utn.frba.dds.exceptions.UsaCrendencialesException;
 import lombok.Getter;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVParser;
+import org.apache.commons.csv.CSVRecord;
 
 public class RepositorioDeUsuarios {
   @Getter
   private List<Usuario> usuariosDeLaPlataforma = new ArrayList<>();
+
+
+  public void registrarEmpresas() {
+    String resourcePath = "";
+    Path path = Paths.get("src", "main", "resources", resourcePath);
+    String archivoCSV = path.toAbsolutePath().toString();
+
+    try (CSVParser parser = new CSVParser(new FileReader(archivoCSV), CSVFormat.newFormat(','))) {
+      for (CSVRecord record : parser) {
+        String nombreUsuario = record.get("NombreUsuario");
+        String contrasenia = record.get("Contrasenia");
+
+        this.registrarUsuario(nombreUsuario, contrasenia);
+      }
+    } catch (IOException e) {
+      //Agregar una excepcion
+    }
+  }
+
+  public void registrarEmpresa(String nombreUsuario, String contrasenia) {
+    this.validarContrasenia(nombreUsuario, contrasenia);
+    usuariosDeLaPlataforma.add(new UsuarioEmpresa(nombreUsuario, contrasenia));
+  }
+
 
   public void registrarUsuario(String nombreUsuario, String contrasenia) {
     this.validarContrasenia(nombreUsuario, contrasenia);

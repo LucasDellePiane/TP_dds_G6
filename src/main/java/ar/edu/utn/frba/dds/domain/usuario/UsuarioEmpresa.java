@@ -11,3 +11,6 @@ public class UsuarioEmpresa extends Usuario {
     super(nombreUsuario, contrasenia);
   }
 }
+
+
+
