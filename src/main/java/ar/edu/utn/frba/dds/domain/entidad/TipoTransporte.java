@@ -1,4 +1,4 @@
-package ar.edu.utn.frba.dds.domain.transporte;
+package ar.edu.utn.frba.dds.domain.entidad;
 
 public enum TipoTransporte {
   SUBTERRANEO,

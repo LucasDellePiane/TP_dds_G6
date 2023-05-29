@@ -1,6 +1,8 @@
 package ar.edu.utn.frba.dds.domain;
 
+import ar.edu.utn.frba.dds.domain.establecimiento.Establecimiento;
 import ar.edu.utn.frba.dds.domain.servicio.Servicio;
+import ar.edu.utn.frba.dds.domain.usuario.Usuario;
 import java.util.List;
 
 public class Comunidad {
@@ -18,7 +20,7 @@ public class Comunidad {
     this.miembros.add(miembroNuevo);
   }
 
-  public void solicitarServicio(Servicio servicio, Estacion estacion) {
-    estacion.darAltaServicio(servicio); // tendria q existir un metodo en estacion que sea controlarSolicitudServicioNuevo o algo asi
+  public void solicitarServicio(Servicio servicio, Establecimiento establecimiento) {
+    establecimiento.darAltaServicio(servicio); // tendria q existir un metodo en estacion que sea controlarSolicitudServicioNuevo o algo asi
   }
 }

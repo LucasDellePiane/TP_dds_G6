@@ -1,6 +1,6 @@
 package ar.edu.utn.frba.dds.domain.funcionalidadRegistroUsuarios;
 
-import ar.edu.utn.frba.dds.domain.Usuario;
+import ar.edu.utn.frba.dds.domain.usuario.Usuario;
 import ar.edu.utn.frba.dds.exceptions.CaracteresRepetidosException;
 import ar.edu.utn.frba.dds.exceptions.ContraseniaMuyCortaException;
 import ar.edu.utn.frba.dds.exceptions.UsaCrendencialesException;
