@@ -16,6 +16,12 @@ public class Usuario {
     this.contrasenia = contrasenia;
   }
 
+  public void configurarLocalizacion(Localizacion nuevaLocalizacion){
+    if(nuevaLocalizacion.localizacionValida()){
+      localizacion = nuevaLocalizacion;
+    }
+  }
+
 }
 
 
