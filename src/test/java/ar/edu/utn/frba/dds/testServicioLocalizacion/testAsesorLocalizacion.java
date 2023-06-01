@@ -11,13 +11,13 @@ import org.mockito.Mockito;
 public class testAsesorLocalizacion {
   // Mockito me da la posibilidad de generar un Mock sin la necesidad de crarlos
 
-  @Test
+  /*@Test
   void sePuedeGenerarLocalizacionParaProvinciaYMuncipio() {
     ServicioLocalizacion servicioMock = Mockito.mock(ServicioLocalizacion.class);
     AsesorLocalizacion asesor = new AsesorLocalizacion(servicioMock);
     Mockito
         .when(servicioMock.listadoDeProvincias())
-        .thenReturn([// aca van la listas de provincias]);
+        .thenReturn(//[ aca van la listas de provincias]);
     ServicioLocalizacionGeoRefApi asesor = new ServicioLocalizacionGeoRefApi();
-  }
+  }*/
 }

@@ -1,6 +1,5 @@
 package ar.edu.utn.frba.dds.domain.funcionalidadRegistroUsuarios;
 
-import ar.edu.utn.frba.dds.domain.servicio.Servicio;
 import ar.edu.utn.frba.dds.domain.usuario.Usuario;
 import ar.edu.utn.frba.dds.domain.usuario.UsuarioEmpresa;
 import ar.edu.utn.frba.dds.exceptions.CaracteresRepetidosException;
@@ -8,7 +7,6 @@ import ar.edu.utn.frba.dds.exceptions.ContraseniaMuyCortaException;
 import ar.edu.utn.frba.dds.exceptions.RutaInvalidaException;
 import ar.edu.utn.frba.dds.exceptions.UsaCrendencialesException;
 import lombok.Getter;
-import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -24,12 +22,18 @@ public class RepositorioDeUsuarios {
   private List<Usuario> usuariosDeLaPlataforma = new ArrayList<>();
   private List<UsuarioEmpresa> empresasUsuarias = new ArrayList<>();
 
-  public void registrarEmpresas() {
-    String resourcePath = "entidadesPrestadoras.csv";
+  public String abrirArchivo(String nombreArchivo) {
+    Path path = Paths.get("src", "main", "resources", nombreArchivo);
+    String rutaCSV = path.toAbsolutePath().toString();
+    return rutaCSV;
+  }
+  public void registrarEmpresas(String nombreArchivo) {
+    /*String resourcePath = "entidadesPrestadoras.csv";
     Path path = Paths.get("src", "main", "resources", resourcePath);
     String archivoCSV = path.toAbsolutePath().toString();
+ºº  */
 
-    try (CSVParser parser = new CSVParser(new FileReader(archivoCSV), CSVFormat.newFormat(';'))) {
+    try (CSVParser parser = new CSVParser(new FileReader(this.abrirArchivo(nombreArchivo)), CSVFormat.newFormat(';'))) {
       for (CSVRecord record : parser) {
         String nombreEmpresa = record.get("NombreUsuario");
         String contrasenia = record.get("Contrasenia");
@@ -38,7 +42,7 @@ public class RepositorioDeUsuarios {
         this.registrarEmpresa(nombreEmpresa, contrasenia, tipo);
       }
     } catch (IOException e) {
-      throw new RutaInvalidaException("La ruta indicada no existe");
+      throw new RutaInvalidaException("La ruta es invalida");
     }
   }
 
@@ -89,6 +93,10 @@ public class RepositorioDeUsuarios {
     if (nombreUsuario.equals(contrasenia)) {
       throw new UsaCrendencialesException("La contrasenia utiliza credenciales");
     }
+  }
+
+  public int cantidadEmpresasRegistradas() {
+    return this.empresasUsuarias.size();
   }
 
   /*

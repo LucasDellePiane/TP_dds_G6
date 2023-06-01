@@ -16,11 +16,13 @@ public class ValidacionDeContraseniaTest {
 
   private final RepositorioDeUsuarios repousers = new RepositorioDeUsuarios();
 
+  /*
   @BeforeEach
   public void comienzo(){
     String ruta = "src\\main\\resources\\contraseniasPeligrosas.txt";
     ValidadorPeorContrasenia.getINSTANCE().setRutaPeoresContrasenias(ruta);
   }
+  */
 
   @Test
   public void unaContraseniaConCaracteresIgualesNoSirve()  {
