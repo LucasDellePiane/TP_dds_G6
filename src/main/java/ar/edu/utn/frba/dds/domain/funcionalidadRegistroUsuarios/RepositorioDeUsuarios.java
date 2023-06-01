@@ -5,6 +5,7 @@ import ar.edu.utn.frba.dds.domain.usuario.Usuario;
 import ar.edu.utn.frba.dds.domain.usuario.UsuarioEmpresa;
 import ar.edu.utn.frba.dds.exceptions.CaracteresRepetidosException;
 import ar.edu.utn.frba.dds.exceptions.ContraseniaMuyCortaException;
+import ar.edu.utn.frba.dds.exceptions.RutaInvalidaException;
 import ar.edu.utn.frba.dds.exceptions.UsaCrendencialesException;
 import lombok.Getter;
 import java.io.BufferedReader;
@@ -21,28 +22,29 @@ import org.apache.commons.csv.CSVRecord;
 public class RepositorioDeUsuarios {
   @Getter
   private List<Usuario> usuariosDeLaPlataforma = new ArrayList<>();
-
+  private List<UsuarioEmpresa> empresasUsuarias = new ArrayList<>();
 
   public void registrarEmpresas() {
-    String resourcePath = "";
+    String resourcePath = "entidadesPrestadoras.csv";
     Path path = Paths.get("src", "main", "resources", resourcePath);
     String archivoCSV = path.toAbsolutePath().toString();
 
-    try (CSVParser parser = new CSVParser(new FileReader(archivoCSV), CSVFormat.newFormat(','))) {
+    try (CSVParser parser = new CSVParser(new FileReader(archivoCSV), CSVFormat.newFormat(';'))) {
       for (CSVRecord record : parser) {
-        String nombreUsuario = record.get("NombreUsuario");
+        String nombreEmpresa = record.get("NombreUsuario");
         String contrasenia = record.get("Contrasenia");
+        String tipo = record.get("Tipo");
 
-        this.registrarUsuario(nombreUsuario, contrasenia);
+        this.registrarEmpresa(nombreEmpresa, contrasenia, tipo);
       }
     } catch (IOException e) {
-      //Agregar una excepcion
+      throw new RutaInvalidaException("La ruta indicada no existe");
     }
   }
 
-  public void registrarEmpresa(String nombreUsuario, String contrasenia) {
-    this.validarContrasenia(nombreUsuario, contrasenia);
-    usuariosDeLaPlataforma.add(new UsuarioEmpresa(nombreUsuario, contrasenia));
+  public void registrarEmpresa(String nombreEmpresa, String contrasenia, String tipo) {
+    this.validarContrasenia(nombreEmpresa, contrasenia);
+    empresasUsuarias.add(new UsuarioEmpresa(nombreEmpresa, contrasenia, tipo));
   }
 
 

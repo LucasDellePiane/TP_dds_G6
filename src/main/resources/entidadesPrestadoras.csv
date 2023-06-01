@@ -1,4 +1,4 @@
-﻿NombreUsuario,Contrasenia,Servicio
-empresa1,delepiane,subteA
-empresa2,delepiane,subteB
-empresa3,delepiane,subteD
+﻿NombreUsuario;Contrasenia;Servicio;Tipo
+empresa1;delepiane;subteA;Entidad
+empresa2;delepiane;subteB;OrganismoControl
+empresa3;delepiane;subteD;Entidad
