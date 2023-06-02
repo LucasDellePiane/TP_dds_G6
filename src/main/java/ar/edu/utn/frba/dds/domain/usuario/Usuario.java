@@ -20,6 +20,7 @@ public class Usuario {
     if(nuevaLocalizacion.localizacionValida()){
       localizacion = nuevaLocalizacion;
     }
+
   }
 
 }

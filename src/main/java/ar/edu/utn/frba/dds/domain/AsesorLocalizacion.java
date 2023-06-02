@@ -7,7 +7,12 @@ import ar.edu.utn.frba.dds.domain.servicioLocalizacion.ListadoDepartamentos;
 import ar.edu.utn.frba.dds.domain.servicioLocalizacion.ListadoMuncipios;
 import ar.edu.utn.frba.dds.domain.servicioLocalizacion.ListadoProvincias;
 import ar.edu.utn.frba.dds.domain.servicioLocalizacion.ServicioLocalizacion;
+import ar.edu.utn.frba.dds.exceptions.LocalizacionInvalidaException;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 public class AsesorLocalizacion {
   private ServicioLocalizacion servicioLocalizacion;
   private ListadoDepartamentos listadoDepartamentos;
@@ -24,7 +29,7 @@ public class AsesorLocalizacion {
     if(this.listadoProvincias.buscar(nombreProvincia) != null){
       return this.listadoProvincias.buscar(nombreProvincia);
     }else{
-      throw new RuntimeException("no se encontro la provincia");
+      throw new LocalizacionInvalidaException("no se encontro la provincia");
     }
   }
   public Division buscarDepartamento(Division division, int idProvincia){
@@ -32,7 +37,7 @@ public class AsesorLocalizacion {
     if(this.listadoDepartamentos.buscar(division.getNombre()) != null){
       return this.listadoDepartamentos.buscar(division.getNombre());
     }else{
-      throw new RuntimeException("no se encontro el departamento");
+      throw new LocalizacionInvalidaException("no se encontro el departamento");
     }
   }
   public Division buscarMunicipio(Division division, int idProvincia){
@@ -40,7 +45,7 @@ public class AsesorLocalizacion {
     if(this.listadoMuncipios.buscar(division.getNombre()) != null){
       return this.listadoMuncipios.buscar(division.getNombre());
     }else{
-      throw new RuntimeException("no se encontro el municipio");
+      throw new LocalizacionInvalidaException("no se encontro el municipio");
     }
   }
 

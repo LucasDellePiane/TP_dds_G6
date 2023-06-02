@@ -8,4 +8,9 @@ import lombok.Setter;
 public class Provincia {
   String nombre;
   int id;
+
+  public Provincia(String nombre, int id) {
+    this.nombre = nombre;
+    this.id = id;
+  }
 }
