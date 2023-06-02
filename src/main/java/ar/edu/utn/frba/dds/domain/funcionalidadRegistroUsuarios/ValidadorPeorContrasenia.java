@@ -15,27 +15,19 @@ import java.nio.charset.StandardCharsets;
 public class ValidadorPeorContrasenia {
   @Getter
   @Setter
-  private String rutaPeoresContrasenias; // Esto tendría que estar aca?
+  private String nombreArchivo = "contraseniasPeligrosas.txt"; // Esto tendría que estar aca?
   @Getter
   private static ValidadorPeorContrasenia INSTANCE = new ValidadorPeorContrasenia();
 
-  /*private File abrirArchivo() {
-    /*
-    Una forma de abrirlo para distintos sistemas operativos es la siguiente:
-    return new File(getClass().getResource("contraseniasPeligrosas.txt").getPath());
-    pero no me funca no se porque, dice que no encuentra el archivo. Esta indexado en el IDE que resources es
-    para dejar archivos que se utilizan en estos casos. No se porque tira ese error.
-
-    return new File(this.rutaPeoresContrasenias);
-
-  }*/
+  public void setResourcePath(String nuevoArchivo) {
+    this.nombreArchivo = nuevoArchivo;
+  }
 
   public void validarPosiblePeorContrasenia(String contrasenia) {
     try{
-      //File archivoContraseniasPeligrosas = this.abrirArchivo();
 
-      String resourcePath = "contraseniasPeligrosas.txt";
-      Path path = Paths.get("src", "main", "resources", resourcePath);
+
+      Path path = Paths.get("src", "main", "resources", nombreArchivo);
       String absolutePath = path.toAbsolutePath().toString();
 
       BufferedReader br = new BufferedReader(

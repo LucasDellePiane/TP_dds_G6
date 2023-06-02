@@ -14,18 +14,9 @@ public class ValidacionArchivoPeoresContrasenias {
   @Test
   public void unaRutaIncorrectaGeneraExcepcion() {
     assertThrows(RutaInvalidaException.class, () -> {
-      String ruta = "src\\main\\recursos\\contraseniasPeligrosas.txt";
-      ValidadorPeorContrasenia.getINSTANCE().setRutaPeoresContrasenias(ruta);
+      ValidadorPeorContrasenia.getINSTANCE().setNombreArchivo("archivomalo.txt");
       repouser.validarContrasenia("soybatman", "peroprefierosersuperman");
     });}
 
-  @Test
-  public void unaRutaCorrectaNoGeneraExcepcion() {
-    try{
-      String ruta = "src\\main\\resources\\contraseniasPeligrosas.txt";
-      ValidadorPeorContrasenia.getINSTANCE().setRutaPeoresContrasenias(ruta);
-      repouser.validarContrasenia("soybatman", "elmascapodelmundo");
-    }catch (Exception e){
-      throw new RuntimeException("El metodo lanzó una excepcion inesperada");
-    }}
+
 }

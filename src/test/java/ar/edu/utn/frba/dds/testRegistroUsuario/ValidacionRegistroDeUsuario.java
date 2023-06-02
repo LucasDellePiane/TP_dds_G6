@@ -10,8 +10,7 @@ public class ValidacionRegistroDeUsuario {
 
   @BeforeEach
   public void comienzo(){
-    String ruta = "src\\main\\resources\\contraseniasPeligrosas.txt";
-    ValidadorPeorContrasenia.getINSTANCE().setRutaPeoresContrasenias(ruta);
+    ValidadorPeorContrasenia.getINSTANCE().setNombreArchivo("contraseniasPeligrosas.txt");
   }
   @Test
   public void unUsuarioSeRegistraSiSeValidaCorrectamenteLaContrasenia() {

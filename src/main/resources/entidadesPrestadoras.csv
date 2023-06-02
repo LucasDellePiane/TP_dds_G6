@@ -1,4 +1,3 @@
-﻿NombreUsuario;Contrasenia;Servicio;Tipo
-empresa1;delepiane;subteA;Entidad
-empresa2;delepiane;subteB;OrganismoControl
-empresa3;delepiane;subteD;Entidad
+﻿empresa1,elmascapodelmundo,subteA,Entidad
+empresa2,elmascapodelmundo,subteB,OrganismoControl
+empresa3,elmascapodelmundo,subteD,Entidad

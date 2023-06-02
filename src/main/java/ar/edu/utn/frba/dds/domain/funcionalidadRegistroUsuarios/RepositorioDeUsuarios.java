@@ -22,22 +22,21 @@ public class RepositorioDeUsuarios {
   private List<Usuario> usuariosDeLaPlataforma = new ArrayList<>();
   private List<UsuarioEmpresa> empresasUsuarias = new ArrayList<>();
 
+  public List<UsuarioEmpresa> getEmpresasUsuarias() {
+    return empresasUsuarias;
+  }
+
   public String abrirArchivo(String nombreArchivo) {
     Path path = Paths.get("src", "main", "resources", nombreArchivo);
     String rutaCSV = path.toAbsolutePath().toString();
     return rutaCSV;
   }
   public void registrarEmpresas(String nombreArchivo) {
-    /*String resourcePath = "entidadesPrestadoras.csv";
-    Path path = Paths.get("src", "main", "resources", resourcePath);
-    String archivoCSV = path.toAbsolutePath().toString();
-ºº  */
-
-    try (CSVParser parser = new CSVParser(new FileReader(this.abrirArchivo(nombreArchivo)), CSVFormat.newFormat(';'))) {
+    try (CSVParser parser = new CSVParser(new FileReader(this.abrirArchivo(nombreArchivo)), CSVFormat.DEFAULT)) {
       for (CSVRecord record : parser) {
-        String nombreEmpresa = record.get("NombreUsuario");
-        String contrasenia = record.get("Contrasenia");
-        String tipo = record.get("Tipo");
+        String nombreEmpresa = record.get(0);
+        String contrasenia = record.get(1);
+        String tipo = record.get(3);
 
         this.registrarEmpresa(nombreEmpresa, contrasenia, tipo);
       }
@@ -95,13 +94,4 @@ public class RepositorioDeUsuarios {
     }
   }
 
-  public int cantidadEmpresasRegistradas() {
-    return this.empresasUsuarias.size();
-  }
-
-  /*
-  public List<Usuario> getUsuariosDeLaPlataforma() {
-    return usuariosDeLaPlataforma;
-  }
-   */
 }

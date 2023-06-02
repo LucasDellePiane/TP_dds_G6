@@ -11,8 +11,6 @@ import java.nio.file.Paths;
 
 public class ValidacionRegistroDeEmpresasTest {
 
-    //private RepositorioDeUsuarios repouser;
-
 
   @Test
   public void SiElCSVTiene3EmpresasSeRegistranTodas() {
@@ -21,8 +19,8 @@ public class ValidacionRegistroDeEmpresasTest {
 
     repouser.registrarEmpresas("entidadesPrestadoras.csv");
 
-    // Verifica que se registraron tres empresas
-    Assertions.assertEquals(3, repouser.cantidadEmpresasRegistradas());
+    // Verifica que se registraron tres empresas, cantidad hardcodeada del csv
+    Assertions.assertEquals(3, repouser.getEmpresasUsuarias().size());
   }
 
 

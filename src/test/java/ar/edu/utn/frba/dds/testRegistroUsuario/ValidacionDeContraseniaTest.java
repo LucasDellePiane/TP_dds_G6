@@ -16,19 +16,10 @@ public class ValidacionDeContraseniaTest {
 
   private final RepositorioDeUsuarios repousers = new RepositorioDeUsuarios();
 
-  /*
-  @BeforeEach
-  public void comienzo(){
-    String ruta = "src\\main\\resources\\contraseniasPeligrosas.txt";
-    ValidadorPeorContrasenia.getINSTANCE().setRutaPeoresContrasenias(ruta);
-  }
-  */
 
   @Test
   public void unaContraseniaConCaracteresIgualesNoSirve()  {
     assertThrows(CaracteresRepetidosException.class, () -> {
-      // Aquí debes llamar a tu método que lanza la excepción
-      // Por ejemplo, si tu método se llama lanzarExcepcion(), puedes hacer:
       repousers.validarContrasenia("batman", "muchosaaa");
     });
   }
@@ -36,8 +27,6 @@ public class ValidacionDeContraseniaTest {
   @Test
   public void contraseniaInvalidaPorLongitudMenorAOcho() {
     assertThrows(ContraseniaMuyCortaException.class, () -> {
-      // Aquí debes llamar a tu método que lanza la excepción
-      // Por ejemplo, si tu método se llama lanzarExcepcion(), puedes hacer:
       repousers.validarContrasenia("batman", "abc");
     });
   }
@@ -45,8 +34,6 @@ public class ValidacionDeContraseniaTest {
   @Test
   public void contraseniaInvalidaPorUsoDeCredenciales() {
     assertThrows(UsaCrendencialesException.class, () -> {
-      // Aquí debes llamar a tu método que lanza la excepción
-      // Por ejemplo, si tu método se llama lanzarExcepcion(), puedes hacer:
       repousers.validarContrasenia("soybatman", "soybatman");
     });
   }
