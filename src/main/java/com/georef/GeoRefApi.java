@@ -1,20 +1,19 @@
 package com.georef;
 
+import ar.edu.utn.frba.dds.domain.localizacion.Provincia;
+import ar.edu.utn.frba.dds.domain.localizacion.division.Division;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
-import ar.edu.utn.frba.dds.domain.servicioLocalizacion.ListadoDepartamentos;
-import ar.edu.utn.frba.dds.domain.servicioLocalizacion.ListadoMuncipios;
-import ar.edu.utn.frba.dds.domain.servicioLocalizacion.ListadoProvincias;
 
 public interface GeoRefApi {
   @GET("provincias")
-  Call<ListadoProvincias> provincias();
+  Call<Provincia> provincia(@Query("nombre") String nombre);
 
   @GET("municipios")
-  Call<ListadoMuncipios> municipiosDeProvincia(@Query("provincia") int idProvincia, @Query("max") int max);
+  Call<Division> municipioDeProvincia(@Query("provincia") String nombreProvincia, @Query("nombre")String nombreMunicipio);
 
   @GET("departamentos")
-  Call<ListadoDepartamentos> departamentosDeProvincia(@Query("provincia") int idProvincia, @Query("max") int max);
+  Call<Division> departamentoDeProvincia(@Query("provincia") String nombreProvincia, @Query("nombre") String nombreDepartamento);
 
 }

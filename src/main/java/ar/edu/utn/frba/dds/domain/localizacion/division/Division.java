@@ -8,12 +8,10 @@ import lombok.Setter;
 public class Division {
 
   String nombre;
-  int id;
   TipoDivision tipo;
 
-  public Division(String nombre, int id, TipoDivision tipo) {
+  public Division(String nombre, TipoDivision tipo) {
     this.nombre = nombre;
-    this.id = id;
     this.tipo = tipo;
   }
 }

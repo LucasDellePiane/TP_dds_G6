@@ -1,10 +1,9 @@
-package ar.edu.utn.frba.dds.domain.funcionalidadRegistroUsuarios;
+package ar.edu.utn.frba.dds.domain.usuario;
 
 import ar.edu.utn.frba.dds.exceptions.MalaContraseniaException;
 import ar.edu.utn.frba.dds.exceptions.RutaInvalidaException;
 import lombok.*;
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;

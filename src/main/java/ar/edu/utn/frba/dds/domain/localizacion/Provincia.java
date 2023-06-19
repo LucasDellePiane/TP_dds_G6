@@ -7,10 +7,10 @@ import lombok.Setter;
 @Setter
 public class Provincia {
   String nombre;
-  int id;
 
-  public Provincia(String nombre, int id) {
+  public Provincia(String nombre) {
     this.nombre = nombre;
-    this.id = id;
   }
+
+
 }

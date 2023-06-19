@@ -1,28 +1,19 @@
 package ar.edu.utn.frba.dds.domain.funcionalidadRegistroUsuarios;
 
 import ar.edu.utn.frba.dds.domain.usuario.Usuario;
-import ar.edu.utn.frba.dds.domain.usuario.UsuarioEmpresa;
-import ar.edu.utn.frba.dds.exceptions.CaracteresRepetidosException;
-import ar.edu.utn.frba.dds.exceptions.ContraseniaMuyCortaException;
-import ar.edu.utn.frba.dds.exceptions.RutaInvalidaException;
-import ar.edu.utn.frba.dds.exceptions.UsaCrendencialesException;
+import ar.edu.utn.frba.dds.domain.usuario.Empresa;
 import lombok.Getter;
-import java.io.FileReader;
-import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import org.apache.commons.csv.CSVFormat;
-import org.apache.commons.csv.CSVParser;
-import org.apache.commons.csv.CSVRecord;
 
 public class RepositorioDeUsuarios {
   @Getter
   private List<Usuario> usuariosDeLaPlataforma = new ArrayList<>();
-  private List<UsuarioEmpresa> empresasUsuarias = new ArrayList<>();
+  private List<Empresa> empresasUsuarias = new ArrayList<>();
 
-  public List<UsuarioEmpresa> getEmpresasUsuarias() {
+  public List<Empresa> getEmpresasUsuarias() {
     return empresasUsuarias;
   }
 
@@ -31,67 +22,11 @@ public class RepositorioDeUsuarios {
     String rutaCSV = path.toAbsolutePath().toString();
     return rutaCSV;
   }
-  public void registrarEmpresas(String nombreArchivo) {
-    try (CSVParser parser = new CSVParser(new FileReader(this.abrirArchivo(nombreArchivo)), CSVFormat.DEFAULT)) {
-      for (CSVRecord record : parser) {
-        String nombreEmpresa = record.get(0);
-        String contrasenia = record.get(1);
-        String tipo = record.get(3);
 
-        this.registrarEmpresa(nombreEmpresa, contrasenia, tipo);
-      }
-    } catch (IOException e) {
-      throw new RutaInvalidaException("La ruta es invalida");
-    }
-  }
-
-  public void registrarEmpresa(String nombreEmpresa, String contrasenia, String tipo) {
-    this.validarContrasenia(nombreEmpresa, contrasenia);
-    empresasUsuarias.add(new UsuarioEmpresa(nombreEmpresa, contrasenia, tipo));
+  public void aniadirUsuario(Usuario usuario) {
+    usuariosDeLaPlataforma.add(usuario);
   }
 
 
-  public void registrarUsuario(String nombreUsuario, String contrasenia) {
-    this.validarContrasenia(nombreUsuario, contrasenia);
-    usuariosDeLaPlataforma.add(new Usuario(nombreUsuario, contrasenia));
-  }
-
-
-  public void validarContrasenia(String nombreUsuario, String contrasenia) {
-
-    this.validarTamanio(contrasenia);
-    this.validacionCaracteresRepetidos(contrasenia);
-    this.validarCredenciales(nombreUsuario, contrasenia);
-    this.validarConPeoresContrasenias(contrasenia);
-
-  }
-
-  private void validacionCaracteresRepetidos(String contrasenia) {
-    int len = contrasenia.length();
-    for (int i = 0; i < len - 1; i++) {
-      if (contrasenia.charAt(i) == contrasenia.charAt(i + 1)) {
-        throw new CaracteresRepetidosException("La contrasenia tiene caracteres repetidos");
-        // si se encuentra un par de caracteres simultáneos repetidos,
-        // el string contiene caracteres simultáneos repetidos
-      }
-    }
-  }
-
-  public void validarConPeoresContrasenias(String contrasenia) {
-    // ValidadorPeorContrasenia.getINSTANCE().setRutaPeoresContrasenias("src\\main\\resources\\contraseniasPeligrosas.txt");
-    ValidadorPeorContrasenia.getINSTANCE().validarPosiblePeorContrasenia(contrasenia);
-  }
-
-  private void validarTamanio(String contrasenia) {
-    if (contrasenia.length() <= 8) {
-      throw new ContraseniaMuyCortaException("La contrasenia es demasiado corta");
-    }
-  }
-
-  private void validarCredenciales(String nombreUsuario, String contrasenia) {
-    if (nombreUsuario.equals(contrasenia)) {
-      throw new UsaCrendencialesException("La contrasenia utiliza credenciales");
-    }
-  }
 
 }

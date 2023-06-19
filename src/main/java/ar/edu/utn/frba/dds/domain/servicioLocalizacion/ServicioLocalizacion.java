@@ -1,9 +1,11 @@
 package ar.edu.utn.frba.dds.domain.servicioLocalizacion;
 
-import java.io.IOException;
+import ar.edu.utn.frba.dds.domain.localizacion.Provincia;
+import ar.edu.utn.frba.dds.domain.localizacion.division.Division;
 
 public interface ServicioLocalizacion {
-  public ListadoMuncipios listadoDeMunicipiosDeProvincia(int idProvincia);
-  public ListadoDepartamentos listadoDeDepartamentosDeProvincia(int idProvincia);
-  public ListadoProvincias listadoDeProvincias();
+  public Division buscarMunicipio(String nombreProvincia, String nombreMunicipio);
+  public Division buscarDepartamento(String nombreProvincia, String nombreDepartamento);
+  public Provincia buscarProvincia(String nombreProvincia);
+
 }
