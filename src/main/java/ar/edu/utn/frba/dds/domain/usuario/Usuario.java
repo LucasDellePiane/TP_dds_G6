@@ -20,9 +20,10 @@ public class Usuario {
   private List<Establecimiento> establecimientosInteres;
   private List<Servicio> serviciosInteres;
   private String apellido;
+  private ValidadorContrasenias validador = new ValidadorContrasenias();
 
   public Usuario(String nombreUsuario, String contrasenia) {
-    ValidadorContrasenias.INSTANCE.validarContrasenia(nombreUsuario,contrasenia);
+    validador.validarContrasenia(nombreUsuario,contrasenia);
     this.nombreUsuario = nombreUsuario;
     this.contrasenia = contrasenia;
 

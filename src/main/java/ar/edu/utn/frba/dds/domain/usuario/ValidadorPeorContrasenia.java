@@ -18,10 +18,6 @@ public class ValidadorPeorContrasenia {
   @Getter
   private static ValidadorPeorContrasenia INSTANCE = new ValidadorPeorContrasenia();
 
-  public void setResourcePath(String nuevoArchivo) {
-    this.nombreArchivo = nuevoArchivo;
-  }
-
   public void validarPosiblePeorContrasenia(String contrasenia) {
     try{
 

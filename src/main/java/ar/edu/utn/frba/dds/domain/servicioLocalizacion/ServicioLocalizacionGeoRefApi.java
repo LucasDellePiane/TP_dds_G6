@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.domain.servicioLocalizacion;
 
+import ar.edu.utn.frba.dds.domain.localizacion.Localizacion;
 import ar.edu.utn.frba.dds.domain.localizacion.Provincia;
 import ar.edu.utn.frba.dds.domain.localizacion.division.Division;
 import ar.edu.utn.frba.dds.domain.localizacion.division.TipoDivision;
@@ -22,7 +23,7 @@ public class ServicioLocalizacionGeoRefApi implements ServicioLocalizacion {
   }
 
   @Override
-  public Provincia buscarProvincia(String nombreProvincia) {
+  public Localizacion buscarProvincia(String nombreProvincia) {
     try{
       GeoRefApi georefService = this.retrofit.create(GeoRefApi.class); // <- OBJETO ANONIMO
 
@@ -32,14 +33,17 @@ public class ServicioLocalizacionGeoRefApi implements ServicioLocalizacion {
 
       provinciaResponse.code();// <- 200
 
-      return provinciaResponse.body();
+      Provincia provincia = provinciaResponse.body();
+
+      return new Localizacion(provincia.getNombre(), null);
+      
     } catch (IOException exception){
       throw new RuntimeException("No se pudo realizar la consulta con GeoRefApi correctamente");
     }
   }
 
   @Override
-  public Division buscarMunicipio(String nombreProvincia, String nombreMunicipio) {
+  public Localizacion buscarMunicipio(String nombreProvincia, String nombreMunicipio) {
     try{
       GeoRefApi georefService = this.retrofit.create(GeoRefApi.class); // <- OBJETO ANONIMO
 
@@ -51,7 +55,9 @@ public class ServicioLocalizacionGeoRefApi implements ServicioLocalizacion {
 
       municipio.setTipo(TipoDivision.MUNICIPIO);
 
-      return municipio;
+      Localizacion localizacion = new Localizacion(nombreProvincia, municipio);
+
+      return localizacion;
 
     }catch (IOException exception){
       throw new RuntimeException("No se pudo realizar la consulta con GeoRefApi correctamente");
@@ -60,7 +66,7 @@ public class ServicioLocalizacionGeoRefApi implements ServicioLocalizacion {
   }
 
   @Override
-  public Division buscarDepartamento(String nombreProvincia, String nombreDepartamento) {
+  public Localizacion buscarDepartamento(String nombreProvincia, String nombreDepartamento) {
     try {
       GeoRefApi georefService = this.retrofit.create(GeoRefApi.class); // <- OBJETO ANONIMO
 
@@ -72,7 +78,9 @@ public class ServicioLocalizacionGeoRefApi implements ServicioLocalizacion {
 
       departamento.setTipo(TipoDivision.DEPARTAMENTO);
 
-      return departamento;
+      Localizacion localizacion = new Localizacion(nombreProvincia, departamento);
+
+      return localizacion;
 
     } catch (IOException excepcion) {
       throw new RuntimeException("No se pudo realizar la consulta con GeoRefApi correctamente");

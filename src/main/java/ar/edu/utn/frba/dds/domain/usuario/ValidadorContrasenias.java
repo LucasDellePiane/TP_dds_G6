@@ -8,7 +8,7 @@ public class ValidadorContrasenias {
 
   public ValidadorContrasenias(){}
 
-  public static ValidadorContrasenias INSTANCE = new ValidadorContrasenias();
+  public ValidadorPeorContrasenia validador = new ValidadorPeorContrasenia();
 
   public void validarContrasenia(String nombreUsuario, String contrasenia) {
 
@@ -30,9 +30,12 @@ public class ValidadorContrasenias {
   }
 
   public void validarConPeoresContrasenias(String contrasenia) {
-    // ValidadorPeorContrasenia.getINSTANCE().setRutaPeoresContrasenias("src\\main\\resources\\contraseniasPeligrosas.txt");
-    ValidadorPeorContrasenia.getINSTANCE().validarPosiblePeorContrasenia(contrasenia);
+    validador.validarPosiblePeorContrasenia(contrasenia);
   }
+
+  public void cambiarArchivoPeoresContrasenias(String nuevoArchivo) {
+    validador.setNombreArchivo(nuevoArchivo);
+   }
 
   private void validarTamanio(String contrasenia) {
     if (contrasenia.length() <= 8) {

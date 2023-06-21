@@ -1,10 +1,10 @@
 package ar.edu.utn.frba.dds.testRegistroUsuario;
 
-import ar.edu.utn.frba.dds.domain.funcionalidadRegistroUsuarios.RepositorioDeUsuarios;
 import ar.edu.utn.frba.dds.exceptions.CaracteresRepetidosException;
 import ar.edu.utn.frba.dds.exceptions.ContraseniaMuyCortaException;
 import ar.edu.utn.frba.dds.exceptions.MalaContraseniaException;
 import ar.edu.utn.frba.dds.exceptions.UsaCrendencialesException;
+import ar.edu.utn.frba.dds.domain.usuario.ValidadorContrasenias;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -12,39 +12,38 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class ValidacionDeContraseniaTest {
 
-  private final RepositorioDeUsuarios repousers = new RepositorioDeUsuarios();
-
+  public ValidadorContrasenias validador = new ValidadorContrasenias();
 
   @Test
   public void unaContraseniaConCaracteresIgualesNoSirve()  {
     assertThrows(CaracteresRepetidosException.class, () -> {
-      repousers.validarContrasenia("batman", "muchosaaa");
+      validador.validarContrasenia("batman", "muchosaaa");
     });
   }
 
   @Test
   public void contraseniaInvalidaPorLongitudMenorAOcho() {
     assertThrows(ContraseniaMuyCortaException.class, () -> {
-      repousers.validarContrasenia("batman", "abc");
+      validador.validarContrasenia("batman", "abc");
     });
   }
 
   @Test
   public void contraseniaInvalidaPorUsoDeCredenciales() {
     assertThrows(UsaCrendencialesException.class, () -> {
-      repousers.validarContrasenia("soybatman", "soybatman");
+      validador.validarContrasenia("soybatman", "soybatman");
     });
   }
   @Test
-  public void contraniaEsPeorContrasenia() {
+  public void contraseniaEsPeorContrasenia() {
     assertThrows(MalaContraseniaException.class, () -> {
-      repousers.validarContrasenia("soybatman", "12345671234567");
+      validador.validarContrasenia("soybatman", "pruebademalacontrasenia");
     });
   }
 
   @Test
   public void contraseniaValida() {
-    repousers.validarContrasenia("soybatman", "elmascapodelmundo");
+    validador.validarContrasenia("soybatman", "elmascapodelmundo");
 
   }
 }

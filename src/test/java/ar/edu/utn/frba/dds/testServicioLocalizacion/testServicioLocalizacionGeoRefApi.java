@@ -5,8 +5,11 @@ import ar.edu.utn.frba.dds.domain.localizacion.Provincia;
 import ar.edu.utn.frba.dds.domain.localizacion.division.Division;
 import ar.edu.utn.frba.dds.domain.localizacion.division.TipoDivision;
 import ar.edu.utn.frba.dds.domain.servicioLocalizacion.ServicioLocalizacion;
+import ar.edu.utn.frba.dds.domain.servicioLocalizacion.ServicioLocalizacionGeoRefApi;
 import ar.edu.utn.frba.dds.domain.usuario.Usuario;
 import ar.edu.utn.frba.dds.exceptions.LocalizacionInvalidaException;
+import net.bytebuddy.asm.Advice.Local;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -17,24 +20,28 @@ import java.util.List;
 public class testServicioLocalizacionGeoRefApi {
 
   @Test
-
   public void seCreaUnaLocalizacionValida() {
+
     ServicioLocalizacion servicioMock = Mockito.mock(ServicioLocalizacion.class);
 
-    Provincia p1 = new Provincia("Buenos Aires");
     Division departamento = new Division("Lacar", TipoDivision.DEPARTAMENTO);
+    Usuario usuario = new Usuario("Hola", "diseño de sistemas");
+    Localizacion localizacion = new Localizacion("Buenos Aires", null);
+
     Mockito
         .when(servicioMock.buscarProvincia("buenos aires"))
-        .thenReturn(p1);
-    Mockito
-        .when(servicioMock.buscarDepartamento("Neuquen", "Lacar"))
-        .thenReturn(departamento);
+        .thenReturn(localizacion);
+        
+    Assertions.assertNotNull(servicioMock.buscarProvincia("buenos aires"));
+  }
 
-    Usuario usuario = new Usuario("Hola", "diseño de sistemas");
-    Localizacion localizacion = new Localizacion(
-        servicioMock.buscarProvincia("buenos aires"),
-        servicioMock.buscarDepartamento("Neuquen", "Lacar"));
-    Assertions.assertNotNull(localizacion);
+  @Test
+  void sePuedeConsultarAGeoRefApiYObtenerUnaLocalizacion() {
+    ServicioLocalizacion servicioGeoRef = new ServicioLocalizacionGeoRefApi();
+    
+    Localizacion resultado = servicioGeoRef.buscarProvincia("Buenos Aires");
+    Assertions.assertNotNull(resultado);
+    Assertions.assertEquals(resultado.getProvincia(),"Buenos Aires");
   }
 
   /* @Test

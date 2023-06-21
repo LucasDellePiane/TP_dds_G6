@@ -8,10 +8,10 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Localizacion {
-  Provincia provincia;
+  String provincia;
   Division division;
 
-  public Localizacion(Provincia provincia, Division division) {
+  public Localizacion(String provincia, Division division) {
     this.division = division;
     this.provincia = provincia;
   }
