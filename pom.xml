@@ -18,6 +18,15 @@
     <maven.compiler.target>17</maven.compiler.target>
   </properties>
 
+  <repositories>
+    <repository>
+      <id>twilio</id>
+      <name>Twilio Maven Repository</name>
+      <url>https://repository.twilio.com/maven/public</url>
+    </repository>
+    <!-- Otros repositorios... -->
+  </repositories>
+
   <dependencies>
     <dependency>
       <groupId>com.squareup.retrofit2</groupId>
@@ -59,8 +68,15 @@
       <artifactId>commons-csv</artifactId>
       <version>1.10.0</version>
     </dependency>
+    <dependency>
+      <groupId>com.twilio.sdk</groupId>
+      <artifactId>twilio</artifactId>
+      <version>7.55.0</version>
+    </dependency>
 
   </dependencies>
+
+
 
   <build>
     <plugins>

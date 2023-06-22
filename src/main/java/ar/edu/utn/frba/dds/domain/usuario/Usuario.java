@@ -1,13 +1,13 @@
 package ar.edu.utn.frba.dds.domain.usuario;
 
+import ar.edu.utn.frba.dds.domain.Comunidad.Comunidad;
+import ar.edu.utn.frba.dds.domain.Comunidad.RepositorioComunidad;
 import ar.edu.utn.frba.dds.domain.establecimiento.Establecimiento;
 import ar.edu.utn.frba.dds.domain.localizacion.Localizacion;
 import ar.edu.utn.frba.dds.domain.notificacion.MedioComunicacion;
 import ar.edu.utn.frba.dds.domain.notificacion.RangoHorario;
 import ar.edu.utn.frba.dds.domain.servicio.Incidente;
 import ar.edu.utn.frba.dds.domain.servicio.Servicio;
-import ar.edu.utn.frba.dds.domain.servicioLocalizacion.ServicioLocalizacion;
-import ar.edu.utn.frba.dds.domain.servicioLocalizacion.ServicioLocalizacionGeoRefApi;
 import lombok.Getter;
 import lombok.Setter;
 import java.time.LocalDate;
@@ -18,6 +18,7 @@ import java.util.List;
 public class Usuario {
   private String nombre;
   private String email;
+  private String telefono;
   private String contrasenia;
   private String nombreUsuario;
   private Localizacion localizacion;
@@ -28,6 +29,8 @@ public class Usuario {
   private List<RangoHorario> horariosNotificacion;
   private MedioComunicacion medioComunicacion;
 
+
+
   public Usuario(String nombreUsuario, String contrasenia) {
     validador.validarContrasenia(nombreUsuario,contrasenia);
     this.nombreUsuario = nombreUsuario;
@@ -35,16 +38,39 @@ public class Usuario {
 
   }
 
+  public void suscribirseMedioComunicacion(MedioComunicacion medioComunicacion){
+      medioComunicacion.suscribirUsuario(this);
+  }
+
    // Duda sobre localizacion.
+
    public void informarNoFuncionamiento(Servicio servicio, String observaciones) {
      Incidente incidente = new Incidente(servicio, observaciones);
-     incidente.notificarInicio(this);
+     this.reportarIncidente(incidente);
    }
+
+    public List<Comunidad> comunidadesDelUsuario(){ //podría estar en repositorioUsuario()
+        RepositorioComunidad repositorioComunidad = RepositorioComunidad.getInstancia();
+        return repositorioComunidad.getComunidades().stream().filter(unaComunidad -> unaComunidad.usuarioEsParte(this)).toList();
+    }
+
+    public void reportarIncidente(Incidente incidente){
+        List<Comunidad> comunidadesUsuario = this.comunidadesDelUsuario();
+        comunidadesUsuario.forEach(unaComunidad -> unaComunidad.reportarIncidente(incidente));
+    }
 
    public void agregarRango(LocalDate horarioInicio, LocalDate horariofinal){
     RangoHorario rangoHorario = new RangoHorario(horarioInicio,horariofinal);
     horariosNotificacion.add(rangoHorario);
    }
+
+    public boolean estaInteresadoServicio(Servicio servicioInteres){
+        return serviciosInteres.contains(servicioInteres);
+    }
+
+    public void cerrarIncidente(Incidente incidente) {
+        incidente.cerrarIncidente();
+    }
 
 
 }

@@ -1,13 +1,19 @@
 package ar.edu.utn.frba.dds.domain.servicio;
 
+import ar.edu.utn.frba.dds.domain.Comunidad.Comunidad;
 import ar.edu.utn.frba.dds.domain.Comunidad.RepositorioComunidad;
 import ar.edu.utn.frba.dds.domain.usuario.Usuario;
+import lombok.Getter;
 import lombok.Setter;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
+
+import ar.edu.utn.frba.dds.domain.Comunidad.RepositorioComunidad;
 
 public class Incidente {
+  @Getter
   Servicio servicio;
   String observaciones;
   EstadoIncidente estado;
@@ -21,12 +27,9 @@ public class Incidente {
     this.estado = EstadoIncidente.ACTIVO;
     this.horarioApertura = LocalDateTime.now();
   }
-  public void cerrarIncidente(Incidente incidente){
-    incidente.setHorarioCierre(LocalDateTime.now());
-  }
-
-  public void notificarInicio(Usuario usuario, RepositorioComunidad repositorioComunidad){
-     repositorioComunidad.getInstancia();
+  public void cerrarIncidente(){
+    this.setHorarioCierre(LocalDateTime.now());
+    this.estado = EstadoIncidente.RESUELTO;
   }
 
   public long tiempoCierre(Incidente incidente){
@@ -34,4 +37,5 @@ public class Incidente {
     long cantidadHoras = duracion.toHours();
     return cantidadHoras;
   }
+
 }
