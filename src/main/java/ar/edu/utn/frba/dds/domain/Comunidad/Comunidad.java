@@ -56,9 +56,9 @@ public class Comunidad {
     return miembros.contains(usuario); //Deberíamos tener a los administradores en la lista de miembros
   }
 
-  public void reportarIncidente(Incidente incidente) {
+  public void reportarIncidente(Servicio servicio, Incidente incidente) {
     this.incidentesReportados.add(incidente);
-    this.notificarIncidente(incidente.getServicio());
+    this.notificarIncidente(servicio);
   }
 
   public void notificarIncidente(Servicio servicioIncidente) {

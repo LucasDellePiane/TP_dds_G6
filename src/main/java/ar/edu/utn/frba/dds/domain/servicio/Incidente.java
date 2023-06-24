@@ -14,15 +14,15 @@ import ar.edu.utn.frba.dds.domain.Comunidad.RepositorioComunidad;
 
 public class Incidente {
   @Getter
-  Servicio servicio;
   String observaciones;
+  @Getter
   EstadoIncidente estado;
+  @Getter
   LocalDateTime horarioApertura;
   @Setter
   LocalDateTime horarioCierre;
 
-  public Incidente(Servicio servicio, String observaciones){
-    this.servicio = servicio;
+  public Incidente(String observaciones){
     this.observaciones = observaciones;
     this.estado = EstadoIncidente.ACTIVO;
     this.horarioApertura = LocalDateTime.now();
@@ -37,5 +37,7 @@ public class Incidente {
     long cantidadHoras = duracion.toHours();
     return cantidadHoras;
   }
+
+
 
 }

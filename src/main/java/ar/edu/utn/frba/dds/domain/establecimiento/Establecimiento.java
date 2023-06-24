@@ -21,4 +21,8 @@ public class Establecimiento {
   public void darBajaServicio(Servicio servicioObsoleto) {
     this.servicios.remove(servicioObsoleto);
   }
+
+  public List<Servicio> getServicios() {
+    return this.servicios;
+  }
 }

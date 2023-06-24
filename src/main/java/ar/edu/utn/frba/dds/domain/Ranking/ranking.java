@@ -2,11 +2,20 @@ package ar.edu.utn.frba.dds.domain.Ranking;
 
 import java.util.List;
 
-public class ranking {
+import ar.edu.utn.frba.dds.domain.entidad.RepositorioDeEntidades;
+
+public class Ranking {
+  private RepositorioDeEntidades repositorioDeEntidades;
   private List<Criterio> criterios;
 
-  public void calcularRanking(){
+  /*public static void main(){
+    //logica para que se haga generar rankings una vez por semana
+  } 
+      DUDAA !!!
+*/
 
+  public void generarRankings(){
+      criterios.forEach(criterio -> criterio.calcularRanking(this.repositorioDeEntidades.getEntidades()));
   }
 
 }

@@ -45,8 +45,9 @@ public class Usuario {
    // Duda sobre localizacion.
 
    public void informarNoFuncionamiento(Servicio servicio, String observaciones) {
-     Incidente incidente = new Incidente(servicio, observaciones);
-     this.reportarIncidente(incidente);
+     Incidente incidente = new Incidente(observaciones);
+     servicio.aniadirIncidente(incidente);
+     this.reportarIncidente(servicio, incidente);
    }
 
     public List<Comunidad> comunidadesDelUsuario(){ //podría estar en repositorioUsuario()
@@ -54,9 +55,9 @@ public class Usuario {
         return repositorioComunidad.getComunidades().stream().filter(unaComunidad -> unaComunidad.usuarioEsParte(this)).toList();
     }
 
-    public void reportarIncidente(Incidente incidente){
+    public void reportarIncidente(Servicio servicio, Incidente incidente){
         List<Comunidad> comunidadesUsuario = this.comunidadesDelUsuario();
-        comunidadesUsuario.forEach(unaComunidad -> unaComunidad.reportarIncidente(incidente));
+        comunidadesUsuario.forEach(unaComunidad -> unaComunidad.reportarIncidente(servicio, incidente));
     }
 
    public void agregarRango(LocalDate horarioInicio, LocalDate horariofinal){
