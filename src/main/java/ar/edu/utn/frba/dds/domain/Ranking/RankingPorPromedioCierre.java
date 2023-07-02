@@ -6,11 +6,11 @@ import java.util.List;
 
 import ar.edu.utn.frba.dds.domain.entidad.Entidad;
 
-public class RankingPorPromedioCierre implements Criterio{
+public class RankingPorPromedioCierre extends Criterio{
   List<Entidad> ranking;  
   @Override
-  public List<Entidad> calcularRanking(List<Entidad> entidades) {
+  public void calcularRanking(List<Entidad> entidades) {
       Collections.sort(entidades, Comparator.comparingDouble(Entidad::promedioDeCierreIncidente).reversed());
-      return entidades;
+      ranking = entidades;
     }  
 }

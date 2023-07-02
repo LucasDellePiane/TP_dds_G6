@@ -8,7 +8,7 @@ import java.util.List;
 import ar.edu.utn.frba.dds.domain.entidad.Entidad;
 
 
-public class RankingPorCantidad implements Criterio{
+public class RankingPorCantidad extends Criterio{
   private List<Entidad> rankingSemanal;
 
   public RankingPorCantidad() {
@@ -16,9 +16,9 @@ public class RankingPorCantidad implements Criterio{
   }
 
   @Override
-  public List<Entidad> calcularRanking(List<Entidad> entidades) {
+  public void calcularRanking(List<Entidad> entidades) {
     Collections.sort(entidades, Comparator.comparingInt(Entidad::cantidadIncidentesEnUnaSemana).reversed());
-    return entidades;
+    rankingSemanal = entidades;
   }
 }
 

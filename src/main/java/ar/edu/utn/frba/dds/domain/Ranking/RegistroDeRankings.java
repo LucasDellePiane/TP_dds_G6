@@ -4,7 +4,7 @@ import java.util.List;
 
 import ar.edu.utn.frba.dds.domain.entidad.RepositorioDeEntidades;
 
-public class Ranking {
+public class RegistroDeRankings {
   private RepositorioDeEntidades repositorioDeEntidades;
   private List<Criterio> criterios;
 

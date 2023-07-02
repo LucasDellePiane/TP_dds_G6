@@ -5,6 +5,7 @@ import java.util.List;
 import ar.edu.utn.frba.dds.domain.entidad.Entidad;
 
 
-public interface Criterio {
-    public List<Entidad> calcularRanking(List<Entidad> entidades);
+public abstract class Criterio {
+    private List<Entidad> ranking;
+    public abstract void calcularRanking(List<Entidad> entidades);
 }
