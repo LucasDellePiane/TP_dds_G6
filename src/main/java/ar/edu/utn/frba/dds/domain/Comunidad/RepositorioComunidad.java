@@ -3,6 +3,8 @@ package ar.edu.utn.frba.dds.domain.Comunidad;
 import ar.edu.utn.frba.dds.domain.usuario.Usuario;
 import lombok.Getter;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class RepositorioComunidad {
@@ -10,8 +12,9 @@ public class RepositorioComunidad {
   private List<Comunidad> comunidades;
   private static RepositorioComunidad repositorioComunidad;
 
-  private RepositorioComunidad() {
-    // Aquí puedes realizar la inicialización de la instancia
+  public RepositorioComunidad() {
+    List<Comunidad> comunidades = new ArrayList<>(Arrays.asList());
+    this.comunidades = comunidades;
   }
 
   public static RepositorioComunidad getInstancia() {

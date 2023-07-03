@@ -1,12 +1,14 @@
 package ar.edu.utn.frba.dds.domain.servicio;
 
 import ar.edu.utn.frba.dds.domain.servicio.TipoServicio;
+import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Servicio {
   private TipoServicio tipo;
+  @Getter
   private List<Incidente> incidentes;
 
   public Servicio(TipoServicio tipo){

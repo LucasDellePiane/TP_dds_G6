@@ -1,12 +1,17 @@
 package ar.edu.utn.frba.dds.domain.notificacion;
 
+import ar.edu.utn.frba.dds.domain.Comunidad.Comunidad;
 import ar.edu.utn.frba.dds.domain.usuario.Usuario;
+import ar.edu.utn.frba.dds.exceptions.SeEnvioWhatsappException;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 import com.twilio.Twilio;
 import com.twilio.rest.api.v2010.account.Message;
@@ -22,6 +27,8 @@ public class WhatsApp implements MedioComunicacion {
         String ACCOUNT_SID = "your_account_sid";
         String AUTH_TOKEN = "your_auth_token";
         Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
+        List<Usuario> usuarios = new ArrayList<>(Arrays.asList());
+        this.usuariosSuscriptos = usuarios;
     }
 
     @Override
@@ -44,7 +51,8 @@ public class WhatsApp implements MedioComunicacion {
     private void enviarMensajeWhatsApp(String numeroTelefono, String mensaje) {
         PhoneNumber to = new PhoneNumber(numeroTelefono);
         PhoneNumber from = new PhoneNumber("your_twilio_phone_number");
-        Message.creator(to, from, mensaje).create();
+        throw new SeEnvioWhatsappException("Mensaje enviado al usuario");
+       // Message.creator(to, from, mensaje).create();
     }
 
 }

@@ -44,10 +44,11 @@ public class Usuario {
 
    // Duda sobre localizacion.
 
-   public void informarNoFuncionamiento(Servicio servicio, String observaciones) {
+   public Incidente informarNoFuncionamiento(Servicio servicio, String observaciones) {
      Incidente incidente = new Incidente(observaciones);
      servicio.aniadirIncidente(incidente);
      this.reportarIncidente(servicio, incidente);
+     return incidente;
    }
 
     public List<Comunidad> comunidadesDelUsuario(){ //podría estar en repositorioUsuario()

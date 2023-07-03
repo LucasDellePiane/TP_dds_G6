@@ -10,6 +10,7 @@ import ar.edu.utn.frba.dds.domain.usuario.Usuario;
 import lombok.Getter;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,16 +20,14 @@ public class Comunidad {
   @Getter
   private List<Servicio> serviciosDeInteres;
   @Getter
-  private List<Incidente> incidentesReportados;
+  private List<Incidente> incidentesReportados = new ArrayList<>(Arrays.asList());
   private List<MedioComunicacion> mediosComunicacion;
 
-  public Comunidad(List<Usuario> miembros, List<Usuario> administradores, List<Servicio> serviciosDeInteres, List<MedioComunicacion> mediosComunicacion) {
+  public Comunidad(List<Usuario> miembros, List<Usuario> administradores, List<Servicio> serviciosDeInteres) {
 
     MedioComunicacion whatsApp = new WhatsApp();
     MedioComunicacion email = new Email();
-
-    mediosComunicacion.add(whatsApp);
-    mediosComunicacion.add(email);
+    List<MedioComunicacion> mediosComunicacion = new ArrayList<>(Arrays.asList(whatsApp, email));
 
     //VERIFICAR
     this.miembros = miembros;
@@ -57,7 +56,7 @@ public class Comunidad {
   }
 
   public void reportarIncidente(Servicio servicio, Incidente incidente) {
-    this.incidentesReportados.add(incidente);
+    incidentesReportados.add(incidente);
     this.notificarIncidente(servicio);
   }
 
