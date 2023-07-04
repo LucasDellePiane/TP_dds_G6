@@ -16,4 +16,9 @@ public class Email implements MedioComunicacion{
 
     }
 
+    @Override
+    public List<Usuario> getUsuariosSuscriptos() {
+        return usuariosSuscriptos;
+    }
+
 }

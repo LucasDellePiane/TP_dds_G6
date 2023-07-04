@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import ar.edu.utn.frba.dds.domain.Comunidad.Comunidad;
 import ar.edu.utn.frba.dds.domain.Comunidad.RepositorioComunidad;
+import ar.edu.utn.frba.dds.domain.notificacion.Email;
 import ar.edu.utn.frba.dds.domain.notificacion.MedioComunicacion;
 import ar.edu.utn.frba.dds.domain.notificacion.WhatsApp;
 import ar.edu.utn.frba.dds.domain.servicio.Incidente;
@@ -20,39 +21,42 @@ import java.util.Arrays;
 import java.util.List;
 
 public class ValidacionEnvioIncidentes {
-  Usuario usuario = new Usuario("hola", "elmascapodelmundo");
-  Usuario usuario2 = new Usuario("chau", "elmascapodelmundo");
+  Usuario usuario = new Usuario("usuario1", "elmascapodelmundo");
+  Usuario usuario2 = new Usuario("usuario2", "elmascapodelmundo");
   List<Usuario> miembros = new ArrayList<>(Arrays.asList(usuario, usuario2));
   List<Usuario> administradores = new ArrayList<>(Arrays.asList(usuario));
   Servicio servicio = new Servicio(TipoServicio.BAÑO);
   List<Servicio> servicios = new ArrayList<>(Arrays.asList(servicio));
-  Comunidad comunidad = new Comunidad(miembros, administradores, servicios);
+
+  MedioComunicacion whatsApp = new WhatsApp();
+  MedioComunicacion email = new Email();
+  List<MedioComunicacion> mediosComunicacion = new ArrayList<>(Arrays.asList(whatsApp,email));
+  Comunidad comunidad = new Comunidad(miembros, administradores, servicios,mediosComunicacion);
   List<Comunidad> comunidades = new ArrayList<>(Arrays.asList(comunidad));
   boolean repositorioComunidad = RepositorioComunidad.getInstancia().getComunidades().add(comunidad);
 
 
   @Test
   public void reportarUnIncidenteAvisaALosUsuarios() {
-    usuario2.setServiciosInteres(servicios);
-    comunidad.darDeAltaMiembro(usuario);
     usuario.setServiciosInteres(servicios);
-    MedioComunicacion medioComunicacion = new WhatsApp();
-    medioComunicacion.suscribirUsuario(usuario);
-    medioComunicacion.suscribirUsuario(usuario2);
+    usuario2.setServiciosInteres(servicios);
+
+    assertEquals(comunidad.usuarioEsParte(usuario), true);
+    assertEquals(usuario.comunidadesDelUsuario(), comunidades);
+
     Incidente incidente = usuario.informarNoFuncionamiento(servicio, "Inodoro roto");
     List<Incidente> incidentes = new ArrayList<>(Arrays.asList(incidente));
 
     assertEquals(servicio.getIncidentes(), incidentes);
-    assertEquals(comunidad.usuarioEsParte(usuario), true);
-    assertEquals(usuario.comunidadesDelUsuario(), comunidades);
-
     assertEquals(incidentes, comunidad.getIncidentesReportados());
 
-    usuario2.suscribirseMedioComunicacion(medioComunicacion);
-    assertEquals(servicio.getIncidentes(), incidentes);
+    usuario2.suscribirseMedioComunicacion(whatsApp);
+    List<Usuario> suscriptoresWhatsApp = new ArrayList<>(Arrays.asList(usuario2));
+    assertEquals(whatsApp.getUsuariosSuscriptos(), suscriptoresWhatsApp);
 
     assertThrows(SeEnvioWhatsappException.class, ()->{
-      comunidad.notificarIncidente(servicio);
-    });}
+      usuario.informarNoFuncionamiento(servicio, "Inodoro roto");
+    });
+  }
 
 }

@@ -38,6 +38,7 @@ public class Usuario {
 
   }
 
+
   public void suscribirseMedioComunicacion(MedioComunicacion medioComunicacion){
       medioComunicacion.suscribirUsuario(this);
   }

@@ -23,11 +23,7 @@ public class Comunidad {
   private List<Incidente> incidentesReportados = new ArrayList<>(Arrays.asList());
   private List<MedioComunicacion> mediosComunicacion;
 
-  public Comunidad(List<Usuario> miembros, List<Usuario> administradores, List<Servicio> serviciosDeInteres) {
-
-    MedioComunicacion whatsApp = new WhatsApp();
-    MedioComunicacion email = new Email();
-    List<MedioComunicacion> mediosComunicacion = new ArrayList<>(Arrays.asList(whatsApp, email));
+  public Comunidad(List<Usuario> miembros, List<Usuario> administradores, List<Servicio> serviciosDeInteres,List<MedioComunicacion> mediosComunicacion) {
 
     //VERIFICAR
     this.miembros = miembros;
@@ -52,7 +48,7 @@ public class Comunidad {
 
 
   public boolean usuarioEsParte(Usuario usuario){
-    return miembros.contains(usuario); //Deberíamos tener a los administradores en la lista de miembros
+    return miembros.contains(usuario); //Tenemos a los administradores en la lista de miembros
   }
 
   public void reportarIncidente(Servicio servicio, Incidente incidente) {
