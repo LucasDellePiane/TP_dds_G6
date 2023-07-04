@@ -6,17 +6,13 @@ import java.util.List;
 import lombok.Getter;
 
 public class RepositorioDeEntidades {
+
     @Getter
     private List<Entidad> entidades = new ArrayList<>();
-    private static RepositorioDeEntidades repositorioDeEntidades;
-    
 
-  public static RepositorioDeEntidades getInstancia() {
-      if (repositorioDeEntidades == null) {
-        repositorioDeEntidades = new RepositorioDeEntidades();
-      }
-      return repositorioDeEntidades;
-    }
+    @Getter
+    private static RepositorioDeEntidades repositorioDeEntidades = new RepositorioDeEntidades(); // duda
+  
 
   public void aniadirEntidad(Entidad entidad){
     this.entidades.add(entidad);

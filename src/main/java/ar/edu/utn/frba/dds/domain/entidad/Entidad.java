@@ -8,11 +8,15 @@ import ar.edu.utn.frba.dds.domain.servicio.Servicio;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
+import lombok.Getter;
 
 /*Transportes y organizacion*/
 public class Entidad {
+  @Getter
   private String nombreEntidad;
+  @Getter
   private List<Establecimiento> conjuntoDeEstablecimientos;
+  @Getter
   private Localizacion localizacion;
 
   public List<Servicio> todosLosServicios() {
