@@ -8,7 +8,9 @@ import java.util.List;
 public class RepositorioDeUsuarios {
   @Getter
   private List<Usuario> usuariosDeLaPlataforma = new ArrayList<>();
-  
+
+  @Getter
+  private static RepositorioDeUsuarios INSTANCE = new RepositorioDeUsuarios();
   public void aniadirUsuario(Usuario usuario) {
     usuariosDeLaPlataforma.add(usuario);
   }

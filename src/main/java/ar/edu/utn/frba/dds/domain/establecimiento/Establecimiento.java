@@ -7,7 +7,7 @@ import java.util.List;
 /*estaciones y sucursales*/
 public class Establecimiento {
   private String nombre;
-  private String ubicacionGeografico; //Serian coordenada o podriamos tomarlo con la localizacion?
+  private String ubicacionGeografica; //Serian coordenada o podriamos tomarlo con la localizacion?
   private List<Servicio> servicios;
   private TipoEstablecimiento tipoEstablecimiento;
 
