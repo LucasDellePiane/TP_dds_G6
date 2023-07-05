@@ -11,6 +11,7 @@ import ar.edu.utn.frba.dds.domain.servicio.Servicio;
 import lombok.Getter;
 import lombok.Setter;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 @Getter
@@ -60,7 +61,7 @@ public class Usuario {
         comunidadesUsuario.forEach(unaComunidad -> unaComunidad.reportarIncidente(servicio, incidente));
     }
 
-   public void agregarRango(LocalDate horarioInicio, LocalDate horariofinal){
+   public void agregarRango(LocalTime horarioInicio, LocalTime horariofinal){
     RangoHorario rangoHorario = new RangoHorario(horarioInicio,horariofinal);
     horariosNotificacion.add(rangoHorario);
    }
@@ -74,6 +75,10 @@ public class Usuario {
     }
 
 
+  public int proximoHorarioNotificaxion() {//FALTA ESTO !!!, ALTERNATIVA: UTILIZAR ENUMS PARA LOS RANGOS HORARIOS
+    int proximaHora = 1;
+    return proximaHora;
+  }
 }
 
 

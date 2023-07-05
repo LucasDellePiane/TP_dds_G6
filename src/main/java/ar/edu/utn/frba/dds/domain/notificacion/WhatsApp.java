@@ -42,7 +42,7 @@ public class WhatsApp implements MedioComunicacion {
     }
 
     @Override
-    public void enviarNotifiacion(List<Usuario> usuarios) {
+    public void enviarNotificacion(List<Usuario> usuarios) {
         List<Usuario> usuariosANotificar = usuarios.stream()
                 .filter(unUsuario -> usuariosSuscriptos.contains(unUsuario))
                 .toList();

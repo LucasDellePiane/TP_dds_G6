@@ -8,7 +8,7 @@ import java.util.List;
 public interface MedioComunicacion {
 
     public  void suscribirUsuario(Usuario usuario);
-    public  void enviarNotifiacion(List<Usuario> usuarios);
+    public  void enviarNotificacion(List<Usuario> usuarios);
 
 
     public  List<Usuario> getUsuariosSuscriptos();

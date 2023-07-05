@@ -12,8 +12,6 @@ import ar.edu.utn.frba.dds.domain.servicio.Incidente;
 import ar.edu.utn.frba.dds.domain.servicio.Servicio;
 import ar.edu.utn.frba.dds.domain.servicio.TipoServicio;
 import ar.edu.utn.frba.dds.domain.usuario.Usuario;
-import ar.edu.utn.frba.dds.domain.usuario.ValidadorPeorContrasenia;
-import ar.edu.utn.frba.dds.exceptions.RutaInvalidaException;
 import ar.edu.utn.frba.dds.exceptions.SeEnvioEmailException;
 import ar.edu.utn.frba.dds.exceptions.SeEnvioWhatsappException;
 import org.junit.jupiter.api.Test;

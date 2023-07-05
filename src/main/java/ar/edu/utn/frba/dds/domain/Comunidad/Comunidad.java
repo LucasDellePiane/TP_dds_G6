@@ -59,7 +59,7 @@ public class Comunidad {
     List<Usuario> miembrosInteresados = miembros.stream()
                                                 .filter(unMiembro -> unMiembro.estaInteresadoServicio(servicioIncidente))
                                                 .toList();
-    mediosComunicacion.forEach(unMedio -> unMedio.enviarNotifiacion(miembrosInteresados));
+    mediosComunicacion.forEach(unMedio -> unMedio.enviarNotificacion(miembrosInteresados));
   }
 
 }

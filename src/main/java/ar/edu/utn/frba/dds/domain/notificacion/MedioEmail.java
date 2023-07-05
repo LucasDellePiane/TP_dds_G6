@@ -2,10 +2,15 @@ package ar.edu.utn.frba.dds.domain.notificacion;
 
 import ar.edu.utn.frba.dds.domain.usuario.Usuario;
 
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 import ar.edu.utn.frba.dds.exceptions.SeEnvioEmailException;
-import ar.edu.utn.frba.dds.exceptions.SeEnvioWhatsappException;
 import javax.mail.Authenticator;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -18,11 +23,13 @@ import java.util.Arrays;
 import java.util.Properties;
 
 
+
 public class MedioEmail implements MedioComunicacion{
     private List<Usuario> usuariosSuscriptos;
+    private ScheduledExecutorService scheduler;
 
-    private final String username = "msolgarcialinf@gmail.com";
-    
+    private final String username = "emailRemitente";
+    private final String accessToken = "tokenAcceso";
 
     @Override
     public void suscribirUsuario(Usuario usuario) {
@@ -30,16 +37,57 @@ public class MedioEmail implements MedioComunicacion{
     }
 
     @Override
-    public void enviarNotifiacion(List<Usuario> usuarios) {
+    public void enviarNotificacion(List<Usuario> usuarios) {
         List<Usuario> usuariosANotificar = usuarios.stream()
             .filter(unUsuario -> usuariosSuscriptos.contains(unUsuario))
             .toList();
+
+        throw new SeEnvioEmailException("Mensaje enviado al usuario");
+
+        /*
+
+        // Configurar el scheduler para el envío de correos electrónicos
+        scheduler = Executors.newScheduledThreadPool(1);
+
         // Enviar mensajes a los usuarios utilizando la API de Email
         for (Usuario usuario : usuariosANotificar) {
-            this.enviarEmail(usuario.getEmail(),"Nuevo incidente reportado");
+            //int horaEnvio = usuario.getHoraEnvio();
+            int horaEnvio = usuario.proximoHorarioNotificaxion();
+            int minutoEnvio = 0;  //Minutos siempre en 0
+
+            // Calcular el retraso hasta el próximo horario de envío
+            long retrasoInicial = calcularRetrasoInicial(horaEnvio,minutoEnvio);
+
+            // Programar el envío del correo electrónico en el próximo horario de envío
+            scheduler.schedule(() -> enviarEmail(usuario.getEmail(), "Nuevo incidente reportado"),
+                retrasoInicial, TimeUnit.MILLISECONDS);
+
         }
 
+        */
+
+
+
     }
+
+    private long calcularRetrasoInicial(int horaEnvio, int minutoEnvio) {
+        // Obtener la fecha y hora actuales
+        LocalDateTime now = LocalDateTime.now();
+        int horaActual = now.getHour();
+        int minutoActual = now.getMinute();
+
+        // Crea un objeto LocalDateTime que representa la fecha y la hora del próximo horario de envío
+        LocalDateTime proximoHorarioEnvio = LocalDateTime.of(now.toLocalDate(), LocalTime.of(horaEnvio, minutoEnvio));
+
+        if (proximoHorarioEnvio.isBefore(now) || proximoHorarioEnvio.isEqual(now)) {
+            // El próximo horario de envío está en el día siguiente
+            proximoHorarioEnvio = proximoHorarioEnvio.plusDays(1);
+        }
+
+        // Calcular el retraso inicial en milisegundos hasta el próximo horario de envío
+        return now.until(proximoHorarioEnvio, ChronoUnit.MILLIS);
+    }
+
 
     private void enviarEmail(String emailUsuario, String mensaje) {
         Properties props = new Properties();
@@ -48,9 +96,6 @@ public class MedioEmail implements MedioComunicacion{
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
 
-        throw new SeEnvioEmailException("Mensaje enviado al usuario");
-
-        /*
         Session session = Session.getInstance(props, new Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication(username, accessToken);
@@ -60,7 +105,7 @@ public class MedioEmail implements MedioComunicacion{
         try {
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(username));
-            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("msolgarcialinf@gmail.com"));
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(emailUsuario));
             message.setSubject("Notificación de incidente");
             message.setText(mensaje);
 
@@ -68,10 +113,9 @@ public class MedioEmail implements MedioComunicacion{
         } catch (MessagingException e) {
             throw new RuntimeException("Error al enviar el correo electrónico: " + e.getMessage());
         }
-        */
+
 
     }
-
 
     public void Email() {
         List<Usuario> usuarios = new ArrayList<>(Arrays.asList());

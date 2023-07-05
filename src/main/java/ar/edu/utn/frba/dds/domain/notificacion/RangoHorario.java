@@ -1,12 +1,13 @@
 package ar.edu.utn.frba.dds.domain.notificacion;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class RangoHorario {
-  LocalDate horarioInicio;
-  LocalDate horarioFinal;
+  LocalTime horarioInicio;
+  LocalTime horarioFinal;
 
-  public RangoHorario(LocalDate horarioInicio,LocalDate horarioFinal){
+  public RangoHorario(LocalTime horarioInicio,LocalTime horarioFinal){
     this.horarioInicio = horarioInicio;
     this.horarioFinal = horarioFinal;
   }
