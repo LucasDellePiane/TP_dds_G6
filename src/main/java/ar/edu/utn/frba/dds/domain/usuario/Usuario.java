@@ -27,8 +27,6 @@ public class Usuario {
   private String apellido;
   private ValidadorContrasenias validador = new ValidadorContrasenias();
   private List<RangoHorario> horariosNotificacion;
-  private MedioComunicacion medioComunicacion;
-
 
 
   public Usuario(String nombreUsuario, String contrasenia) {

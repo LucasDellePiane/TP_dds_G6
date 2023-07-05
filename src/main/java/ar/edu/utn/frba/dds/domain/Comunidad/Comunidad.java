@@ -1,9 +1,7 @@
 package ar.edu.utn.frba.dds.domain.Comunidad;
 
 import ar.edu.utn.frba.dds.domain.establecimiento.Establecimiento;
-import ar.edu.utn.frba.dds.domain.notificacion.Email;
 import ar.edu.utn.frba.dds.domain.notificacion.MedioComunicacion;
-import ar.edu.utn.frba.dds.domain.notificacion.WhatsApp;
 import ar.edu.utn.frba.dds.domain.servicio.Incidente;
 import ar.edu.utn.frba.dds.domain.servicio.Servicio;
 import ar.edu.utn.frba.dds.domain.usuario.Usuario;

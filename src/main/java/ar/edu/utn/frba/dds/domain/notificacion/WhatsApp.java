@@ -1,4 +1,7 @@
 package ar.edu.utn.frba.dds.domain.notificacion;
+import javax.mail.*;
+import javax.mail.internet.*;
+import java.util.Properties;
 
 import ar.edu.utn.frba.dds.domain.Comunidad.Comunidad;
 import ar.edu.utn.frba.dds.domain.usuario.Usuario;
@@ -17,7 +20,7 @@ import java.util.UUID;
 import com.twilio.Twilio;
 import com.twilio.rest.api.v2010.account.Message;
 import com.twilio.type.PhoneNumber;
-@Getter
+
 public class WhatsApp implements MedioComunicacion {
 
     private List<Usuario> usuariosSuscriptos;
