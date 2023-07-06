@@ -22,6 +22,7 @@ public class Usuario {
   private String contrasenia;
   private String nombreUsuario;
   private Localizacion localizacion;
+  private Localizacion localizacion_actual;
   private List<Establecimiento> establecimientosInteres;
   private List<Servicio> serviciosInteres;
   private String apellido;
