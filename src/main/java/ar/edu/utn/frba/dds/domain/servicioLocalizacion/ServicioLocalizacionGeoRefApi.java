@@ -86,5 +86,8 @@ public class ServicioLocalizacionGeoRefApi implements ServicioLocalizacion {
       throw new RuntimeException("No se pudo realizar la consulta con GeoRefApi correctamente");
     }
   }
-
+  @Override
+  public Localizacion obtenerUbicacionActual(){
+    return null;
+  }
 }
