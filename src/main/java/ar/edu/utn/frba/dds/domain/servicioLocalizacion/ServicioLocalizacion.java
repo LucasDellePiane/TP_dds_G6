@@ -13,4 +13,6 @@ public interface ServicioLocalizacion {
   //esto a su vez podriamos hacer que se ejecute cada cierto tiempo para los usuarios
   // y les cambiaria la ubi actual,como lo vamos a hacer
   //es una buena pregunta, pero para ir planteandolo
+  public Localizacion obtenerUbicacion(String longitud, String latitud); // en caso de q transforme la long y lat en una ubc
+
 }

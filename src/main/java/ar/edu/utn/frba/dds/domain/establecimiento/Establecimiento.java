@@ -7,12 +7,19 @@ import java.util.List;
 /*estaciones y sucursales*/
 public class Establecimiento {
   private String nombre;
-  private String ubicacionGeografica; //Serian coordenada o podriamos tomarlo con la localizacion?
+  private Localizacion ubicacionGeografica; //Es Localizacion
   private List<Servicio> servicios;
   private TipoEstablecimiento tipoEstablecimiento;
 
   // Metodos
 
+  /*
+  public void avisarIncidentes(){
+  if(!!getservicios().map(servicio->servicio.getIncidentes).isEmpty())  
+    avisaALosCercanos(); repoUsuarios.getUsuarios.filter(u.ubicacionAcutla = servicioLocalizacion);
+  }
+  
+  */  
   // Tendriamos que hacer los test
   public void darAltaServicio(Servicio servicioNuevo) {
     this.servicios.add(servicioNuevo);

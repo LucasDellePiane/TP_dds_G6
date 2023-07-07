@@ -19,6 +19,16 @@ public class Entidad {
   @Getter
   private Localizacion localizacion;
 
+  /*
+   * 
+   * public avisarEstablecimientoZona(){
+   *  this.conjuntDeEstablecimentos.forEach(establecimiento -> establecimiento.avisarIncidentes)
+   *
+   * }
+   * 
+   * 
+   */
+
   public List<Servicio> todosLosServicios() {
     return this.getEstablecimientos().stream().
       flatMap(establecimiento -> establecimiento.getServicios().stream()).

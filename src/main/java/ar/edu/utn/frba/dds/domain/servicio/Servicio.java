@@ -12,7 +12,6 @@ import java.util.List;
 
 public class Servicio {
   private TipoServicio tipo;
-  @Getter
   private List<Incidente> incidentes;
 
   public Servicio(TipoServicio tipo){
@@ -24,7 +23,7 @@ public class Servicio {
     incidentes.add(incidente);
     //lo siento mediopasamanos, pero es porque cuando se añade el incidente/crea lo reporta a la comunidad que
     //va a añadirlo y notificarlo a los usuarios como nos pide.
-    this.ComunidadesInteresadasEnElServicio().forEach(comunidad-> comunidad.reportarIncidente(this,incidente));
+    this.ComunidadesInteresadasEnElServicio().forEach(comunidad-> comunidad.notificarIncidente(this));
   }
 
   //no deberia estar aca esta funcion muy probablemente y en realidad la cosa nose si deberia ser con comunidad
@@ -36,4 +35,6 @@ public class Servicio {
   public List<Incidente> getIncidentes() {
     return this.incidentes;
   }
+  
 }
+
