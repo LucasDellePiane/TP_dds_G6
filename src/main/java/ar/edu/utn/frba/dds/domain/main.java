@@ -22,6 +22,7 @@ public class main {
      * 
      * 
      * repoEntidad.getInstancia().getEntidades().forEach(entidad->entidad.avisarEstablecimientoZona)
+     * podriamos saltearnos esto si tuviesemos un repo establecimiento,saltearnos el paso
      *
      *
      */
