@@ -30,7 +30,6 @@ public class Comunidad {
     this.mediosComunicacion = mediosComunicacion;
   }
 
-  // Metodos
 
   public void darDeBajaMiembro(Usuario miembro) {
     this.miembros.remove(miembro);
@@ -44,22 +43,19 @@ public class Comunidad {
     establecimiento.darAltaServicio(servicio); // tendria q existir un metodo en estacion que sea controlarSolicitudServicioNuevo o algo asi
   }
 
-
   public boolean usuarioEsParte(Usuario usuario){
-    return miembros.contains(usuario); //Tenemos a los administradores en la lista de miembros
+    return miembros.contains(usuario);
   }
 
-  public void reportarIncidente(Servicio servicio, Incidente incidente) {
+  public void reportarIncidente(Incidente incidente) {
+    //Se añade el incidente a la comunidad y se notifica a los miembros
     incidentesReportados.add(incidente);
-    this.notificarIncidente(servicio);
+    this.miembros.stream().forEach(unUsuario -> unUsuario.notificarIncidente());
   }
 
-  public void notificarIncidente(Servicio servicioIncidente) {
-    //Notificará a todos los miembros que tengan a ese servicio como interés
-    List<Usuario> miembrosInteresados = miembros.stream()
-                                                .filter(unMiembro -> unMiembro.estaInteresadoServicio(servicioIncidente))
-                                                .toList();
-    mediosComunicacion.forEach(unMedio -> unMedio.enviarNotificacion(miembrosInteresados));
+  public void cerrarIncidente(Incidente incidente) {
+    //SE DEBE CERRAR SOLO PARA LA COMUNIDAD QUE LO CIERRE
   }
+
 
 }

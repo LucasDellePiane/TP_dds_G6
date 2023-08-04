@@ -1,6 +1,8 @@
 package ar.edu.utn.frba.dds.domain.repositorios;
 
 import ar.edu.utn.frba.dds.domain.Comunidad.Comunidad;
+import ar.edu.utn.frba.dds.domain.servicio.Incidente;
+import ar.edu.utn.frba.dds.domain.servicio.Servicio;
 import lombok.Getter;
 
 import java.util.ArrayList;
@@ -22,6 +24,15 @@ public class RepositorioComunidad {
       repositorioComunidad = new RepositorioComunidad();
     }
     return repositorioComunidad;
+  }
+
+  //DEBERÍA ESTAR ACA O EN SERVICIO ?
+  //public List<Comunidad> ComunidadesInteresadasEnElServicio(Servicio servicio) {
+  //return this.comunidades.stream().filter(comunidad -> comunidad.getServiciosDeInteres().contains(servicio)).toList();
+  //}
+
+  public void aniadirComunidad(Comunidad comunidad) {
+    comunidades.add(comunidad);
   }
 
 }

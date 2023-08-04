@@ -2,6 +2,7 @@ package ar.edu.utn.frba.dds.domain.servicio;
 
 import ar.edu.utn.frba.dds.domain.Comunidad.Comunidad;
 import ar.edu.utn.frba.dds.domain.repositorios.RepositorioComunidad;
+import ar.edu.utn.frba.dds.domain.repositorios.RepositorioIncidentes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,14 +16,16 @@ public class Servicio {
     this.incidentes = new ArrayList<>();
   }
 
-  public void aniadirIncidente(Incidente incidente) {
+  public Incidente informarNoFuncionamiento(String observaciones) {
+    //Se crea el incidente, se añade el incidente al servicio y al repoIncidentes, se reporta el incidente en todas las comunidades que tengan a ese servicio como interés
+    Incidente incidente = new Incidente(observaciones);
+    RepositorioIncidentes.getInstancia().aniadirIncidente(incidente);
     incidentes.add(incidente);
-    //lo siento mediopasamanos, pero es porque cuando se añade el incidente/crea lo reporta a la comunidad que
-    //va a añadirlo y notificarlo a los usuarios como nos pide.
-    this.ComunidadesInteresadasEnElServicio().forEach(comunidad-> comunidad.notificarIncidente(this));
+    this.ComunidadesInteresadasEnElServicio().forEach(comunidad-> comunidad.reportarIncidente(incidente));
+    return incidente; //Se retorna solo para poder testear
   }
 
-  //no deberia estar aca esta funcion muy probablemente y en realidad la cosa nose si deberia ser con comunidad
+  //ComunidadesInteresadasEnElServicio() DEBERÍA ESTAR ACA O EN EL REPO DE COMUNIDADES ?
   private List<Comunidad> ComunidadesInteresadasEnElServicio(){
     return RepositorioComunidad.getInstancia().getComunidades().stream().
         filter(comunidad -> comunidad.getServiciosDeInteres().contains(this)).toList();

@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds.domain.usuario;
 
 import ar.edu.utn.frba.dds.domain.Comunidad.Comunidad;
+import ar.edu.utn.frba.dds.domain.notificacion.MedioComunicacion;
 import ar.edu.utn.frba.dds.domain.repositorios.RepositorioComunidad;
 import ar.edu.utn.frba.dds.domain.establecimiento.Establecimiento;
 import ar.edu.utn.frba.dds.domain.localizacion.Localizacion;
@@ -27,67 +28,37 @@ public class Usuario {
   private String apellido;
   private ValidadorContrasenias validador = new ValidadorContrasenias();
   private List<RangoHorario> horariosNotificacion;
-
+  private MedioComunicacion medioComunicacion;
 
   public Usuario(String nombreUsuario, String contrasenia) {
     validador.validarContrasenia(nombreUsuario,contrasenia);
     this.nombreUsuario = nombreUsuario;
     this.contrasenia = contrasenia;
-
   }
 
-/*
-* SuscribirseMedioComunicacion
-* InformarNoFuncionamiento
-* reportarIncidente
-* CerrarIncidente
-*
-* Todas esas funciones NO VAN EN USUARIO, son funciones q se llaman con el "boton" desde otra clase xd
-* */
+  public void agregarRango(LocalTime horarioInicio, LocalTime horariofinal){
+      RangoHorario rangoHorario = new RangoHorario(horarioInicio,horariofinal);
+      horariosNotificacion.add(rangoHorario);
+  }
+
+  // Esto no se convierte en un pasamanos ???
+  public void notificarIncidente() {
+      //this.medioComunicacion.notificarIncidente();
+  }
 
 
-//
-//  public void suscribirseMedioComunicacion(MedioComunicacion medioComunicacion){
-//      medioComunicacion.suscribirUsuario(this);
-//  }
-
-   // Duda sobre localizacion.
-
-//   public Incidente informarNoFuncionamiento(Servicio servicio, String observaciones) {
-//     Incidente incidente = new Incidente(observaciones);
-//     servicio.aniadirIncidente(incidente);
-//     this.reportarIncidente(servicio, incidente);
-//     return incidente;
-//   }
-
-    public List<Comunidad> comunidadesDelUsuario(){ //podría estar en repositorioUsuario()
-        RepositorioComunidad repositorioComunidad = RepositorioComunidad.getInstancia();
-        return repositorioComunidad.getComunidades().stream().filter(unaComunidad -> unaComunidad.usuarioEsParte(this)).toList();
-    }
-
-//    public void reportarIncidente(Servicio servicio, Incidente incidente){
-//    List<Comunidad> comunidadesUsuario = this.comunidadesDelUsuario();
-//    comunidadesUsuario.forEach(unaComunidad -> unaComunidad.reportarIncidente(servicio, incidente));
-//  }
-
-   public void agregarRango(LocalTime horarioInicio, LocalTime horariofinal){
-    RangoHorario rangoHorario = new RangoHorario(horarioInicio,horariofinal);
-    horariosNotificacion.add(rangoHorario);
-   }
-
-    public boolean estaInteresadoServicio(Servicio servicioInteres){
-        return serviciosInteres.contains(servicioInteres);
-    }
-
-//    public void cerrarIncidente(Incidente incidente) {
-//        incidente.cerrarIncidente();
-//    }
-
-
-  public int proximoHorarioNotificaxion() {//FALTA ESTO !!!, ALTERNATIVA: UTILIZAR ENUMS PARA LOS RANGOS HORARIOS
+  public int proximoHorarioNotificaxion() { //FALTA ESTO !!!, ALTERNATIVA: UTILIZAR ENUMS PARA LOS RANGOS HORARIOS
     int proximaHora = 1;
     return proximaHora;
   }
+
+
+    // comunidadesDelUsuario() ESTA FUNCION NO SE UTILIZARIA MÁS
+    //public List<Comunidad> comunidadesDelUsuario(){ //podría estar en repositorioUsuario()
+    //    RepositorioComunidad repositorioComunidad = RepositorioComunidad.getInstancia();
+    //    return repositorioComunidad.getComunidades().stream().filter(unaComunidad -> unaComunidad.usuarioEsParte(this)).toList();
+    //}
+
 }
 
 
