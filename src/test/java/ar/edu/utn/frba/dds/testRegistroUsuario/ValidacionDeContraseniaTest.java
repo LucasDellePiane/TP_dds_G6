@@ -4,7 +4,7 @@ import ar.edu.utn.frba.dds.exceptions.CaracteresRepetidosException;
 import ar.edu.utn.frba.dds.exceptions.ContraseniaMuyCortaException;
 import ar.edu.utn.frba.dds.exceptions.MalaContraseniaException;
 import ar.edu.utn.frba.dds.exceptions.UsaCrendencialesException;
-import ar.edu.utn.frba.dds.domain.usuario.ValidadorContrasenias;
+import ar.edu.utn.frba.dds.domain.validadores.ValidadorContrasenias;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

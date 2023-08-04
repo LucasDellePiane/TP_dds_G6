@@ -1,4 +1,4 @@
-package ar.edu.utn.frba.dds.domain.usuario;
+package ar.edu.utn.frba.dds.domain.validadores;
 
 import ar.edu.utn.frba.dds.exceptions.MalaContraseniaException;
 import ar.edu.utn.frba.dds.exceptions.RutaInvalidaException;

@@ -1,7 +1,7 @@
 package ar.edu.utn.frba.dds.testRegistroUsuario;
 
 import ar.edu.utn.frba.dds.domain.repositorios.RepositorioDeUsuarios;
-import ar.edu.utn.frba.dds.domain.usuario.ValidadorPeorContrasenia;
+import ar.edu.utn.frba.dds.domain.validadores.ValidadorPeorContrasenia;
 import ar.edu.utn.frba.dds.domain.usuario.Usuario;
 import org.junit.jupiter.api.*;
 

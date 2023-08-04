@@ -4,10 +4,9 @@ import ar.edu.utn.frba.dds.domain.Comunidad.Comunidad;
 import ar.edu.utn.frba.dds.domain.repositorios.RepositorioComunidad;
 import ar.edu.utn.frba.dds.domain.establecimiento.Establecimiento;
 import ar.edu.utn.frba.dds.domain.localizacion.Localizacion;
-import ar.edu.utn.frba.dds.domain.notificacion.MedioComunicacion;
 import ar.edu.utn.frba.dds.domain.notificacion.RangoHorario;
-import ar.edu.utn.frba.dds.domain.servicio.Incidente;
 import ar.edu.utn.frba.dds.domain.servicio.Servicio;
+import ar.edu.utn.frba.dds.domain.validadores.ValidadorContrasenias;
 import lombok.Getter;
 import lombok.Setter;
 import java.time.LocalTime;
@@ -37,29 +36,39 @@ public class Usuario {
 
   }
 
+/*
+* SuscribirseMedioComunicacion
+* InformarNoFuncionamiento
+* reportarIncidente
+* CerrarIncidente
+*
+* Todas esas funciones NO VAN EN USUARIO, son funciones q se llaman con el "boton" desde otra clase xd
+* */
 
-  public void suscribirseMedioComunicacion(MedioComunicacion medioComunicacion){
-      medioComunicacion.suscribirUsuario(this);
-  }
+
+//
+//  public void suscribirseMedioComunicacion(MedioComunicacion medioComunicacion){
+//      medioComunicacion.suscribirUsuario(this);
+//  }
 
    // Duda sobre localizacion.
 
-   public Incidente informarNoFuncionamiento(Servicio servicio, String observaciones) {
-     Incidente incidente = new Incidente(observaciones);
-     servicio.aniadirIncidente(incidente);
-     this.reportarIncidente(servicio, incidente);
-     return incidente;
-   }
+//   public Incidente informarNoFuncionamiento(Servicio servicio, String observaciones) {
+//     Incidente incidente = new Incidente(observaciones);
+//     servicio.aniadirIncidente(incidente);
+//     this.reportarIncidente(servicio, incidente);
+//     return incidente;
+//   }
 
     public List<Comunidad> comunidadesDelUsuario(){ //podría estar en repositorioUsuario()
         RepositorioComunidad repositorioComunidad = RepositorioComunidad.getInstancia();
         return repositorioComunidad.getComunidades().stream().filter(unaComunidad -> unaComunidad.usuarioEsParte(this)).toList();
     }
 
-    public void reportarIncidente(Servicio servicio, Incidente incidente){
-        List<Comunidad> comunidadesUsuario = this.comunidadesDelUsuario();
-        comunidadesUsuario.forEach(unaComunidad -> unaComunidad.reportarIncidente(servicio, incidente));
-    }
+//    public void reportarIncidente(Servicio servicio, Incidente incidente){
+//    List<Comunidad> comunidadesUsuario = this.comunidadesDelUsuario();
+//    comunidadesUsuario.forEach(unaComunidad -> unaComunidad.reportarIncidente(servicio, incidente));
+//  }
 
    public void agregarRango(LocalTime horarioInicio, LocalTime horariofinal){
     RangoHorario rangoHorario = new RangoHorario(horarioInicio,horariofinal);
@@ -70,9 +79,9 @@ public class Usuario {
         return serviciosInteres.contains(servicioInteres);
     }
 
-    public void cerrarIncidente(Incidente incidente) {
-        incidente.cerrarIncidente();
-    }
+//    public void cerrarIncidente(Incidente incidente) {
+//        incidente.cerrarIncidente();
+//    }
 
 
   public int proximoHorarioNotificaxion() {//FALTA ESTO !!!, ALTERNATIVA: UTILIZAR ENUMS PARA LOS RANGOS HORARIOS

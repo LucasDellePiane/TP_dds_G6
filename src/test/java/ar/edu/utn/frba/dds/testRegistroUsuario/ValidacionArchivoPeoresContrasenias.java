@@ -1,7 +1,7 @@
 package ar.edu.utn.frba.dds.testRegistroUsuario;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import ar.edu.utn.frba.dds.domain.usuario.ValidadorPeorContrasenia;
+import ar.edu.utn.frba.dds.domain.validadores.ValidadorPeorContrasenia;
 import ar.edu.utn.frba.dds.exceptions.RutaInvalidaException;
 import org.junit.jupiter.api.Test;
 
