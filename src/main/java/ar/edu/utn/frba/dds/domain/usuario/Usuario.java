@@ -40,7 +40,7 @@ public class Usuario {
   }
 
   public void notificarIncidente() {
-    //this.medioComunicacion.notificarIncidente();
+    //this.medioComunicacion.notificarIncidente(this);
   }
 
   //public void agregarRango(LocalTime horarioInicio, LocalTime horariofinal){

@@ -20,15 +20,13 @@ public class Comunidad {
   private List<Servicio> serviciosDeInteres;
   @Getter
   private List<Incidente> incidentesReportados = new ArrayList<>(Arrays.asList());
-  private List<MedioComunicacion> mediosComunicacion;
 
-  public Comunidad(List<Usuario> miembros, List<Usuario> administradores, List<Servicio> serviciosDeInteres,List<MedioComunicacion> mediosComunicacion) {
+  public Comunidad(List<Usuario> miembros, List<Usuario> administradores, List<Servicio> serviciosDeInteres) {
 
     //VERIFICAR
     this.miembros = miembros;
     this.administradores = administradores;
     this.serviciosDeInteres = serviciosDeInteres;
-    this.mediosComunicacion = mediosComunicacion;
   }
 
 
@@ -51,17 +49,13 @@ public class Comunidad {
   public void reportarIncidente(Incidente incidente) {
     //Se añade el incidente a la comunidad y se notifica a los miembros
     incidentesReportados.add(incidente);
-    this.miembros.stream().forEach(unUsuario -> unUsuario.notificarIncidente());
+    this.miembros.stream().forEach(unMiembro -> unMiembro.notificarIncidente());
   }
 
   public List<Incidente> consultarIncidentesPorEstado(EstadoIncidente estadoIncidente){
     return this.incidentesReportados.stream()
                                     .filter(unIncidente -> unIncidente.getEstado().equals(estadoIncidente))
                                     .collect(Collectors.toList());
-  }
-
-  public void cerrarIncidente(Incidente incidente) {
-    //SE DEBE CERRAR SOLO PARA LA COMUNIDAD QUE LO CIERRE
   }
 
 

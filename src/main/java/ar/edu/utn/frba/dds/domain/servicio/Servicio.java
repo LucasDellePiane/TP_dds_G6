@@ -16,14 +16,28 @@ public class Servicio {
     this.incidentes = new ArrayList<>();
   }
 
-  public Incidente informarNoFuncionamiento(String observaciones) {
-    //Se crea el incidente, se añade el incidente al servicio y al repoIncidentes, se reporta el incidente en todas las comunidades que tengan a ese servicio como interés
-    Incidente incidente = new Incidente(observaciones);
-    RepositorioIncidentes.getInstancia().aniadirIncidente(incidente);
+
+  // REVISAR EL HECHO DE QUE HAY INCIDENTES REPETIDOS EN LA LISTA DE INCIDENTES DEL SERVICIO
+  public void informarNoFuncionamiento(String observaciones) {
+   this.ComunidadesInteresadasEnElServicio().forEach(comunidad->
+   {
+    Incidente incidente = new Incidente(observaciones, comunidad);
     incidentes.add(incidente);
-    this.ComunidadesInteresadasEnElServicio().forEach(comunidad-> comunidad.reportarIncidente(incidente));
-    return incidente; //Se retorna solo para poder testear
+    comunidad.reportarIncidente(incidente);
+    });
   }
+
+  //NO BORRAR - ESPERANDO APROBACIÓN DE ROLI
+  //public void informarNoFuncionamiento(String observaciones) {
+  //  Incidente incidente = new Incidente(observaciones);
+  //  incidentes.add(incidente);
+  //  this.ComunidadesInteresadasEnElServicio().forEach(comunidad->
+  //  {
+  //    IncidenteComunidad incidenteComunidad = new IncidenteComunidad(incidente);
+  //    comunidad.reportarIncidente(incidenteComunidad);
+  //  });
+  //}
+
 
   //ComunidadesInteresadasEnElServicio() DEBERÍA ESTAR ACA O EN EL REPO DE COMUNIDADES ?
   private List<Comunidad> ComunidadesInteresadasEnElServicio(){

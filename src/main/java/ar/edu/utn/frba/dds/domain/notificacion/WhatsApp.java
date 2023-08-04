@@ -52,7 +52,7 @@ public class WhatsApp implements MedioComunicacion {
         }
     }
 
-    // Método para enviar un mensaje de WhatsApp utilizando Twilio
+    // LO ÚNICO QUE QUEDARÍA EN CLASE ES ESTE MÉTODO
     private void enviarMensajeWhatsApp(String numeroTelefono, String mensaje) {
         PhoneNumber to = new PhoneNumber(numeroTelefono);
         PhoneNumber from = new PhoneNumber("your_twilio_phone_number");

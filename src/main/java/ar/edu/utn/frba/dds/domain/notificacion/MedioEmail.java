@@ -26,10 +26,8 @@ import java.util.Properties;
 
 public class MedioEmail implements MedioComunicacion{
 
-
     private List<Usuario> usuariosSuscriptos;     //ELIMINAR - NO DEBERÍA ESTAR MÁS
     private ScheduledExecutorService scheduler;
-
     private final String username = "emailRemitente";
     private final String accessToken = "tokenAcceso";
 
@@ -65,12 +63,8 @@ public class MedioEmail implements MedioComunicacion{
             // Programar el envío del correo electrónico en el próximo horario de envío
             scheduler.schedule(() -> enviarEmail(usuario.getEmail(), "Nuevo incidente reportado"),
                 retrasoInicial, TimeUnit.MILLISECONDS);
-
         }
-
         */
-
-
 
     }
 
@@ -93,6 +87,23 @@ public class MedioEmail implements MedioComunicacion{
     }
 
 
+    public void Email() {
+        List<Usuario> usuarios = new ArrayList<>(Arrays.asList());
+        this.usuariosSuscriptos = usuarios;
+    }
+
+    @Override  //ELIMINAR - NO DEBERÍA ESTAR MÁS
+    public List<Usuario> getUsuariosSuscriptos() {
+        return usuariosSuscriptos;
+    }
+
+    public MedioEmail() {
+        List<Usuario> usuariosSuscriptos = new ArrayList<>();
+        this.usuariosSuscriptos = usuariosSuscriptos;
+    }
+
+
+    //LO ÚNICO QUE QUEDARÍA EN ESTA CLASE ES enviarEmail(String emailUsuario, String mensaje)
     private void enviarEmail(String emailUsuario, String mensaje) {
         Properties props = new Properties();
         props.put("mail.smtp.host", "smtp.gmail.com");
@@ -121,18 +132,4 @@ public class MedioEmail implements MedioComunicacion{
 
     }
 
-    public void Email() {
-        List<Usuario> usuarios = new ArrayList<>(Arrays.asList());
-        this.usuariosSuscriptos = usuarios;
-    }
-
-    @Override  //ELIMINAR - NO DEBERÍA ESTAR MÁS
-    public List<Usuario> getUsuariosSuscriptos() {
-        return usuariosSuscriptos;
-    }
-
-    public MedioEmail() {
-        List<Usuario> usuariosSuscriptos = new ArrayList<>();
-        this.usuariosSuscriptos = usuariosSuscriptos;
-    }
 }

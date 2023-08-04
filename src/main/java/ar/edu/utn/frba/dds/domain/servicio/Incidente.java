@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.domain.servicio;
 
+import ar.edu.utn.frba.dds.domain.Comunidad.Comunidad;
 import lombok.Getter;
 import lombok.Setter;
 import java.time.Duration;
@@ -11,14 +12,17 @@ public class Incidente {
   @Getter
   EstadoIncidente estado;
   @Getter
+  Comunidad comunidad;
+  @Getter
   LocalDateTime horarioApertura;
   @Setter
   LocalDateTime horarioCierre;
 
-  public Incidente(String observaciones){
+  public Incidente(String observaciones, Comunidad comunidad){
     this.observaciones = observaciones;
     this.estado = EstadoIncidente.ACTIVO;
     this.horarioApertura = LocalDateTime.now();
+    this.comunidad = comunidad;
   }
   public void cerrarIncidente(){
     this.setHorarioCierre(LocalDateTime.now());
