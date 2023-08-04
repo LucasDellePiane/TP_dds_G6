@@ -2,6 +2,7 @@ package ar.edu.utn.frba.dds.domain.Comunidad;
 
 import ar.edu.utn.frba.dds.domain.establecimiento.Establecimiento;
 import ar.edu.utn.frba.dds.domain.notificacion.MedioComunicacion;
+import ar.edu.utn.frba.dds.domain.servicio.EstadoIncidente;
 import ar.edu.utn.frba.dds.domain.servicio.Incidente;
 import ar.edu.utn.frba.dds.domain.servicio.Servicio;
 import ar.edu.utn.frba.dds.domain.usuario.Usuario;
@@ -51,6 +52,12 @@ public class Comunidad {
     //Se añade el incidente a la comunidad y se notifica a los miembros
     incidentesReportados.add(incidente);
     this.miembros.stream().forEach(unUsuario -> unUsuario.notificarIncidente());
+  }
+
+  public List<Incidente> consultarIncidentesPorEstado(EstadoIncidente estadoIncidente){
+    return this.incidentesReportados.stream()
+                                    .filter(unIncidente -> unIncidente.getEstado().equals(estadoIncidente))
+                                    .collect(Collectors.toList());
   }
 
   public void cerrarIncidente(Incidente incidente) {

@@ -25,17 +25,21 @@ import java.util.Properties;
 
 
 public class MedioEmail implements MedioComunicacion{
-    private List<Usuario> usuariosSuscriptos;
+
+
+    private List<Usuario> usuariosSuscriptos;     //ELIMINAR - NO DEBERÍA ESTAR MÁS
     private ScheduledExecutorService scheduler;
 
     private final String username = "emailRemitente";
     private final String accessToken = "tokenAcceso";
 
-    @Override
+    @Override   //ELIMINAR - NO DEBERÍA ESTAR MÁS
     public void suscribirUsuario(Usuario usuario) {
         usuariosSuscriptos.add(usuario);
     }
 
+    //LA LÓGICA DE LA PROGRAMACIÓN DE ENVIOS DE EMAIL NO DEBE ESTAR EN ESTA CLASE POR COHESIÓN
+    //NO SE DEBE PROGRAMAR UNA TAREA POR CADA NOTIFICACIÓN DE CADA USUARIO
     @Override
     public void enviarNotificacion(List<Usuario> usuarios) {
         List<Usuario> usuariosANotificar = usuarios.stream()
@@ -122,8 +126,7 @@ public class MedioEmail implements MedioComunicacion{
         this.usuariosSuscriptos = usuarios;
     }
 
-
-    @Override
+    @Override  //ELIMINAR - NO DEBERÍA ESTAR MÁS
     public List<Usuario> getUsuariosSuscriptos() {
         return usuariosSuscriptos;
     }
