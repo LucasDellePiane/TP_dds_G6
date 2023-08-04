@@ -27,8 +27,11 @@ public class Usuario {
   private List<Servicio> serviciosInteres;
   private String apellido;
   private ValidadorContrasenias validador = new ValidadorContrasenias();
-  private List<RangoHorario> horariosNotificacion;
   private MedioComunicacion medioComunicacion;
+
+  //Cambiaríamos el rangoHorario por horas directamente
+  //private List<RangoHorario> horariosNotificacion;
+  private List<Integer> horariosNotificacion;
 
   public Usuario(String nombreUsuario, String contrasenia) {
     validador.validarContrasenia(nombreUsuario,contrasenia);
@@ -36,28 +39,24 @@ public class Usuario {
     this.contrasenia = contrasenia;
   }
 
-  public void agregarRango(LocalTime horarioInicio, LocalTime horariofinal){
-      RangoHorario rangoHorario = new RangoHorario(horarioInicio,horariofinal);
-      horariosNotificacion.add(rangoHorario);
-  }
-
-  // Esto no se convierte en un pasamanos ???
   public void notificarIncidente() {
-      //this.medioComunicacion.notificarIncidente();
+    //this.medioComunicacion.notificarIncidente();
+  }
+
+  //public void agregarRango(LocalTime horarioInicio, LocalTime horariofinal){
+  //    RangoHorario rangoHorario = new RangoHorario(horarioInicio,horariofinal);
+  //    horariosNotificacion.add(rangoHorario);
+  //}
+  public void agregarHorarioNotificacion(Integer horario){
+    horariosNotificacion.add(horario);
   }
 
 
-  public int proximoHorarioNotificaxion() { //FALTA ESTO !!!, ALTERNATIVA: UTILIZAR ENUMS PARA LOS RANGOS HORARIOS
-    int proximaHora = 1;
-    return proximaHora;
-  }
-
-
-    // comunidadesDelUsuario() ESTA FUNCION NO SE UTILIZARIA MÁS
-    //public List<Comunidad> comunidadesDelUsuario(){ //podría estar en repositorioUsuario()
-    //    RepositorioComunidad repositorioComunidad = RepositorioComunidad.getInstancia();
-    //    return repositorioComunidad.getComunidades().stream().filter(unaComunidad -> unaComunidad.usuarioEsParte(this)).toList();
-    //}
+  //VERIFICAR LÓGICA DE NOFITICACIONES
+  //public int proximoHorarioNotificaxion() {
+  //  int proximaHora = 1;
+  //  return proximaHora;
+  //}
 
 }
 
