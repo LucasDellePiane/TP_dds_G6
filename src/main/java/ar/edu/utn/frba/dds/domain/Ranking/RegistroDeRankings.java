@@ -2,7 +2,7 @@ package ar.edu.utn.frba.dds.domain.Ranking;
 
 import java.util.List;
 
-import ar.edu.utn.frba.dds.domain.entidad.RepositorioDeEntidades;
+import ar.edu.utn.frba.dds.domain.repositorios.RepositorioDeEntidades;
 
 public class RegistroDeRankings { // cambiar nombre
     private List<Criterio> criterios;

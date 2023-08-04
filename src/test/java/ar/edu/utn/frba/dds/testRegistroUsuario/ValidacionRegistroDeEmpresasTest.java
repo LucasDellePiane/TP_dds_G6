@@ -1,7 +1,7 @@
 package ar.edu.utn.frba.dds.testRegistroUsuario;
 
 
-import ar.edu.utn.frba.dds.domain.funcionalidadRegistroUsuarios.RepositorioEmpresas;
+import ar.edu.utn.frba.dds.domain.repositorios.RepositorioEmpresas;
 import ar.edu.utn.frba.dds.exceptions.RutaInvalidaException;
 
 

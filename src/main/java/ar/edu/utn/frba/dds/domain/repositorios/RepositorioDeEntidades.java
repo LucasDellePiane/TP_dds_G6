@@ -1,8 +1,9 @@
-package ar.edu.utn.frba.dds.domain.entidad;
+package ar.edu.utn.frba.dds.domain.repositorios;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import ar.edu.utn.frba.dds.domain.entidad.Entidad;
 import lombok.Getter;
 
 public class RepositorioDeEntidades {

@@ -1,4 +1,4 @@
-package ar.edu.utn.frba.dds.domain.funcionalidadRegistroUsuarios;
+package ar.edu.utn.frba.dds.domain.repositorios;
 
 import ar.edu.utn.frba.dds.domain.usuario.Empresa;
 import ar.edu.utn.frba.dds.domain.usuario.TipoEmpresa;

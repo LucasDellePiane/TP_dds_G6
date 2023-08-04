@@ -1,11 +1,7 @@
 package ar.edu.utn.frba.dds.domain.servicio;
 
 import ar.edu.utn.frba.dds.domain.Comunidad.Comunidad;
-import ar.edu.utn.frba.dds.domain.Comunidad.RepositorioComunidad;
-import ar.edu.utn.frba.dds.domain.funcionalidadRegistroUsuarios.RepositorioDeUsuarios;
-import ar.edu.utn.frba.dds.domain.servicio.TipoServicio;
-import ar.edu.utn.frba.dds.domain.usuario.Usuario;
-import lombok.Getter;
+import ar.edu.utn.frba.dds.domain.repositorios.RepositorioComunidad;
 
 import java.util.ArrayList;
 import java.util.List;

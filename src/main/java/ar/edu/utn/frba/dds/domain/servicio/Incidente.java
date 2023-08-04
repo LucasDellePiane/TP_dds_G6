@@ -1,16 +1,9 @@
 package ar.edu.utn.frba.dds.domain.servicio;
 
-import ar.edu.utn.frba.dds.domain.Comunidad.Comunidad;
-import ar.edu.utn.frba.dds.domain.Comunidad.RepositorioComunidad;
-import ar.edu.utn.frba.dds.domain.usuario.Usuario;
 import lombok.Getter;
 import lombok.Setter;
 import java.time.Duration;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
-
-import ar.edu.utn.frba.dds.domain.Comunidad.RepositorioComunidad;
 
 public class Incidente {
   @Getter

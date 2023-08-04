@@ -1,6 +1,6 @@
-package ar.edu.utn.frba.dds.domain.Comunidad;
+package ar.edu.utn.frba.dds.domain.repositorios;
 
-import ar.edu.utn.frba.dds.domain.usuario.Usuario;
+import ar.edu.utn.frba.dds.domain.Comunidad.Comunidad;
 import lombok.Getter;
 
 import java.util.ArrayList;

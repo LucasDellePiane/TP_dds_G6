@@ -1,7 +1,7 @@
 package ar.edu.utn.frba.dds.domain.usuario;
 
 import ar.edu.utn.frba.dds.domain.Comunidad.Comunidad;
-import ar.edu.utn.frba.dds.domain.Comunidad.RepositorioComunidad;
+import ar.edu.utn.frba.dds.domain.repositorios.RepositorioComunidad;
 import ar.edu.utn.frba.dds.domain.establecimiento.Establecimiento;
 import ar.edu.utn.frba.dds.domain.localizacion.Localizacion;
 import ar.edu.utn.frba.dds.domain.notificacion.MedioComunicacion;
@@ -10,7 +10,6 @@ import ar.edu.utn.frba.dds.domain.servicio.Incidente;
 import ar.edu.utn.frba.dds.domain.servicio.Servicio;
 import lombok.Getter;
 import lombok.Setter;
-import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
