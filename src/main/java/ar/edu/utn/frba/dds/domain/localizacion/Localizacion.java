@@ -10,6 +10,8 @@ import lombok.Setter;
 public class Localizacion {
   String provincia;
   Division division;
+  // lat
+  //long
 
   public Localizacion(String provincia, Division division) {
     this.division = division;

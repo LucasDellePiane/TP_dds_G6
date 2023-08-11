@@ -1,28 +1,32 @@
 package ar.edu.utn.frba.dds.domain;
 
+import ar.edu.utn.frba.dds.domain.repositorios.RepositorioDeUsuarios;
+
 public class main {
-    // agregar tiempo de cada una semana para 
+    // agregar tiempo de cada una semana para
+
+    // dos tipos de notificaciones:
+    // 1) una es en X tiempo para mostrar los incidentes (cronJob)
+    // 2) cuando esta cerca de un incidente
 
     // crontab
-    
-    
+
+
+
+    public void notificarIncidentes() {
+      RepositorioDeUsuarios repousuario = RepositorioDeUsuarios.getINSTANCE();
+      repousuario.getUsuariosDeLaPlataforma()
+          .forEach(usuario->usuario.notificarIncidente());
+    }
+
     /*
-    
-        servicioLocalizacio asdfasf= obtenerUbicacionActualApi (long, lat)
-        --> lo transformamos
-        nos da localizacion provincia BUENOSAIRES,LANUS
-        serivioLocalizacion asasdf = transformadorApi ('provincia')
-        --> lo pasas a geoRefApi
-        --> obtenerLocalizacion(buenosAires) --> buenos aires 
-        servicioLocalizacion georef = georefApi --> traeme ('provincia')
-    
      * 
      * //!! repousuario.getInstancia().forEach(obtenerUbicacionActual)
      * 
      * 
      * 
-     * repoEntidad.getInstancia().getEntidades().forEach(entidad->entidad.avisarEstablecimientoZona)
-     * podriamos saltearnos esto si tuviesemos un repo establecimiento,saltearnos el paso
+     * repoUsuariogetInstancia().getUsuarios().forEach(usuario->usuario.notificacionIncidente(usuario)
+
      *
      *
      */

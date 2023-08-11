@@ -1,7 +1,6 @@
 package ar.edu.utn.frba.dds.domain.Comunidad;
 
 import ar.edu.utn.frba.dds.domain.establecimiento.Establecimiento;
-import ar.edu.utn.frba.dds.domain.notificacion.MedioComunicacion;
 import ar.edu.utn.frba.dds.domain.servicio.EstadoIncidente;
 import ar.edu.utn.frba.dds.domain.servicio.Incidente;
 import ar.edu.utn.frba.dds.domain.servicio.Servicio;
@@ -20,6 +19,7 @@ public class Comunidad {
   private List<Servicio> serviciosDeInteres;
   @Getter
   private List<Incidente> incidentesReportados = new ArrayList<>(Arrays.asList());
+
 
   public Comunidad(List<Usuario> miembros, List<Usuario> administradores, List<Servicio> serviciosDeInteres) {
 

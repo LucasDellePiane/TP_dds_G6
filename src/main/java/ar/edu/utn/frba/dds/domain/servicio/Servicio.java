@@ -9,7 +9,7 @@ import java.util.List;
 
 public class Servicio {
   private TipoServicio tipo;
-  private List<Incidente> incidentes;
+  private List<Incidente> incidentes; // PONEMOS UN REPO INCIDENTES
 
   public Servicio(TipoServicio tipo){
     this.tipo = tipo;

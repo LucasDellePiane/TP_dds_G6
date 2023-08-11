@@ -5,9 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import ar.edu.utn.frba.dds.domain.Comunidad.Comunidad;
 import ar.edu.utn.frba.dds.domain.repositorios.RepositorioComunidad;
-import ar.edu.utn.frba.dds.domain.notificacion.MedioComunicacion;
-import ar.edu.utn.frba.dds.domain.notificacion.MedioEmail;
-import ar.edu.utn.frba.dds.domain.notificacion.WhatsApp;
+import ar.edu.utn.frba.dds.domain.medioComunicacion.MedioComunicacion;
+import ar.edu.utn.frba.dds.domain.medioComunicacion.MedioEmail;
+import ar.edu.utn.frba.dds.domain.medioComunicacion.WhatsApp;
 import ar.edu.utn.frba.dds.domain.servicio.Incidente;
 import ar.edu.utn.frba.dds.domain.servicio.Servicio;
 import ar.edu.utn.frba.dds.domain.servicio.TipoServicio;

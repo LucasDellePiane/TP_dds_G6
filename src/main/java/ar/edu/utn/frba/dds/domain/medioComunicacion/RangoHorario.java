@@ -1,6 +1,5 @@
-package ar.edu.utn.frba.dds.domain.notificacion;
+package ar.edu.utn.frba.dds.domain.medioComunicacion;
 
-import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class RangoHorario {
