@@ -47,9 +47,8 @@ public class Comunidad {
   }
 
   public void reportarIncidente(Incidente incidente) {
-    //Se añade el incidente a la comunidad y se notifica a los miembros
     incidentesReportados.add(incidente);
-    this.miembros.stream().forEach(unMiembro -> unMiembro.notificarIncidente());
+    this.miembros.stream().forEach(unMiembro -> unMiembro.notificarIncidente(incidente));
   }
 
   public List<Incidente> consultarIncidentesPorEstado(EstadoIncidente estadoIncidente){

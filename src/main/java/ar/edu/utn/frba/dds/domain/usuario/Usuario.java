@@ -1,13 +1,21 @@
 package ar.edu.utn.frba.dds.domain.usuario;
 
+import ar.edu.utn.frba.dds.domain.Comunidad.Comunidad;
 import ar.edu.utn.frba.dds.domain.medioComunicacion.MedioComunicacion;
 import ar.edu.utn.frba.dds.domain.establecimiento.Establecimiento;
 import ar.edu.utn.frba.dds.domain.localizacion.Localizacion;
+import ar.edu.utn.frba.dds.domain.repositorios.RepositorioComunidad;
+import ar.edu.utn.frba.dds.domain.repositorios.RepositorioIncidentes;
+import ar.edu.utn.frba.dds.domain.servicio.Incidente;
 import ar.edu.utn.frba.dds.domain.servicio.Servicio;
 import ar.edu.utn.frba.dds.domain.validadores.ValidadorContrasenias;
+import com.google.common.collect.Lists;
 import lombok.Getter;
 import lombok.Setter;
+import java.time.LocalTime;
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
 @Setter
@@ -35,24 +43,31 @@ public class Usuario {
     this.contrasenia = contrasenia;
   }
 
-  public void notificarIncidente() {
-    //
+  public void notificarIncidentes() {
+    LocalTime horaActual = LocalTime.now();
+    int horaEntero = horaActual.getHour() * 100 + horaActual.getMinute();
+    boolean contieneHorarioActual = this.horariosNotificacion.contains(horaEntero);
+    if(contieneHorarioActual){
+      Comunidad comunidad = (Comunidad) RepositorioComunidad.getInstancia().getComunidades().stream().filter(c -> {
+        return c.usuarioEsParte(this);
+      });
+      List<Incidente> incidentes = comunidad.getServiciosDeInteres().stream()
+          .filter(servicio -> serviciosInteres.contains(servicio) )
+          .map(servicio -> servicio.getIncidentes())
+          .flatMap(Collection::stream)
+          .collect(Collectors.toList());;
+
+      medioComunicacion.notificarIncidentes(this, incidentes);
+    }
   }
 
-  //public void agregarRango(LocalTime horarioInicio, LocalTime horariofinal){
-  //    RangoHorario rangoHorario = new RangoHorario(horarioInicio,horariofinal);
-  //    horariosNotificacion.add(rangoHorario);
-  //}
+  public void notificarIncidente(Incidente incidente) {
+    medioComunicacion.notificarIncidente(this, incidente);
+  }
+
   public void agregarHorarioNotificacion(Integer horario){
     horariosNotificacion.add(horario);
   }
-
-
-  //VERIFICAR LÓGICA DE NOFITICACIONES
-  //public int proximoHorarioNotificaxion() {
-  //  int proximaHora = 1;
-  //  return proximaHora;
-  //}
 
 }
 

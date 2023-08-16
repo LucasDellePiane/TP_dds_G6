@@ -90,4 +90,9 @@ public class ServicioLocalizacionGeoRefApi implements ServicioLocalizacion {
   public Localizacion obtenerUbicacionActual(){
     return null;
   }
+
+  @Override
+  public Localizacion obtenerUbicacion(String longitud, String latitud) {
+    return null;
+  }
 }
