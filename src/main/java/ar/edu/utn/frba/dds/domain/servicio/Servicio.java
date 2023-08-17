@@ -2,14 +2,14 @@ package ar.edu.utn.frba.dds.domain.servicio;
 
 import ar.edu.utn.frba.dds.domain.Comunidad.Comunidad;
 import ar.edu.utn.frba.dds.domain.repositorios.RepositorioComunidad;
-import ar.edu.utn.frba.dds.domain.repositorios.RepositorioIncidentes;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Servicio {
   private TipoServicio tipo;
-  private List<Incidente> incidentes; // PONEMOS UN REPO INCIDENTES
+  private List<Incidente> incidentes;
 
   public Servicio(TipoServicio tipo){
     this.tipo = tipo;
@@ -25,6 +25,15 @@ public class Servicio {
     incidentes.add(incidente);
     comunidad.reportarIncidente(incidente);
     });
+  }
+
+  public List<Incidente> obtenerIncidentesAbiertosDeComunidad(Comunidad comunidad){
+    return incidentes.stream()
+        .filter(incidente -> {
+          return incidente.getComunidad().equals(comunidad)
+          && incidente.getEstado().equals(EstadoIncidente.ACTIVO);
+        })
+        .collect(Collectors.toList());
   }
 
   //NO BORRAR - ESPERANDO APROBACIÓN DE ROLI

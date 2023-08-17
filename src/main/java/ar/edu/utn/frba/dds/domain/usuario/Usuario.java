@@ -5,11 +5,9 @@ import ar.edu.utn.frba.dds.domain.medioComunicacion.MedioComunicacion;
 import ar.edu.utn.frba.dds.domain.establecimiento.Establecimiento;
 import ar.edu.utn.frba.dds.domain.localizacion.Localizacion;
 import ar.edu.utn.frba.dds.domain.repositorios.RepositorioComunidad;
-import ar.edu.utn.frba.dds.domain.repositorios.RepositorioIncidentes;
 import ar.edu.utn.frba.dds.domain.servicio.Incidente;
 import ar.edu.utn.frba.dds.domain.servicio.Servicio;
 import ar.edu.utn.frba.dds.domain.validadores.ValidadorContrasenias;
-import com.google.common.collect.Lists;
 import lombok.Getter;
 import lombok.Setter;
 import java.time.LocalTime;
@@ -51,12 +49,8 @@ public class Usuario {
       Comunidad comunidad = (Comunidad) RepositorioComunidad.getInstancia().getComunidades().stream().filter(c -> {
         return c.usuarioEsParte(this);
       });
-      List<Incidente> incidentes = comunidad.getServiciosDeInteres().stream()
-          .filter(servicio -> serviciosInteres.contains(servicio) )
-          .map(servicio -> servicio.getIncidentes())
-          .flatMap(Collection::stream)
-          .collect(Collectors.toList());;
 
+      List<Incidente> incidentes = comunidad.obtenerIncidentesReportados();
       medioComunicacion.notificarIncidentes(this, incidentes);
     }
   }

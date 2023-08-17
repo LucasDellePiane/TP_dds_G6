@@ -9,6 +9,7 @@ import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,9 +18,9 @@ public class Comunidad {
   private List<Usuario> administradores;
   @Getter
   private List<Servicio> serviciosDeInteres;
-  @Getter
-  private List<Incidente> incidentesReportados = new ArrayList<>(Arrays.asList());
 
+  @Getter
+  private List<Incidente> incidentesReportados;
 
   public Comunidad(List<Usuario> miembros, List<Usuario> administradores, List<Servicio> serviciosDeInteres) {
 
@@ -27,6 +28,14 @@ public class Comunidad {
     this.miembros = miembros;
     this.administradores = administradores;
     this.serviciosDeInteres = serviciosDeInteres;
+  }
+
+  public List<Incidente> obtenerIncidentesReportados() {
+    return this.getServiciosDeInteres().stream()
+        .filter(servicio -> this.serviciosDeInteres.contains(servicio) )
+        .map(servicio -> servicio.obtenerIncidentesAbiertosDeComunidad(this))
+        .flatMap(Collection::stream)
+        .collect(Collectors.toList());
   }
 
 
