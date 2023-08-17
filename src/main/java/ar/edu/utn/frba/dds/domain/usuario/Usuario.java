@@ -50,9 +50,13 @@ public class Usuario {
         return c.usuarioEsParte(this);
       });
 
-      List<Incidente> incidentes = comunidad.obtenerIncidentesReportados();
+      List<Incidente> incidentes = comunidad.obtenerIncidentesReportados(this);
       medioComunicacion.notificarIncidentes(this, incidentes);
     }
+  }
+
+  public boolean estaInteresado(Servicio servicio) {
+    return this.getServiciosInteres().contains(servicio);
   }
 
   public void notificarIncidente(Incidente incidente) {

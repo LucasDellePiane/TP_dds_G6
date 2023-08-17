@@ -30,9 +30,9 @@ public class Comunidad {
     this.serviciosDeInteres = serviciosDeInteres;
   }
 
-  public List<Incidente> obtenerIncidentesReportados() {
+  public List<Incidente> obtenerIncidentesReportados(Usuario usuario) {
     return this.getServiciosDeInteres().stream()
-        .filter(servicio -> this.serviciosDeInteres.contains(servicio) )
+        .filter(servicio -> usuario.getServiciosInteres().contains(servicio) )
         .map(servicio -> servicio.obtenerIncidentesAbiertosDeComunidad(this))
         .flatMap(Collection::stream)
         .collect(Collectors.toList());
@@ -55,9 +55,16 @@ public class Comunidad {
     return miembros.contains(usuario);
   }
 
-  public void reportarIncidente(Incidente incidente) {
-    incidentesReportados.add(incidente);
-    this.miembros.stream().forEach(unMiembro -> unMiembro.notificarIncidente(incidente));
+  public void reportarIncidente(Servicio servicio, Incidente incidente) {
+      this.usuariosInteresadosEn(servicio).forEach(usuario -> {
+        usuario.notificarIncidente(incidente);
+      });
+
+  }
+
+  public List<Usuario> usuariosInteresadosEn(Servicio servicio) {
+    return this.miembros.stream().filter(usuario -> usuario.estaInteresado(servicio))
+                        .collect(Collectors.toList());
   }
 
   public List<Incidente> consultarIncidentesPorEstado(EstadoIncidente estadoIncidente){

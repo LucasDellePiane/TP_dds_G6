@@ -17,13 +17,14 @@ public class Servicio {
   }
 
 
-  // REVISAR EL HECHO DE QUE HAY INCIDENTES REPETIDOS EN LA LISTA DE INCIDENTES DEL SERVICIO
+  // !!! Incidentes repetidos en la lista de incidentes
+
   public void informarNoFuncionamiento(String observaciones) {
    this.ComunidadesInteresadasEnElServicio().forEach(comunidad->
    {
     Incidente incidente = new Incidente(observaciones, comunidad);
     incidentes.add(incidente);
-    comunidad.reportarIncidente(incidente);
+    comunidad.reportarIncidente(this, incidente);
     });
   }
 

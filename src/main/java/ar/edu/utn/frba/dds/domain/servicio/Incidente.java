@@ -35,5 +35,5 @@ public class Incidente {
     return cantidadHoras;
   }
 
-
+  // como el incidente tiene a la comunidad, informa a sus usuarios cercanos.
 }
