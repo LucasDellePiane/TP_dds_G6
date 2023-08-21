@@ -1,15 +1,28 @@
 package ar.edu.utn.frba.dds.domain.establecimiento;
 
+import ar.edu.utn.frba.dds.domain.Comunidad.Comunidad;
 import ar.edu.utn.frba.dds.domain.localizacion.Localizacion;
+import ar.edu.utn.frba.dds.domain.repositorios.RepositorioComunidad;
+import ar.edu.utn.frba.dds.domain.servicio.EstadoIncidente;
 import ar.edu.utn.frba.dds.domain.servicio.Servicio;
+import ar.edu.utn.frba.dds.domain.usuario.Usuario;
+import lombok.Getter;
+import lombok.Setter;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /*estaciones y sucursales*/
+@Getter
+@Setter
 public class Establecimiento {
+
+  // Atributos
+
   private String nombre;
-  private Localizacion ubicacionGeografica; //Es Localizacion
-  private List<Servicio> servicios;
   private TipoEstablecimiento tipoEstablecimiento;
+  private Localizacion localizacion; //Es Localizacion
+  private List<Servicio> servicios;
+
 
   // Metodos
 
@@ -29,7 +42,25 @@ public class Establecimiento {
     this.servicios.remove(servicioObsoleto);
   }
 
-  public List<Servicio> getServicios() {
-    return this.servicios;
+
+  // con un repo incidentes esto es mas facil xd
+  public void estaCerca(Usuario usuario) {
+
+    if(this.localizacion.estaCerca(usuario.getLocalizacion())){
+
+      List<Comunidad> comunidades = RepositorioComunidad.getInstancia()
+          .comunidadesALasQuePertenece(usuario);
+      List<Servicio> serviciosConIncidentes = this.servicios.stream().filter(servicio -> {
+        return !(servicio.getIncidentes().stream().filter(incidente -> {
+          return  comunidades.contains(incidente.getComunidad()) && incidente.getEstado().equals(EstadoIncidente.ACTIVO);
+        }).collect(Collectors.toList()).isEmpty());
+      }).collect(Collectors.toList());
+
+      if(!serviciosConIncidentes.isEmpty()){
+        usuario.notificarServiciosCercanos(serviciosConIncidentes);
+      }
+    }
+
   }
+
 }

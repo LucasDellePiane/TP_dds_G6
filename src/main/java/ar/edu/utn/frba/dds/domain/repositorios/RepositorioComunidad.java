@@ -3,11 +3,13 @@ package ar.edu.utn.frba.dds.domain.repositorios;
 import ar.edu.utn.frba.dds.domain.Comunidad.Comunidad;
 import ar.edu.utn.frba.dds.domain.servicio.Incidente;
 import ar.edu.utn.frba.dds.domain.servicio.Servicio;
+import ar.edu.utn.frba.dds.domain.usuario.Usuario;
 import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class RepositorioComunidad {
   @Getter
@@ -33,6 +35,12 @@ public class RepositorioComunidad {
 
   public void aniadirComunidad(Comunidad comunidad) {
     comunidades.add(comunidad);
+  }
+
+  public List<Comunidad> comunidadesALasQuePertenece(Usuario usuario){
+    return this.getComunidades().stream().filter(c -> {
+      return c.usuarioEsParte(usuario);
+    }).collect(Collectors.toList());
   }
 
 }

@@ -1,5 +1,8 @@
 package ar.edu.utn.frba.dds.domain.medioComunicacion;
 
+import ar.edu.utn.frba.dds.domain.localizacion.Localizacion;
+import ar.edu.utn.frba.dds.domain.servicio.Incidente;
+import ar.edu.utn.frba.dds.domain.servicio.Servicio;
 import ar.edu.utn.frba.dds.domain.usuario.Usuario;
 import ar.edu.utn.frba.dds.exceptions.SeEnvioWhatsappException;
 import retrofit2.Retrofit;
@@ -30,4 +33,23 @@ public class WhatsApp implements MedioComunicacion {
        // Message.creator(to, from, mensaje).create();
     }
 
+    @Override
+    public Localizacion notificarIncidentes(Usuario usuario, List<Incidente> incidentes) {
+        return null;
+    }
+
+    @Override
+    public Localizacion notificarIncidente(Usuario usuario, Incidente incidente) {
+        return null;
+    }
+
+    @Override
+    public void notificar(String string) {
+
+    }
+
+    @Override
+    public void notificarServicioCercano(Usuario usuario, List<Servicio> servicios) {
+
+    }
 }
