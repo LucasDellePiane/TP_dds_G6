@@ -4,6 +4,7 @@ import ar.edu.utn.frba.dds.domain.Comunidad.Comunidad;
 import ar.edu.utn.frba.dds.domain.localizacion.Localizacion;
 import ar.edu.utn.frba.dds.domain.repositorios.RepositorioComunidad;
 import ar.edu.utn.frba.dds.domain.servicio.EstadoIncidente;
+import ar.edu.utn.frba.dds.domain.servicio.Incidente;
 import ar.edu.utn.frba.dds.domain.servicio.Servicio;
 import ar.edu.utn.frba.dds.domain.usuario.Usuario;
 import lombok.Getter;
@@ -42,6 +43,10 @@ public class Establecimiento {
     this.servicios.remove(servicioObsoleto);
   }
 
+  public void agregarIncidente(Incidente incidente){
+    // no se le asigna una comunidad al incidente
+    // va aca ???
+  }
 
   // con un repo incidentes esto es mas facil xd
   public void estaCerca(Usuario usuario) {
