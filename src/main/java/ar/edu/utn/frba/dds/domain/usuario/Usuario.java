@@ -8,6 +8,7 @@ import ar.edu.utn.frba.dds.domain.repositorios.RepositorioComunidad;
 import ar.edu.utn.frba.dds.domain.servicio.Incidente;
 import ar.edu.utn.frba.dds.domain.servicio.Servicio;
 import ar.edu.utn.frba.dds.domain.validadores.ValidadorContrasenias;
+import java.util.ArrayList;
 import lombok.Getter;
 import lombok.Setter;
 import java.time.LocalTime;
@@ -35,8 +36,8 @@ public class Usuario {
   private Localizacion localizacion;
   private Localizacion localizacion_actual;
 
-  private List<Establecimiento> establecimientosInteres;
-  private List<Servicio> serviciosInteres;
+  private List<Establecimiento> establecimientosInteres = new ArrayList<>();
+  private List<Servicio> serviciosInteres = new ArrayList<>();
 
   private ValidadorContrasenias validador = new ValidadorContrasenias();
 

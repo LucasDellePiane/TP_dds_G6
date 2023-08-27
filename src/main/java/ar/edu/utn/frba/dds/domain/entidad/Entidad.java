@@ -6,6 +6,7 @@ import ar.edu.utn.frba.dds.domain.servicio.Incidente;
 import ar.edu.utn.frba.dds.domain.servicio.Servicio;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.Getter;
@@ -15,7 +16,7 @@ public class Entidad {
   @Getter
   private String nombreEntidad;
   @Getter
-  private List<Establecimiento> conjuntoDeEstablecimientos;
+  private List<Establecimiento> conjuntoDeEstablecimientos = new ArrayList<>();
   @Getter
   private Localizacion localizacion;
 
@@ -28,7 +29,9 @@ public class Entidad {
    * 
    * 
    */
-
+  public void setearNombre(String nombreEntidad) {
+    this.nombreEntidad = nombreEntidad;
+  }
   public List<Servicio> todosLosServicios() {
     return this.getEstablecimientos().stream().
       flatMap(establecimiento -> establecimiento.getServicios().stream()).
@@ -60,5 +63,9 @@ public class Entidad {
               .mapToLong(incidente -> incidente.tiempoCierre(incidente)) // Mapear a una lista de enteros
               .average()                                                 // Calcula directamente el promedio, es como hacer sum y dividir por la cant. de elementos
               .orElse(0);                                                // En caso de que no haya elementos devuelve 0
+  }
+
+  public void aniadirEstablecimiento(Establecimiento establecimiento) {
+    this.conjuntoDeEstablecimientos.add(establecimiento);
   }
 }

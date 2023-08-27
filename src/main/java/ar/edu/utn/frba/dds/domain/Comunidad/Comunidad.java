@@ -36,7 +36,7 @@ public class Comunidad {
     this.usuariosInteresadosEn(servicio).forEach(usuario -> {
       usuario.notificarIncidente(incidente);
     });
-
+    servicio.registrarIncidente(incidente);
   }
 
   public List<Incidente> obtenerIncidentesDeInteres(Usuario usuario) {

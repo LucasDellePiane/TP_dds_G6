@@ -7,6 +7,7 @@ import ar.edu.utn.frba.dds.domain.servicio.EstadoIncidente;
 import ar.edu.utn.frba.dds.domain.servicio.Incidente;
 import ar.edu.utn.frba.dds.domain.servicio.Servicio;
 import ar.edu.utn.frba.dds.domain.usuario.Usuario;
+import java.util.ArrayList;
 import lombok.Getter;
 import lombok.Setter;
 import java.util.List;
@@ -22,7 +23,7 @@ public class Establecimiento {
   private String nombre;
   private TipoEstablecimiento tipoEstablecimiento;
   private Localizacion localizacion; //Es Localizacion
-  private List<Servicio> servicios;
+  private List<Servicio> servicios = new ArrayList<>();
 
 
   // Metodos

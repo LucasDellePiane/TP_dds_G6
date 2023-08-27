@@ -17,7 +17,7 @@ public interface Criterio {
 
           for (int i = 0; i < listaStrings.size(); i++) {
               String elemento = listaStrings.get(i);
-              String linea = (i + 1) + " " + elemento;
+              String linea = (i + 1) + ", " + elemento;
 
               csvWriter.append(linea);
               csvWriter.append("\n");

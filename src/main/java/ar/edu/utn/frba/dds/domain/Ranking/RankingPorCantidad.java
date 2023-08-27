@@ -18,24 +18,11 @@ import com.opencsv.CSVWriter;
 
 
 public class RankingPorCantidad implements Criterio{
-  String rutaArchivo = "ruta/del/archivo.csv";
-  FileWriter fileWriter;
-  CSVWriter csvWriter = new CSVWriter(fileWriter);
-
-  public RankingPorCantidad() {
-    try{
-      this.fileWriter = new FileWriter(rutaArchivo);
-    } catch (IOException exception) {
-      throw new RutaInvalidaException("No se encontro la ruta");
-    }
-    
-  }
-
 
   @Override
   public void calcularRanking(List<Entidad> entidades) {
     Collections.sort(entidades, Comparator.comparingInt(Entidad::cantidadIncidentesEnUnaSemana).reversed());
-    generarCSVConNumeracion(entidades.stream().map(Entidad :: getNombreEntidad).toList(), "rankingPorCantidad.csv");
+    generarCSVConNumeracion(entidades.stream().map(Entidad :: getNombreEntidad).toList(), "RankingsCSV/rankingPorCantidad.csv");
   }
 }
 

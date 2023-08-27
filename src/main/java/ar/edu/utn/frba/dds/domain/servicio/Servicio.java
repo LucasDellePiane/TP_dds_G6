@@ -47,7 +47,11 @@ public class Servicio {
     return RepositorioComunidad.getInstancia().getComunidades().stream().
         filter(comunidad -> comunidad.getServiciosDeInteres().contains(this)).toList();
   }
-
+  public void registrarIncidente(Incidente incidente) {
+    if (!incidentes.contains(incidente)) {
+      this.incidentes.add(incidente);
+    }
+  }
   
 }
 
