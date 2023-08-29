@@ -1,5 +1,7 @@
 package ar.edu.utn.frba.dds.domain.Comunidad;
 
+import static ar.edu.utn.frba.dds.domain.servicio.EstadoIncidente.ACTIVO;
+
 import ar.edu.utn.frba.dds.domain.establecimiento.Establecimiento;
 import ar.edu.utn.frba.dds.domain.servicio.EstadoIncidente;
 import ar.edu.utn.frba.dds.domain.servicio.Incidente;
@@ -8,8 +10,6 @@ import ar.edu.utn.frba.dds.domain.usuario.Usuario;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -31,21 +31,59 @@ public class Comunidad {
     this.administradores = administradores;
     this.serviciosDeInteres = serviciosDeInteres;
   }
-
-  public void reportarIncidente(Servicio servicio, Incidente incidente) {
-    this.usuariosInteresadosEn(servicio).forEach(usuario -> {
-      usuario.notificarIncidente(incidente);
-    });
-    servicio.registrarIncidente(incidente);
+  public void reportarIncidente(Incidente incidente) {
+    this.miembros.forEach(miembro -> miembro.notificarIncidente(incidente));
   }
 
-  public List<Incidente> obtenerIncidentesDeInteres(Usuario usuario) {
-    return this.getServiciosDeInteres().stream()
-        .filter(servicio -> usuario.getServiciosInteres().contains(servicio) )
-        .map(servicio -> servicio.obtenerIncidentesAbiertosDeComunidad(this))
+  public boolean estaInteresaEnServicio(Servicio servicio) {
+    return this.serviciosDeInteres.contains(servicio);
+  }
+
+  public void darDeBajaMiembro(Usuario miembro) {
+    this.miembros.remove(miembro);
+  }
+
+  public void darDeAltaMiembro(Usuario miembroNuevo) {
+    this.miembros.add(miembroNuevo);
+  }
+
+  public List<Incidente> consultarIncidentesPorEstado(EstadoIncidente estadoIncidente){
+    return this.incidentesReportados().stream()
+        .filter(unIncidente -> unIncidente.suEstadoEs(estadoIncidente))
+        .collect(Collectors.toList());
+  }
+
+  public void solicitarServicio(Servicio servicio, Establecimiento establecimiento) {
+    establecimiento.darAltaServicio(servicio); // tendria q existir un metodo en estacion que sea controlarSolicitudServicioNuevo o algo asi
+  }
+
+  public boolean usuarioEsParte(Usuario usuario){
+    return miembros.contains(usuario);
+  }
+
+  public List<Incidente> incidentesReportados() {
+    return this.serviciosDeInteres.stream()
+        .map(servicio -> servicio.incidentesDeComunidad(this))
         .flatMap(Collection::stream)
         .collect(Collectors.toList());
   }
+
+  public List<Incidente> incidentesAbiertos() {
+    return this.incidentesReportados().stream().filter(unIncidente->unIncidente.suEstadoEs(ACTIVO)).collect(Collectors.toList());
+  }
+
+}
+
+
+//métodos anteriores POR LAS DUDAS LOS DEJÉ
+/*
+public List<Incidente> obtenerIncidentesDeInteres(Usuario usuario) {
+  return this.getServiciosDeInteres().stream()
+      .filter(servicio -> usuario.getServiciosInteres().contains(servicio) )
+      .map(servicio -> servicio.obtenerIncidentesAbiertosDeComunidad(this))
+      .flatMap(Collection::stream)
+      .collect(Collectors.toList());
+}
 
   public List<Incidente> obtenerIncidentesReportados() {
     return this.getServiciosDeInteres().stream().map(servicio -> {
@@ -57,39 +95,4 @@ public class Comunidad {
     return this.miembros.stream().filter(usuario -> usuario.estaInteresado(servicio))
         .collect(Collectors.toList());
   }
-
-  public void darDeBajaMiembro(Usuario miembro) {
-    this.miembros.remove(miembro);
-  }
-
-  public void darDeAltaMiembro(Usuario miembroNuevo) {
-    this.miembros.add(miembroNuevo);
-  }
-
-  public void solicitarServicio(Servicio servicio, Establecimiento establecimiento) {
-    establecimiento.darAltaServicio(servicio); // tendria q existir un metodo en estacion que sea controlarSolicitudServicioNuevo o algo asi
-  }
-  public boolean usuarioEsParte(Usuario usuario){
-    return miembros.contains(usuario);
-  }
-
-
-
-
-
-
-// Atributo
-
-//  private List<Incidente> incidentesReportados;
-
-
-// Metodo
-
-//  public List<Incidente> consultarIncidentesPorEstado(EstadoIncidente estadoIncidente){
-//    return this.incidentesReportados.stream()
-//                                    .filter(unIncidente -> unIncidente.getEstado().equals(estadoIncidente))
-//                                    .collect(Collectors.toList());
-//  }
-
-
-}
+*/

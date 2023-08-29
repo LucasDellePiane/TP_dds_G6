@@ -35,5 +35,13 @@ public class Incidente {
     return cantidadHoras;
   }
 
+  public boolean esDeLaComunidad(Comunidad comunidad){
+    return this.comunidad.equals(comunidad);
+  }
+
+  public boolean suEstadoEs(EstadoIncidente estado){
+    return this.estado.equals(estado);
+  }
+
   // como el incidente tiene a la comunidad, informa a sus usuarios cercanos.
 }

@@ -8,10 +8,8 @@ import java.util.List;
 
 public interface MedioComunicacion {
 
-    //public  void enviarNotificacion(String medio, String mensaje);
-    public Localizacion notificarIncidentes(Usuario usuario, List<Incidente> incidentes);
     public Localizacion notificarIncidente(Usuario usuario, Incidente incidente);
-    public void notificar(String string);
+
     public void notificarServicioCercano(Usuario usuario, List<Servicio> servicios);
 }
 

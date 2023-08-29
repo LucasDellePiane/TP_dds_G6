@@ -30,12 +30,30 @@ public class Servicio {
    this.ComunidadesInteresadasEnElServicio().forEach(comunidad->
    {
     Incidente incidente = new Incidente(observaciones, comunidad);
-    incidentes.add(incidente);
-    comunidad.reportarIncidente(this, incidente);
+    this.incidentes.add(incidente);
+    comunidad.reportarIncidente(incidente);
     });
   }
 
-  public List<Incidente> obtenerIncidentesAbiertosDeComunidad(Comunidad comunidad){
+  private List<Comunidad> ComunidadesInteresadasEnElServicio(){ // DEBERÍA ESTAR ACA O EN EL REPO DE COMUNIDADES ?
+    return RepositorioComunidad.getInstancia().getComunidades().stream().
+        filter(comunidad -> comunidad.estaInteresaEnServicio(this)).toList();
+  }
+
+  public List<Incidente> incidentesDeComunidad(Comunidad comunidad){
+    return incidentes.stream()
+        .filter(incidente -> incidente.esDeLaComunidad(comunidad))
+        .collect(Collectors.toList());
+  }
+
+}
+
+
+
+
+//métodos anteriores POR LAS DUDAS LOS DEJÉ
+/*
+public List<Incidente> obtenerIncidentesAbiertosDeComunidad(Comunidad comunidad){
     return incidentes.stream()
         .filter(incidente -> {
           return incidente.getComunidad().equals(comunidad)
@@ -43,35 +61,5 @@ public class Servicio {
         })
         .collect(Collectors.toList());
   }
-  private List<Comunidad> ComunidadesInteresadasEnElServicio(){
-    return RepositorioComunidad.getInstancia().getComunidades().stream().
-        filter(comunidad -> comunidad.getServiciosDeInteres().contains(this)).toList();
-  }
-  public void registrarIncidente(Incidente incidente) {
-    if (!incidentes.contains(incidente)) {
-      this.incidentes.add(incidente);
-    }
-  }
-  
-}
 
-// !!! Incidentes repetidos en la lista de incidentes
-
-/*
-  fueraDeFuncionamiento: true si esta fuera de funcionamiento, por lo tanto los
-  incidentes reportados cuando esta fuera de funcionamiento no hay q guardarlos
 */
-
-//NO BORRAR - ESPERANDO APROBACIÓN DE ROLI
-//public void informarNoFuncionamiento(String observaciones) {
-//  Incidente incidente = new Incidente(observaciones);
-//  incidentes.add(incidente);
-//  this.ComunidadesInteresadasEnElServicio().forEach(comunidad->
-//  {
-//    IncidenteComunidad incidenteComunidad = new IncidenteComunidad(incidente);
-//    comunidad.reportarIncidente(incidenteComunidad);
-//  });
-//}
-
-
-//ComunidadesInteresadasEnElServicio() DEBERÍA ESTAR ACA O EN EL REPO DE COMUNIDADES ?

@@ -34,18 +34,11 @@ public class WhatsApp implements MedioComunicacion {
     }
 
     @Override
-    public Localizacion notificarIncidentes(Usuario usuario, List<Incidente> incidentes) {
-        return null;
-    }
-
-    @Override
     public Localizacion notificarIncidente(Usuario usuario, Incidente incidente) {
-        return null;
-    }
-
-    @Override
-    public void notificar(String string) {
-
+        String telefonoUsuario = usuario.getTelefono();
+        String mensaje = "La comunidad: "+incidente.getComunidad()+" reportó un nuevo incidente. Las observaciones son: "+incidente.getObservaciones();
+        this.enviarNotificacion(telefonoUsuario,mensaje);
+        return usuario.getLocalizacion_actual();    //NO TENGO IDEA QUE LOCALIZACION HABIA QUE DEVOLVER NI POR QUÉ, LA AGERGUÉ PORQUE ASI ESTABA, NO SÉ SI ES NECESARIO
     }
 
     @Override

@@ -9,15 +9,19 @@ public class RangoHorario {
 
   // Atributos
 
-  private int inicio;
-  private int fin;
+  private int horaInicio;
+  private int horaFin;
 
   // Metodos
 
 
   public RangoHorario(int inicio, int fin) {
-    this.inicio = inicio;
-    this.fin = fin;
+    this.horaInicio = inicio;
+    this.horaFin = fin;
+  }
+
+  public boolean laHoraPertene(int hora){
+    return hora >= this.horaInicio && hora < this.horaFin;
   }
 
 
