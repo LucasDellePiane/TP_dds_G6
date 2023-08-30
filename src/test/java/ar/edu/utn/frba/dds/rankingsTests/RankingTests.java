@@ -67,9 +67,9 @@ public class RankingTests {
     entidad2.aniadirEstablecimiento(establecimientoDeLa2);
     establecimientoDeLa1.darAltaServicio(servicioDeLa1);
     establecimientoDeLa2.darAltaServicio(servicioDeLa2);
-    rockandrolleros.reportarIncidente(servicioDeLa1, incidente1dela1);
-    rockandrolleros.reportarIncidente(servicioDeLa1, incidente2dela1);
-    rockandrolleros.reportarIncidente(servicioDeLa2, incidente2dela1);
+    rockandrolleros.reportarIncidente(incidente1dela1);
+    rockandrolleros.reportarIncidente(incidente2dela1);
+    rockandrolleros.reportarIncidente(incidente2dela1);
     incidente1dela1.cerrarIncidente();
     incidente1dela2.cerrarIncidente();
     incidente2dela1.cerrarIncidente();
