@@ -67,6 +67,11 @@ public class MedioEmail implements MedioComunicacion{
 
     @Override
     public void notificarServicioCercano(Usuario usuario, List<Servicio> servicios) {
-
+        String mailUsuario = usuario.getEmail();
+        servicios.stream().map(
+            servicio -> {
+                this.enviarNotificacion(mailUsuario, "estas cerca del servicio: " + servicio.getTipo());
+                return null;}
+            );
     }
 }

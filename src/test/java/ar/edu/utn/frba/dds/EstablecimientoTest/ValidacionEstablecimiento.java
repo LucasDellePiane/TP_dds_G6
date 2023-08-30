@@ -1,14 +1,19 @@
 package ar.edu.utn.frba.dds.EstablecimientoTest;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import ar.edu.utn.frba.dds.domain.Comunidad.Comunidad;
 import ar.edu.utn.frba.dds.domain.establecimiento.Establecimiento;
 import ar.edu.utn.frba.dds.domain.localizacion.Localizacion;
 import ar.edu.utn.frba.dds.domain.localizacion.division.Division;
 import ar.edu.utn.frba.dds.domain.localizacion.division.TipoDivision;
+import ar.edu.utn.frba.dds.domain.medioComunicacion.MedioEmail;
 import ar.edu.utn.frba.dds.domain.servicio.Incidente;
 import ar.edu.utn.frba.dds.domain.servicio.Servicio;
 import ar.edu.utn.frba.dds.domain.servicio.TipoServicio;
+import ar.edu.utn.frba.dds.domain.usuario.RangoHorario;
 import ar.edu.utn.frba.dds.domain.usuario.Usuario;
+import ar.edu.utn.frba.dds.exceptions.SeEnvioEmailException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
@@ -27,7 +32,11 @@ public class ValidacionEstablecimiento {
   private Usuario lucho;
   private Comunidad rockandrolleros;
   private Localizacion localizacion;
+  private Localizacion localizacion2;
   private Division division;
+  private RangoHorario horario;
+  private List<RangoHorario> horariosNotificacion;
+  private MedioEmail medioEmail;
 
   @BeforeEach
   public void setUp() {
@@ -48,16 +57,29 @@ public class ValidacionEstablecimiento {
     establecimientoDeLa2.darAltaServicio(servicioDeLa2);
     division = new Division("Monte Grande", TipoDivision.MUNICIPIO);
     localizacion = new Localizacion("Buenos Aires", division);
+    localizacion.setLatitud(100.00);
+    localizacion.setLongitud(100.00);
+    localizacion2 = new Localizacion("Buenos Aires", division);
+    localizacion2.setLatitud(90.00);
+    localizacion2.setLongitud(90.00);
+    horario = new RangoHorario(00,24);
+    horariosNotificacion = new ArrayList<>(Arrays.asList(horario));
+    medioEmail = new MedioEmail();
   }
-  /*
+
   @Test
   public void estaCercaUsuarioDeEstablecimiento(){
+    luki.setLocalizacion(localizacion2);
     luki.setLocalizacion_actual(localizacion);
     establecimientoDeLa1.setLocalizacion(localizacion);
     List<Incidente> incidentes = new ArrayList<>(Arrays.asList(incidente1dela1, incidente2dela1));
     servicioDeLa1.setIncidentes(incidentes);
     establecimientoDeLa1.estaCerca(luki);
-
-  }*/
+    luki.setHorariosNotificacion(horariosNotificacion);
+    luki.setMedioComunicacion(medioEmail);
+    luki.setEmail("luki@gmail.com");
+    assertThrows(SeEnvioEmailException.class, ()->{rockandrolleros.reportarIncidente(incidente1dela1);}, "" +
+        "Error al enviar el correo electrónico: luki@gmail.com");
+  }
 
 }
