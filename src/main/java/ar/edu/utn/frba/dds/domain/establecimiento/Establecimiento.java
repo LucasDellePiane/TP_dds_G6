@@ -44,11 +44,6 @@ public class Establecimiento {
     this.servicios.remove(servicioObsoleto);
   }
 
-  public void agregarIncidente(Incidente incidente){
-    // no se le asigna una comunidad al incidente
-    // va aca ???
-  }
-
   // con un repo incidentes esto es mas facil xd
   public void estaCerca(Usuario usuario) {
 

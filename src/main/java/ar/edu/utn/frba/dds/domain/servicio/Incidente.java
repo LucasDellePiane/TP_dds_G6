@@ -29,8 +29,8 @@ public class Incidente {
     this.estado = EstadoIncidente.RESUELTO;
   }
 
-  public long tiempoCierre(Incidente incidente){
-    Duration duracion = Duration.between(incidente.horarioCierre,incidente.horarioApertura);
+  public long tiempoCierre(){
+    Duration duracion = Duration.between(this.horarioApertura, this.horarioCierre);
     long cantidadHoras = duracion.toHours();
     return cantidadHoras;
   }

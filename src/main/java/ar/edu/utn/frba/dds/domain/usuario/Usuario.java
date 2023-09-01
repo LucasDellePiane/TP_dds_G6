@@ -29,7 +29,7 @@ public class Usuario {
   private String email;
   private String telefono;
 
-  private List<RangoHorario> horariosNotificacion;
+  private List<RangoHorario> horariosNotificacion = new ArrayList<>();
   private MedioComunicacion medioComunicacion;
   private LocalDateTime ultimaHoraNotificacion;
 

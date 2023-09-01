@@ -26,6 +26,10 @@ public class Servicio {
     this.incidentes = new ArrayList<>();
   }
 
+  public void aniadirIncidente(Incidente incidente) {
+      this.incidentes.add(incidente);
+  }
+
   public void informarNoFuncionamiento(String observaciones) {
    this.ComunidadesInteresadasEnElServicio().forEach(comunidad->
    {

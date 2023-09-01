@@ -2,6 +2,7 @@ package ar.edu.utn.frba.dds.rankingsTests;
 
 import ar.edu.utn.frba.dds.domain.Comunidad.Comunidad;
 import ar.edu.utn.frba.dds.domain.Ranking.RankingPorCantidad;
+import ar.edu.utn.frba.dds.domain.Ranking.RankingPorPromedioCierre;
 import ar.edu.utn.frba.dds.domain.entidad.Entidad;
 import ar.edu.utn.frba.dds.domain.establecimiento.Establecimiento;
 import ar.edu.utn.frba.dds.domain.repositorios.RepositorioDeEntidades;
@@ -16,14 +17,14 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class RankingTests {
   private RepositorioDeEntidades repoEntidades;
@@ -41,6 +42,7 @@ public class RankingTests {
   private Usuario lucho;
   private Comunidad rockandrolleros;
   RankingPorCantidad rankingCantidad;
+  RankingPorPromedioCierre rankingPromedio;
   @BeforeEach
   public void setUp() {
     repoEntidades = new RepositorioDeEntidades();
@@ -73,8 +75,18 @@ public class RankingTests {
     incidente1dela1.cerrarIncidente();
     incidente1dela2.cerrarIncidente();
     incidente2dela1.cerrarIncidente();
+    incidente1dela1.setHorarioCierre(LocalDateTime.now().plusHours(5));
+    incidente2dela1.setHorarioCierre(LocalDateTime.now().plusHours(5));
+    incidente1dela2.setHorarioCierre(LocalDateTime.now().plusHours(10));
     rankingCantidad = new RankingPorCantidad();
+    rankingPromedio = new RankingPorPromedioCierre();
+
+    servicioDeLa1.aniadirIncidente(incidente1dela1);
+    servicioDeLa1.aniadirIncidente(incidente2dela1);
+    servicioDeLa2.aniadirIncidente(incidente1dela2);
+
     repoEntidades.aniadirCriterio(rankingCantidad);
+    repoEntidades.aniadirCriterio(rankingPromedio);
     repoEntidades.generarRankings();
   }
 
@@ -98,9 +110,35 @@ public class RankingTests {
     assertEquals(segundaEntidad, contenidoLeido.get(1));
     }
 
+  @Test
+  public void funcionaRankingPorRangoHorario() {
+    String rutaArchivo = "RankingsCSV/rankingPorPromedio.csv";
+    List<String> contenidoLeido = leerArchivoCSV(rutaArchivo);
+    //Deberia terminar primero super villanos y 2do super heroes
+    String primeraEntidad = "1, SuperVillanos";
+    String segundaEntidad = "2, SuperHeroes";
+    assertEquals(primeraEntidad, contenidoLeido.get(0));
+    assertEquals(segundaEntidad, contenidoLeido.get(1));
+  }
+  @Test
+  public void elPromedioDeCierreSeCalculaBien() {
+    assertEquals(10, entidad2.promedioDeCierreIncidente());
+    assertEquals(5, entidad1.promedioDeCierreIncidente());
+
+  }
+  @Test public void cantidadDeIncidentesSemanales() {
+    assertEquals(2, entidad1.cantidadIncidentesEnUnaSemana());
+  }
+  @Test public void cantidadDeIncidentes() {
+    assertEquals(2, entidad1.cantidadIncidentesEntidad());
+  }
+
+  @Test public void elTiempoDeCierreEstaBien() {
+    assertEquals(5, incidente1dela1.tiempoCierre());
+  }
+
   private List<String> leerArchivoCSV(String rutaArchivo) {
     List<String> lineas = new ArrayList<>();
-
     try (BufferedReader br = new BufferedReader(new FileReader(rutaArchivo))) {
       String linea;
       while ((linea = br.readLine()) != null) {

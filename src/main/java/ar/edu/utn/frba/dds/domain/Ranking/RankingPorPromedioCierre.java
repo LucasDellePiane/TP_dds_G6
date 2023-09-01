@@ -20,6 +20,6 @@ public class RankingPorPromedioCierre implements Criterio{//esto es mas facil si
   @Override
   public void calcularRanking(List<Entidad> entidades) {
       Collections.sort(entidades, Comparator.comparingDouble(Entidad::promedioDeCierreIncidente).reversed());
-      generarCSVConNumeracion(entidades.stream().map(Entidad :: getNombreEntidad).toList(), "rankingPorPromedio.csv");
+      generarCSVConNumeracion(entidades.stream().map(Entidad :: getNombreEntidad).toList(), "RankingsCSV/rankingPorPromedio.csv");
     }  
 }

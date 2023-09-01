@@ -36,7 +36,7 @@ public class ValidacionComunidad {
   private Localizacion localizacion;
   private Division division;
   private RangoHorario horario;
-  private List<RangoHorario> horariosNotificacion;
+  private List<RangoHorario> horariosNotificacion = new ArrayList<>();
   private MedioEmail medioEmail;
   @BeforeEach
   public void setUp() {
