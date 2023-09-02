@@ -10,6 +10,7 @@ import ar.edu.utn.frba.dds.domain.localizacion.division.Division;
 import ar.edu.utn.frba.dds.domain.localizacion.division.TipoDivision;
 import ar.edu.utn.frba.dds.domain.medioComunicacion.MedioComunicacion;
 import ar.edu.utn.frba.dds.domain.medioComunicacion.MedioEmail;
+import ar.edu.utn.frba.dds.domain.repositorios.RepositorioComunidad;
 import ar.edu.utn.frba.dds.domain.servicio.EstadoIncidente;
 import ar.edu.utn.frba.dds.domain.servicio.Incidente;
 import ar.edu.utn.frba.dds.domain.servicio.Servicio;
@@ -86,5 +87,11 @@ public class ValidacionComunidad {
   public void incidentesReportados(){
     servicioDeLa1.informarNoFuncionamiento("no funciona el baño");
     assertEquals(rockandrolleros.incidentesReportados(), servicioDeLa1.getIncidentes());
+  }
+
+  @Test
+  public void agregarComunidad(){
+    RepositorioComunidad.getInstancia().aniadirComunidad(rockandrolleros);
+    assertEquals(RepositorioComunidad.getInstancia().getComunidades().size(),1 );
   }
 }
