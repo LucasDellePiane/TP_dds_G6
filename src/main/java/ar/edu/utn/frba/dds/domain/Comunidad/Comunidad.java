@@ -69,10 +69,6 @@ public class Comunidad {
         .collect(Collectors.toList());
   }
 
-  public List<Incidente> incidentesAbiertos() {
-    return this.incidentesReportados().stream().filter(unIncidente->unIncidente.suEstadoEs(ACTIVO)).collect(Collectors.toList());
-  }
-
 }
 
 

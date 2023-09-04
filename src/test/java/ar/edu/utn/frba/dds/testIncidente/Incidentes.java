@@ -104,4 +104,18 @@ public class Incidentes {
     assertEquals(1,comunidad2.consultarIncidentesPorEstado(RESUELTO).size());
   }
 
+  @Test
+  public void incidentesReportadosComunidad() {
+    servicioBaño.informarNoFuncionamiento("No hay agua");
+    servicioElevacion.informarNoFuncionamiento("No funciona");
+    servicioBaño.getIncidentes().get(0).cerrarIncidente();
+    servicioBaño.getIncidentes().get(1).cerrarIncidente();
+    servicioElevacion.getIncidentes().get(1).cerrarIncidente();
+    servicioElevacion.getIncidentes().get(2).cerrarIncidente();
+
+    assertEquals(2,comunidad1.incidentesReportados().size());
+    assertEquals(1,comunidad2.incidentesReportados().size());
+    assertEquals(2,comunidad3.incidentesReportados().size());
+  }
+
 }

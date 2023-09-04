@@ -1,5 +1,7 @@
 package ar.edu.utn.frba.dds.domain.usuario;
 
+import static ar.edu.utn.frba.dds.domain.servicio.EstadoIncidente.ACTIVO;
+
 import ar.edu.utn.frba.dds.domain.Comunidad.Comunidad;
 import ar.edu.utn.frba.dds.domain.medioComunicacion.MedioComunicacion;
 import ar.edu.utn.frba.dds.domain.establecimiento.Establecimiento;
@@ -72,7 +74,7 @@ public class Usuario {
       List<Comunidad> comunidadesUsuario = RepositorioComunidad.getInstancia().getComunidades().stream().filter(unaComunidad -> unaComunidad.usuarioEsParte(this)).collect(Collectors.toList());
 
       List<Incidente> incidentesAbiertos = comunidadesUsuario.stream()
-                                                      .map(unaComunidad -> unaComunidad.incidentesAbiertos())
+                                                      .map(unaComunidad -> unaComunidad.consultarIncidentesPorEstado(ACTIVO))
                                                       .flatMap(Collection::stream)
                                                       .collect(Collectors.toList());
       List<Incidente> incidentesANotificar = incidentesAbiertos.stream()
