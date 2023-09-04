@@ -16,6 +16,7 @@ public class Incidente {
   @Getter
   LocalDateTime horarioApertura;
   @Setter
+  @Getter
   LocalDateTime horarioCierre;
 
   public Incidente(String observaciones, Comunidad comunidad){

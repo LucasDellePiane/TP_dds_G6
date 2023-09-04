@@ -3,6 +3,7 @@ package ar.edu.utn.frba.dds.domain.Comunidad;
 import static ar.edu.utn.frba.dds.domain.servicio.EstadoIncidente.ACTIVO;
 
 import ar.edu.utn.frba.dds.domain.establecimiento.Establecimiento;
+import ar.edu.utn.frba.dds.domain.repositorios.RepositorioComunidad;
 import ar.edu.utn.frba.dds.domain.servicio.EstadoIncidente;
 import ar.edu.utn.frba.dds.domain.servicio.Incidente;
 import ar.edu.utn.frba.dds.domain.servicio.Servicio;
