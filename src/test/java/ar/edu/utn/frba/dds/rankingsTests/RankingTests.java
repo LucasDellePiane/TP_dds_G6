@@ -6,6 +6,7 @@ import ar.edu.utn.frba.dds.domain.Ranking.RankingPorPromedioCierre;
 import ar.edu.utn.frba.dds.domain.entidad.Entidad;
 import ar.edu.utn.frba.dds.domain.establecimiento.Establecimiento;
 import ar.edu.utn.frba.dds.domain.repositorios.RepositorioDeEntidades;
+import ar.edu.utn.frba.dds.domain.repositorios.RepositorioComunidad;
 import ar.edu.utn.frba.dds.domain.servicio.Incidente;
 import ar.edu.utn.frba.dds.domain.servicio.Servicio;
 import ar.edu.utn.frba.dds.domain.servicio.TipoServicio;
@@ -45,7 +46,7 @@ public class RankingTests {
   RankingPorPromedioCierre rankingPromedio;
   @BeforeEach
   public void setUp() {
-    repoEntidades = new RepositorioDeEntidades();
+    repoEntidades = new RepositorioDeEntidades();//RepositorioDeEntidades.getInstancia();
     entidad1 = new Entidad();
     entidad1.setearNombre("SuperHeroes");
     entidad2 = new Entidad();
@@ -63,6 +64,7 @@ public class RankingTests {
     incidente1dela1 = new Incidente("Se tapo el baño", rockandrolleros);
     incidente2dela1 = new Incidente("No hay agua", rockandrolleros);
     incidente1dela2 = new Incidente("no anda la cadena", rockandrolleros);
+    RepositorioComunidad.getInstancia().aniadirComunidad(rockandrolleros);
     repoEntidades.aniadirEntidad(entidad1);
     repoEntidades.aniadirEntidad(entidad2);
     entidad1.aniadirEstablecimiento(establecimientoDeLa1);
@@ -124,7 +126,6 @@ public class RankingTests {
   public void elPromedioDeCierreSeCalculaBien() {
     assertEquals(10, entidad2.promedioDeCierreIncidente());
     assertEquals(5, entidad1.promedioDeCierreIncidente());
-
   }
   @Test public void cantidadDeIncidentesSemanales() {
     assertEquals(2, entidad1.cantidadIncidentesEnUnaSemana());
