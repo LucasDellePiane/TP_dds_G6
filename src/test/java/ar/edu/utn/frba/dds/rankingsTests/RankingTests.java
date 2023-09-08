@@ -22,31 +22,24 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class RankingTests {
-  private RepositorioDeEntidades repoEntidades;
-  private Entidad entidad1;
-  private Entidad entidad2;
-  private Establecimiento establecimientoDeLa1;
-  private Establecimiento establecimientoDeLa2;
-  private Servicio servicioDeLa1;
-  private Servicio servicioDeLa2;
-
-  private Incidente incidente1dela1;
-  private Incidente incidente2dela1;
-  private Incidente incidente1dela2;
-  private Usuario luki;
-  private Usuario lucho;
+  //private RepositorioDeEntidades repoEntidades;
+  private Entidad entidad1, entidad2;
+  private Establecimiento establecimientoDeLa1, establecimientoDeLa2;
+  private Servicio servicioDeLa1, servicioDeLa2;
+  private Usuario luki, lucho;
   private Comunidad rockandrolleros;
   RankingPorCantidad rankingCantidad;
   RankingPorPromedioCierre rankingPromedio;
   @BeforeEach
   public void setUp() {
-    repoEntidades = new RepositorioDeEntidades();//RepositorioDeEntidades.getInstancia();
+    
     entidad1 = new Entidad();
     entidad1.setearNombre("SuperHeroes");
     entidad2 = new Entidad();
@@ -61,35 +54,41 @@ public class RankingTests {
     List<Usuario> administradores = new ArrayList<>(Arrays.asList(luki));
     List<Servicio> servicios = new ArrayList<>(Arrays.asList(servicioDeLa1, servicioDeLa2));
     rockandrolleros =new Comunidad(miembros, administradores, servicios);
-    incidente1dela1 = new Incidente("Se tapo el baño", rockandrolleros);
-    incidente2dela1 = new Incidente("No hay agua", rockandrolleros);
-    incidente1dela2 = new Incidente("no anda la cadena", rockandrolleros);
+
+
     RepositorioComunidad.getInstancia().aniadirComunidad(rockandrolleros);
-    repoEntidades.aniadirEntidad(entidad1);
-    repoEntidades.aniadirEntidad(entidad2);
+
+    RepositorioDeEntidades.getInstancia().aniadirEntidad(entidad1);
+    RepositorioDeEntidades.getInstancia().aniadirEntidad(entidad2);
+
     entidad1.aniadirEstablecimiento(establecimientoDeLa1);
     entidad2.aniadirEstablecimiento(establecimientoDeLa2);
     establecimientoDeLa1.darAltaServicio(servicioDeLa1);
     establecimientoDeLa2.darAltaServicio(servicioDeLa2);
-    rockandrolleros.reportarIncidente(incidente1dela1);
-    rockandrolleros.reportarIncidente(incidente2dela1);
-    rockandrolleros.reportarIncidente(incidente2dela1);
-    incidente1dela1.cerrarIncidente();
-    incidente1dela2.cerrarIncidente();
-    incidente2dela1.cerrarIncidente();
-    incidente1dela1.setHorarioCierre(LocalDateTime.now().plusHours(5));
-    incidente2dela1.setHorarioCierre(LocalDateTime.now().plusHours(5));
-    incidente1dela2.setHorarioCierre(LocalDateTime.now().plusHours(10));
+
+    servicioDeLa1.informarNoFuncionamiento("Se tapo el baño");
+    servicioDeLa1.informarNoFuncionamiento("No hay agua");
+    servicioDeLa2.informarNoFuncionamiento("No anda la cadena");
+
+    servicioDeLa1.getIncidentes().get(0).cerrarIncidente();
+    servicioDeLa1.getIncidentes().get(1).cerrarIncidente();
+    servicioDeLa2.getIncidentes().get(0).cerrarIncidente();
+
+    servicioDeLa1.getIncidentes().get(0).setHorarioCierre(LocalDateTime.now().plusHours(5));
+    servicioDeLa1.getIncidentes().get(1).setHorarioCierre(LocalDateTime.now().plusHours(5));
+    servicioDeLa2.getIncidentes().get(0).setHorarioCierre(LocalDateTime.now().plusHours(10));
+
     rankingCantidad = new RankingPorCantidad();
     rankingPromedio = new RankingPorPromedioCierre();
 
-    servicioDeLa1.aniadirIncidente(incidente1dela1);
-    servicioDeLa1.aniadirIncidente(incidente2dela1);
-    servicioDeLa2.aniadirIncidente(incidente1dela2);
+    RepositorioDeEntidades.getInstancia().aniadirCriterio(rankingCantidad);
+    RepositorioDeEntidades.getInstancia().aniadirCriterio(rankingPromedio);
+    RepositorioDeEntidades.getInstancia().generarRankings();
+  }
 
-    repoEntidades.aniadirCriterio(rankingCantidad);
-    repoEntidades.aniadirCriterio(rankingPromedio);
-    repoEntidades.generarRankings();
+  @AfterEach
+  public void tearDown() {
+    RepositorioDeEntidades.getInstancia().getEntidades().clear();
   }
 
   @Test
@@ -134,8 +133,13 @@ public class RankingTests {
     assertEquals(2, entidad1.cantidadIncidentesEntidad());
   }
 
+  @Test
+  public void cantidadDeIncidentesDeUnServicio() {
+    assertEquals(2, servicioDeLa1.getIncidentes().size());
+  }
+
   @Test public void elTiempoDeCierreEstaBien() {
-    assertEquals(5, incidente1dela1.tiempoCierre());
+    assertEquals(5, servicioDeLa1.getIncidentes().get(0).tiempoCierre());
   }
 
   private List<String> leerArchivoCSV(String rutaArchivo) {

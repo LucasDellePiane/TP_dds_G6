@@ -56,6 +56,7 @@ public class Incidentes {
     RepositorioComunidad.getInstancia().aniadirComunidad(comunidad3);
   }
 
+
   @Test
   public void informarNoFuncionamiento() {
     servicioBaño.informarNoFuncionamiento("No hay agua");

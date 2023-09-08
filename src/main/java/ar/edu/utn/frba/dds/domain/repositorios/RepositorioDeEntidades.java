@@ -23,6 +23,7 @@ public class RepositorioDeEntidades {
     }
     return repositorioDeEntidades;
   }
+
   public void aniadirEntidad(Entidad entidad){
     this.entidades.add(entidad);
   }
