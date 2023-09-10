@@ -3,6 +3,7 @@ package ar.edu.utn.frba.dds.domain.usuario;
 import static ar.edu.utn.frba.dds.domain.servicio.EstadoIncidente.ACTIVO;
 
 import ar.edu.utn.frba.dds.domain.Comunidad.Comunidad;
+import ar.edu.utn.frba.dds.domain.Persistente;
 import ar.edu.utn.frba.dds.domain.medioComunicacion.MedioComunicacion;
 import ar.edu.utn.frba.dds.domain.establecimiento.Establecimiento;
 import ar.edu.utn.frba.dds.domain.localizacion.Localizacion;
@@ -14,38 +15,99 @@ import java.time.LocalDateTime;
 import java.time.chrono.ChronoLocalDateTime;
 import java.util.ArrayList;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import javax.persistence.Column;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 import java.time.LocalTime;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Entity
 @Getter
 @Setter
-public class Usuario {
-
+@Table(name = "usuarios")
+@NoArgsConstructor
+public class Usuario{
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "id_usuario")
+  private Integer id_usuario;
   // Atributos
-
+  @Column(name = "nombre", columnDefinition = "VARCHAR(20)")
   private String nombre;
+  @Column(name = "apellido", columnDefinition = "VARCHAR(20)")
   private String apellido;
+  @Column(name = "email", columnDefinition = "VARCHAR(40)")
   private String email;
+  @Column(name = "telefono", columnDefinition = "VARCHAR(10)")
   private String telefono;
 
+  @OneToMany
+  @JoinColumn(name = "id")
   private List<RangoHorario> horariosNotificacion = new ArrayList<>();
+  @Transient
   private MedioComunicacion medioComunicacion;
+  @Column(name = "ultimaHoraNotificacion", columnDefinition = "DATE")
   private LocalDateTime ultimaHoraNotificacion;
 
+  @Column(name = "nombreUsuario", columnDefinition = "VARCHAR(20)")
   private String nombreUsuario;
+  @Column(name = "contrasenia", columnDefinition = "VARCHAR(20)")
   private String contrasenia;
-
+  @Column(name = "localizacion")
+  @Embedded
   private Localizacion localizacion;
+  @Column(name = "localizacion_actual")
+  @Embedded
   private Localizacion localizacion_actual;
-
+  @ManyToMany
+  @JoinTable(
+      name = "usuario_establecimiento", // Nombre de la tabla intermedia
+      joinColumns = @JoinColumn(name = "id_usuario"), // Columna que hace referencia a esta entidad
+      inverseJoinColumns = @JoinColumn(name = "id_establecimiento") // Columna que hace referencia a la otra entidad
+  )
   private List<Establecimiento> establecimientosInteres = new ArrayList<>();
+  @ManyToMany
+  @JoinTable(
+      name = "usuario_servicio", // Nombre de la tabla intermedia
+      joinColumns = @JoinColumn(name = "id_usuario"), // Columna que hace referencia a esta entidad
+      inverseJoinColumns = @JoinColumn(name = "id_servicio") // Columna que hace referencia a la otra entidad
+  )
   private List<Servicio> serviciosInteres = new ArrayList<>();
-
+  @Transient
   private ValidadorContrasenias validador = new ValidadorContrasenias();
 
+  /*Agrego
+  @ManyToMany
+  @JoinTable(
+      name = "usuario_comunidad_miembro", // Nombre de la tabla intermedia
+      joinColumns = @JoinColumn(name = "id_usuario"), // Columna que hace referencia a esta entidad
+      inverseJoinColumns = @JoinColumn(name = "id_comunidad") // Columna que hace referencia a la otra entidad
+  )
+   */
+  @Transient
+  private List<Comunidad> comunidadMiembro;
+
+
+  @ManyToMany
+  @JoinTable(
+      name = "usuario_comunidad_administrador", // Nombre de la tabla intermedia
+      joinColumns = @JoinColumn(name = "id_usuario"), // Columna que hace referencia a esta entidad
+      inverseJoinColumns = @JoinColumn(name = "id_comunidad") // Columna que hace referencia a la otra entidad
+  )
+  private List<Comunidad> comunidadAdministrador;
 
   // Metodos
   public Usuario(String nombreUsuario, String contrasenia) {

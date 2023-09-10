@@ -1,23 +1,39 @@
 package ar.edu.utn.frba.dds.domain.servicio;
 
 import ar.edu.utn.frba.dds.domain.Comunidad.Comunidad;
+import ar.edu.utn.frba.dds.domain.Persistente;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Enumerated;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import java.time.Duration;
 import java.time.LocalDateTime;
-
-public class Incidente {
+@Entity
+@Table(name = "Incidentes")
+@NoArgsConstructor
+public class Incidente extends Persistente {
   @Getter
-  String observaciones;
+  @Column(name = "observaciones", columnDefinition = "VARCHAR(250)")
+  private String observaciones;
   @Getter
-  EstadoIncidente estado;
+  @Enumerated
+  private EstadoIncidente estado;
   @Getter
-  Comunidad comunidad;
+  @ManyToOne
+  @JoinColumn(name = "comunidad_id", referencedColumnName = "id_comunidad")
+  private Comunidad comunidad;
   @Getter
-  LocalDateTime horarioApertura;
+  @Column(name = "horarioApertura", columnDefinition = "DATE")
+  private LocalDateTime horarioApertura;
   @Setter
   @Getter
-  LocalDateTime horarioCierre;
+  @Column(name = "horarioCierre", columnDefinition = "DATE")
+  private LocalDateTime horarioCierre;
 
   public Incidente(String observaciones, Comunidad comunidad){
     this.observaciones = observaciones;

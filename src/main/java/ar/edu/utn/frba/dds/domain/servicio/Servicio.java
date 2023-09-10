@@ -1,23 +1,56 @@
 package ar.edu.utn.frba.dds.domain.servicio;
 
 import ar.edu.utn.frba.dds.domain.Comunidad.Comunidad;
+import ar.edu.utn.frba.dds.domain.Persistente;
 import ar.edu.utn.frba.dds.domain.repositorios.RepositorioComunidad;
 import ar.edu.utn.frba.dds.domain.usuario.Usuario;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Getter
 @Setter
+@Entity
+@Table(name = "Servicios")
+@NoArgsConstructor
 public class Servicio {
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "id_servicio")
+  private Integer id_servicio;
 
   // Atributos
+  @Column(name = "tipoServicio")
+  @Enumerated
   private TipoServicio tipo;
+  @Column(name = "fueraDeFuncionamiento", columnDefinition = "BOOLEAN")
   private boolean fueraDeFuncionamiento;
+  @OneToMany
   private List<Incidente> incidentes;
+
+  /*Agrego*/
+  @ManyToMany
+  @JoinTable(
+      name = "usuario_servicio", // Nombre de la tabla intermedia
+      joinColumns = @JoinColumn(name = "id_servicio"), // Columna que hace referencia a esta entidad
+      inverseJoinColumns = @JoinColumn(name = "id_usuario") // Columna que hace referencia a la otra entidad
+  )
+  private List<Usuario> usuariosInteresados;
 
   // Metodos
 

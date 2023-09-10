@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.domain.entidad;
 
+import ar.edu.utn.frba.dds.domain.Persistente;
 import ar.edu.utn.frba.dds.domain.establecimiento.Establecimiento;
 import ar.edu.utn.frba.dds.domain.localizacion.Localizacion;
 import ar.edu.utn.frba.dds.domain.servicio.Incidente;
@@ -10,14 +11,24 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.Getter;
+import javax.persistence.Column;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /*Transportes y organizacion*/
-public class Entidad {
+@Entity
+@Table(name = "Entidades")
+public class Entidad extends Persistente {
+  @Column(name = "nombreEntidad", columnDefinition = "VARCHAR(20)")
   @Getter
   private String nombreEntidad;
+  @OneToMany
   @Getter
   private List<Establecimiento> conjuntoDeEstablecimientos = new ArrayList<>();
   @Getter
+  @Embedded
   private Localizacion localizacion;
 
   /*

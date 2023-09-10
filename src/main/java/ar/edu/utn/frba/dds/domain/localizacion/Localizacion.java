@@ -3,14 +3,21 @@ package ar.edu.utn.frba.dds.domain.localizacion;
 import ar.edu.utn.frba.dds.domain.localizacion.division.Division;
 import ar.edu.utn.frba.dds.domain.servicioLocalizacion.ServicioLocalizacionGeoRefApi;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import javax.persistence.Embeddable;
+import javax.persistence.Embedded;
+
+@Embeddable
 @Getter
 @Setter
+@NoArgsConstructor
 public class Localizacion {
 
   // Atributos
 
   String provincia;
+  @Embedded
   Division division;
   Double latitud;
   Double longitud;
