@@ -3,7 +3,6 @@ package ar.edu.utn.frba.dds.domain.usuario;
 import static ar.edu.utn.frba.dds.domain.servicio.EstadoIncidente.ACTIVO;
 
 import ar.edu.utn.frba.dds.domain.Comunidad.Comunidad;
-import ar.edu.utn.frba.dds.domain.Persistente;
 import ar.edu.utn.frba.dds.domain.medioComunicacion.MedioComunicacion;
 import ar.edu.utn.frba.dds.domain.establecimiento.Establecimiento;
 import ar.edu.utn.frba.dds.domain.localizacion.Localizacion;
@@ -12,7 +11,6 @@ import ar.edu.utn.frba.dds.domain.servicio.Incidente;
 import ar.edu.utn.frba.dds.domain.servicio.Servicio;
 import ar.edu.utn.frba.dds.domain.validadores.ValidadorContrasenias;
 import java.time.LocalDateTime;
-import java.time.chrono.ChronoLocalDateTime;
 import java.util.ArrayList;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -45,25 +43,25 @@ public class Usuario{
   @Column(name = "id_usuario")
   private Integer id_usuario;
   // Atributos
-  @Column(name = "nombre", columnDefinition = "VARCHAR(20)")
-  private String nombre;
   @Column(name = "apellido", columnDefinition = "VARCHAR(20)")
   private String apellido;
+  @Column(name = "name", columnDefinition = "VARCHAR(20)", insertable = false, updatable = false)
+  private String name;
   @Column(name = "email", columnDefinition = "VARCHAR(40)")
   private String email;
   @Column(name = "telefono", columnDefinition = "VARCHAR(10)")
   private String telefono;
 
   @OneToMany
-  @JoinColumn(name = "id")
+  @JoinColumn(name = "id_Rango")
   private List<RangoHorario> horariosNotificacion = new ArrayList<>();
   @Transient
   private MedioComunicacion medioComunicacion;
   @Column(name = "ultimaHoraNotificacion", columnDefinition = "DATE")
   private LocalDateTime ultimaHoraNotificacion;
 
-  @Column(name = "nombreUsuario", columnDefinition = "VARCHAR(20)")
-  private String nombreUsuario;
+  @Column(name = "user_first_name", columnDefinition = "VARCHAR(20)")
+  private String user_first_name;
   @Column(name = "contrasenia", columnDefinition = "VARCHAR(20)")
   private String contrasenia;
   @Column(name = "localizacion")
@@ -89,17 +87,14 @@ public class Usuario{
   @Transient
   private ValidadorContrasenias validador = new ValidadorContrasenias();
 
-  /*Agrego
+  /*Agrego*/
   @ManyToMany
   @JoinTable(
       name = "usuario_comunidad_miembro", // Nombre de la tabla intermedia
       joinColumns = @JoinColumn(name = "id_usuario"), // Columna que hace referencia a esta entidad
       inverseJoinColumns = @JoinColumn(name = "id_comunidad") // Columna que hace referencia a la otra entidad
   )
-   */
-  @Transient
   private List<Comunidad> comunidadMiembro;
-
 
   @ManyToMany
   @JoinTable(
@@ -110,9 +105,9 @@ public class Usuario{
   private List<Comunidad> comunidadAdministrador;
 
   // Metodos
-  public Usuario(String nombreUsuario, String contrasenia) {
-    validador.validarContrasenia(nombreUsuario,contrasenia);
-    this.nombreUsuario = nombreUsuario;
+  public Usuario(String user_first_name, String contrasenia) {
+    validador.validarContrasenia(user_first_name,contrasenia);
+    this.user_first_name = user_first_name;
     this.contrasenia = contrasenia;
   }
 

@@ -20,12 +20,13 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.persistence.DiscriminatorType;
+import javax.persistence.DiscriminatorValue;
 import java.util.Arrays;
 import java.util.Properties;
 
-
-
-public class MedioEmail implements MedioComunicacion{
+@DiscriminatorValue( value = "Email")
+public class MedioEmail extends MedioComunicacion {
 
     private final String username = "emailRemitente";
     private final String accessToken = "tokenAcceso";

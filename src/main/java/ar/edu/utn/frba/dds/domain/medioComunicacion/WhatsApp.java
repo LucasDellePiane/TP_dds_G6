@@ -13,8 +13,10 @@ import java.util.List;
 
 import com.twilio.Twilio;
 import com.twilio.type.PhoneNumber;
+import javax.persistence.DiscriminatorValue;
 
-public class WhatsApp implements MedioComunicacion {
+@DiscriminatorValue( value = "Whatsapp")
+public class WhatsApp extends MedioComunicacion {
 
     private static final String apiURL = "https://api.whatsapp.com/send?";
     private Retrofit retrofit;

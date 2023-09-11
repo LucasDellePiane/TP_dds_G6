@@ -1,6 +1,5 @@
 package ar.edu.utn.frba.dds.domain.entidad;
 
-import ar.edu.utn.frba.dds.domain.Persistente;
 import ar.edu.utn.frba.dds.domain.establecimiento.Establecimiento;
 import ar.edu.utn.frba.dds.domain.localizacion.Localizacion;
 import ar.edu.utn.frba.dds.domain.servicio.Incidente;
@@ -14,13 +13,20 @@ import lombok.Getter;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /*Transportes y organizacion*/
 @Entity
 @Table(name = "Entidades")
-public class Entidad extends Persistente {
+public class Entidad {
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "id_entidad")
+  private Integer id_entidad;
   @Column(name = "nombreEntidad", columnDefinition = "VARCHAR(20)")
   @Getter
   private String nombreEntidad;

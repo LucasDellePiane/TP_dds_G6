@@ -1,10 +1,6 @@
 package ar.edu.utn.frba.dds.domain.Comunidad;
 
-import static ar.edu.utn.frba.dds.domain.servicio.EstadoIncidente.ACTIVO;
-
-import ar.edu.utn.frba.dds.domain.Persistente;
 import ar.edu.utn.frba.dds.domain.establecimiento.Establecimiento;
-import ar.edu.utn.frba.dds.domain.repositorios.RepositorioComunidad;
 import ar.edu.utn.frba.dds.domain.servicio.EstadoIncidente;
 import ar.edu.utn.frba.dds.domain.servicio.Incidente;
 import ar.edu.utn.frba.dds.domain.servicio.Servicio;
@@ -18,12 +14,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -40,23 +33,22 @@ public class Comunidad {
   private Integer id_comunidad;
 
   // Atributos
+  @ManyToMany(mappedBy = "comunidadMiembro")
   /*
-  @ManyToMany
   @JoinTable(
       name = "usuario_comunidad_miembro", // Nombre de la tabla intermedia
       joinColumns = @JoinColumn(name = "id_comunidad"), // Columna que hace referencia a esta entidad
       inverseJoinColumns = @JoinColumn(name = "id_usuario") // Columna que hace referencia a la otra entidad
-  )
-  */
-  @Transient
+  )*/
   private List<Usuario> miembros;
 
-  @ManyToMany
+  @ManyToMany(mappedBy = "comunidadAdministrador")
+  /*
   @JoinTable(
       name = "usuario_comunidad_administrador", // Nombre de la tabla intermedia
       joinColumns = @JoinColumn(name = "id_comunidad"), // Columna que hace referencia a esta entidad
       inverseJoinColumns = @JoinColumn(name = "id_usuario") // Columna que hace referencia a la otra entidad
-  )
+  )*/
   private List<Usuario> administradores;
   @OneToMany
   private List<Servicio> serviciosDeInteres;

@@ -1,11 +1,13 @@
 package ar.edu.utn.frba.dds.domain.usuario;
 
-import ar.edu.utn.frba.dds.domain.Persistente;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
@@ -13,7 +15,11 @@ import javax.persistence.Table;
 @Setter
 @Table(name = "RangosHorarios")
 @NoArgsConstructor
-public class RangoHorario extends Persistente {
+public class RangoHorario {
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "id_Rango")
+  private Integer id_Rango;
 
   // Atributos
   @Column(name = "horaInicio", columnDefinition = "INTEGER")
