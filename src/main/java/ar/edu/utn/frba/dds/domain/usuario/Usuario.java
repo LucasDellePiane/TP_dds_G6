@@ -47,8 +47,8 @@ public class Usuario{
   // Atributos
   @Column(name = "apellido", columnDefinition = "VARCHAR(20)")
   private String apellido;
-  @Column(name = "name", columnDefinition = "VARCHAR(20)", insertable = false, updatable = false)
-  private String name;
+  @Column(name = "nombre", columnDefinition = "VARCHAR(20)", insertable = false, updatable = false)
+  private String nombre;
   @Column(name = "email", columnDefinition = "VARCHAR(40)")
   private String email;
   @Column(name = "telefono", columnDefinition = "VARCHAR(10)")
@@ -62,8 +62,8 @@ public class Usuario{
   @Column(name = "ultimaHoraNotificacion", columnDefinition = "DATE")
   private LocalDateTime ultimaHoraNotificacion;
 
-  @Column(name = "user_first_name", columnDefinition = "VARCHAR(20)")
-  private String user_first_name;
+  @Column(name = "nombreUsuario", columnDefinition = "VARCHAR(20)")
+  private String nombreUsuario;
   @Column(name = "contrasenia", columnDefinition = "VARCHAR(20)")
   private String contrasenia;
   @Column(name = "localizacion")
@@ -114,9 +114,9 @@ public class Usuario{
   private List<Comunidad> comunidadAdministrador;
 
   // Metodos
-  public Usuario(String user_first_name, String contrasenia) {
-    validador.validarContrasenia(user_first_name,contrasenia);
-    this.user_first_name = user_first_name;
+  public Usuario(String nombreUsuario, String contrasenia) {
+    validador.validarContrasenia(nombreUsuario,contrasenia);
+    this.nombreUsuario = nombreUsuario;
     this.contrasenia = contrasenia;
   }
 
