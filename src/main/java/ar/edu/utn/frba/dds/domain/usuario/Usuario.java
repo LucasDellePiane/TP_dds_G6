@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -66,6 +68,13 @@ public class Usuario{
   private String contrasenia;
   @Column(name = "localizacion")
   @Embedded
+  @AttributeOverrides({
+      @AttributeOverride(name = "provincia", column = @Column(name = "usuario_provincia")),
+      @AttributeOverride(name = "division.nombre", column = @Column(name = "usuario_division_nombre")),
+      @AttributeOverride(name = "division.tipo", column = @Column(name = "usuario_division_tipo")),
+      @AttributeOverride(name = "latitud", column = @Column(name = "usuario_latitud")),
+      @AttributeOverride(name = "longitud", column = @Column(name = "usuario_longitud")),
+  })
   private Localizacion localizacion;
   @Column(name = "localizacion_actual")
   @Embedded

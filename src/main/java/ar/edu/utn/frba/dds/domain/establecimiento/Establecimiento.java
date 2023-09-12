@@ -9,6 +9,8 @@ import ar.edu.utn.frba.dds.domain.usuario.Usuario;
 import java.util.ArrayList;
 import lombok.Getter;
 import lombok.Setter;
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -42,6 +44,13 @@ public class Establecimiento  {
   @Enumerated
   private TipoEstablecimiento tipoEstablecimiento;
   @Embedded
+  @AttributeOverrides({
+      @AttributeOverride(name = "provincia", column = @Column(name = "establecimiento_provincia")),
+      @AttributeOverride(name = "division.nombre", column = @Column(name = "establecimiento_division_nombre")),
+      @AttributeOverride(name = "division.tipo", column = @Column(name = "establecimiento_division_tipo")),
+      @AttributeOverride(name = "latitud", column = @Column(name = "establecimiento_latitud")),
+      @AttributeOverride(name = "longitud", column = @Column(name = "establecimiento_longitud")),
+  })
   private Localizacion localizacion; //Es Localizacion
   @OneToMany
   private List<Servicio> servicios = new ArrayList<>();
