@@ -14,6 +14,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -33,22 +35,20 @@ public class Comunidad {
   private Integer id_comunidad;
 
   // Atributos
-  @ManyToMany(mappedBy = "comunidadMiembro")
-  /*
+  @ManyToMany
   @JoinTable(
       name = "usuario_comunidad_miembro", // Nombre de la tabla intermedia
       joinColumns = @JoinColumn(name = "id_comunidad"), // Columna que hace referencia a esta entidad
       inverseJoinColumns = @JoinColumn(name = "id_usuario") // Columna que hace referencia a la otra entidad
-  )*/
+  )
   private List<Usuario> miembros;
 
-  @ManyToMany(mappedBy = "comunidadAdministrador")
-  /*
+  @ManyToMany
   @JoinTable(
       name = "usuario_comunidad_administrador", // Nombre de la tabla intermedia
       joinColumns = @JoinColumn(name = "id_comunidad"), // Columna que hace referencia a esta entidad
       inverseJoinColumns = @JoinColumn(name = "id_usuario") // Columna que hace referencia a la otra entidad
-  )*/
+  )
   private List<Usuario> administradores;
   @OneToMany
   private List<Servicio> serviciosDeInteres;

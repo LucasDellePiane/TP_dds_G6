@@ -42,15 +42,6 @@ public class Servicio {
   @OneToMany
   private List<Incidente> incidentes;
 
-  /*Agrego*/
-  @ManyToMany
-  @JoinTable(
-      name = "usuario_servicio", // Nombre de la tabla intermedia
-      joinColumns = @JoinColumn(name = "id_servicio"), // Columna que hace referencia a esta entidad
-      inverseJoinColumns = @JoinColumn(name = "id_usuario") // Columna que hace referencia a la otra entidad
-  )
-  private List<Usuario> usuariosInteresados;
-
   // Metodos
 
   public Servicio(TipoServicio tipo){

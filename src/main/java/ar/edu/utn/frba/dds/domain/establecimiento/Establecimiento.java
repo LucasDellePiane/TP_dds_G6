@@ -55,15 +55,6 @@ public class Establecimiento  {
   @OneToMany
   private List<Servicio> servicios = new ArrayList<>();
 
-  /*Agrego*/
-  @ManyToMany
-  @JoinTable(
-      name = "usuario_establecimiento", // Nombre de la tabla intermedia
-      joinColumns = @JoinColumn(name = "id_establecimiento"), // Columna que hace referencia a esta entidad
-      inverseJoinColumns = @JoinColumn(name = "id_usuario") // Columna que hace referencia a la otra entidad
-  )
-  private List<Usuario> usuariosInteresados;
-
 
   // Metodos
 

@@ -96,23 +96,6 @@ public class Usuario{
   @Transient
   private ValidadorContrasenias validador = new ValidadorContrasenias();
 
-  /*Agrego*/
-  @ManyToMany
-  @JoinTable(
-      name = "usuario_comunidad_miembro", // Nombre de la tabla intermedia
-      joinColumns = @JoinColumn(name = "id_usuario"), // Columna que hace referencia a esta entidad
-      inverseJoinColumns = @JoinColumn(name = "id_comunidad") // Columna que hace referencia a la otra entidad
-  )
-  private List<Comunidad> comunidadMiembro;
-
-  @ManyToMany
-  @JoinTable(
-      name = "usuario_comunidad_administrador", // Nombre de la tabla intermedia
-      joinColumns = @JoinColumn(name = "id_usuario"), // Columna que hace referencia a esta entidad
-      inverseJoinColumns = @JoinColumn(name = "id_comunidad") // Columna que hace referencia a la otra entidad
-  )
-  private List<Comunidad> comunidadAdministrador;
-
   // Metodos
   public Usuario(String nombreUsuario, String contrasenia) {
     validador.validarContrasenia(nombreUsuario,contrasenia);
