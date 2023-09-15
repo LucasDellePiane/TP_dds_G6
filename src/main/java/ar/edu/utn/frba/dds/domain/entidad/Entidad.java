@@ -1,3 +1,4 @@
+
 package ar.edu.utn.frba.dds.domain.entidad;
 
 import ar.edu.utn.frba.dds.domain.establecimiento.Establecimiento;
