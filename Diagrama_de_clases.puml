@@ -155,6 +155,7 @@ RepositorioDeUsuarios --> Usuario
 RepositorioEmpresas -> Empresa
 RepositorioComunidad --> Comunidad
 
+
 class RepositorioComunidad {
     List<Comunidad> comunidades
     RepositorioComunidad repositorioComunidad
@@ -307,4 +308,5 @@ class mainNotificarIncidentes {
     void notificarIncidentes()
 }
 
+mainNotificarIncidentes --> RepositorioDeUsuarios
 @enduml
