@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import javax.persistence.Embeddable;
+import javax.persistence.Enumerated;
 
 @Getter
 @Setter
@@ -12,6 +13,7 @@ import javax.persistence.Embeddable;
 public class Division {
 
   String nombre;
+  @Enumerated
   TipoDivision tipo;
 
   public Division(String nombre, TipoDivision tipo) {

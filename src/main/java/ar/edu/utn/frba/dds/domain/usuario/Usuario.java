@@ -18,6 +18,7 @@ import lombok.Setter;
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -26,6 +27,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -47,17 +49,18 @@ public class Usuario{
   // Atributos
   @Column(name = "apellido", columnDefinition = "VARCHAR(20)")
   private String apellido;
-  @Column(name = "nombre", columnDefinition = "VARCHAR(20)", insertable = false, updatable = false)
+  @Column(name = "nombre", columnDefinition = "VARCHAR(20)")
   private String nombre;
   @Column(name = "email", columnDefinition = "VARCHAR(40)")
   private String email;
   @Column(name = "telefono", columnDefinition = "VARCHAR(10)")
   private String telefono;
 
-  @OneToMany
-  @JoinColumn(name = "id_Rango")
+  @Embedded
+  @ElementCollection
   private List<RangoHorario> horariosNotificacion = new ArrayList<>();
-  @Transient
+  @ManyToOne
+  @JoinColumn(name = "medioComunicacion_id", referencedColumnName = "id_medioComunicacion")
   private MedioComunicacion medioComunicacion;
   @Column(name = "ultimaHoraNotificacion", columnDefinition = "DATE")
   private LocalDateTime ultimaHoraNotificacion;
@@ -108,7 +111,7 @@ public class Usuario{
   private boolean estaEnRangoHorario() {
     LocalTime horaActual = LocalTime.now();
     int horaEntero = horaActual.getHour();
-    return this.horariosNotificacion.stream().anyMatch(unRango -> unRango.laHoraPertene(horaEntero));
+    return this.horariosNotificacion.stream().anyMatch(unRango -> unRango.laHoraPertenece(horaEntero));
   }
 
   public void notificarIncidente(Incidente incidente) {

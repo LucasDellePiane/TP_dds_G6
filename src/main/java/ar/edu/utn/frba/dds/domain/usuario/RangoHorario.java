@@ -4,27 +4,21 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import javax.persistence.Column;
+import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity
 @Getter
 @Setter
-@Table(name = "RangosHorarios")
+@Embeddable
 @NoArgsConstructor
 public class RangoHorario {
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "id_Rango")
-  private Integer id_Rango;
 
   // Atributos
-  @Column(name = "horaInicio", columnDefinition = "INTEGER")
   private int horaInicio;
-  @Column(name = "horaFin", columnDefinition = "INTEGER")
   private int horaFin;
 
   // Metodos
@@ -35,9 +29,10 @@ public class RangoHorario {
     this.horaFin = fin;
   }
 
-  public boolean laHoraPertene(int hora){
+  public boolean laHoraPertenece(int hora){
     return hora >= this.horaInicio && hora < this.horaFin;
   }
+
 
 
 }

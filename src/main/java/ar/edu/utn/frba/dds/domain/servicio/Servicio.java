@@ -54,7 +54,7 @@ public class Servicio {
   }
 
   public void informarNoFuncionamiento(String observaciones) {
-   this.ComunidadesInteresadasEnElServicio().forEach(comunidad->
+   this.comunidadesInteresadasEnElServicio().forEach(comunidad->
    {
     Incidente incidente = new Incidente(observaciones, comunidad);
     this.incidentes.add(incidente);
@@ -62,7 +62,7 @@ public class Servicio {
     });
   }
 
-  private List<Comunidad> ComunidadesInteresadasEnElServicio(){ // DEBERÍA ESTAR ACA O EN EL REPO DE COMUNIDADES ?
+  private List<Comunidad> comunidadesInteresadasEnElServicio(){ // DEBERÍA ESTAR ACA O EN EL REPO DE COMUNIDADES ?
     return RepositorioComunidad.getInstancia().getComunidades().stream().
         filter(comunidad -> comunidad.estaInteresaEnServicio(this)).toList();
   }
