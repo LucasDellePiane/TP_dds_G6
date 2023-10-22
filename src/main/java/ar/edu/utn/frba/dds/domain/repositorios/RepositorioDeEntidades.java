@@ -4,7 +4,9 @@ import ar.edu.utn.frba.dds.domain.Ranking.Criterio;
 import java.util.ArrayList;
 import java.util.List;
 import java.io.File;
+import java.util.stream.Collectors;
 import ar.edu.utn.frba.dds.domain.entidad.Entidad;
+import ar.edu.utn.frba.dds.domain.establecimiento.Establecimiento;
 import lombok.Getter;
 
 public class RepositorioDeEntidades {
@@ -36,6 +38,10 @@ public class RepositorioDeEntidades {
 
     this.eliminarRankingsAntiguos();
     criterios.forEach(criterio -> criterio.calcularRanking(this.entidades));
+  }
+
+  public List<Establecimiento> obtenerEstablecimientos(){
+   return this.entidades.stream().flatMap(entidad -> entidad.getEstablecimientos().stream()).toList();
   }
 
   public void eliminarRankingsAntiguos() {

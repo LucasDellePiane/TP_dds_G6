@@ -39,16 +39,24 @@
       <artifactId>jpa-extras</artifactId>
       <version>1.0.0-rc1</version>
     </dependency>
+
     <dependency>
       <groupId>mysql</groupId>
       <artifactId>mysql-connector-java</artifactId>
-      <version>8.0.17</version>
+      <version>5.1.26</version>
     </dependency>
+
     <dependency>
       <groupId>org.hsqldb</groupId>
       <artifactId>hsqldb</artifactId>
       <version>2.4.0</version>
       <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.hsqldb</groupId>
+      <artifactId>hsqldb</artifactId>
+      <version>2.2.8</version>
     </dependency>
 
     <dependency>
@@ -111,12 +119,30 @@
       <artifactId>javax.mail-api</artifactId>
       <version>1.6.2</version>
     </dependency>
+    <dependency>
+      <groupId>com.sparkjava</groupId>
+      <artifactId>spark-core</artifactId>
+      <version>2.2</version>
+    </dependency>
+    <dependency>
+      <groupId>com.github.jknack</groupId>
+      <artifactId>handlebars</artifactId>
+      <version>4.3.1</version>
+    </dependency>
+    <dependency>
+      <groupId>com.github.jknack</groupId>
+      <artifactId>handlebars-guava-cache</artifactId>
+      <version>4.3.1</version>
+    </dependency>
+    <dependency>
+      <groupId>com.google.code.gson</groupId>
+      <artifactId>gson</artifactId>
+      <version>2.3.1</version>
+    </dependency>
+
 
 
   </dependencies>
-
-
-
   <build>
     <plugins>
       <plugin>
