@@ -49,7 +49,7 @@ public class Usuario{
   // Atributos
   @Column(name = "apellido", columnDefinition = "VARCHAR(20)")
   private String apellido;
-  @Column(name = "nombre", columnDefinition = "VARCHAR(20)")
+  @Column(name = "nombre", columnDefinition = "VARCHAR(20)", insertable = false, updatable = false)
   private String nombre;
   @Column(name = "email", columnDefinition = "VARCHAR(40)")
   private String email;

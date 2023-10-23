@@ -3,7 +3,6 @@ package main;
 import controller.DemoController;
 import controller.SessionController;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
-import spark.ModelAndView;
 import spark.Spark;
 import handlebars.HandlebarsTemplateEngine;
 import javax.persistence.PersistenceException;
@@ -11,14 +10,14 @@ import javax.persistence.PersistenceException;
 public class Routes implements WithSimplePersistenceUnit {
 
   public static void main(String[] args) {
-    /*new Bootstrap().run();*/
+    new Bootstrap().run();
     new Routes().start();
   }
 
   public void start() {
     System.out.println("Iniciando servidor");
 
-    Spark.port(9000);
+    Spark.port(9001);
     Spark.staticFileLocation("/public");
 
     HandlebarsTemplateEngine engine = new HandlebarsTemplateEngine();
@@ -34,8 +33,9 @@ public class Routes implements WithSimplePersistenceUnit {
 
     Spark.before((request, response) -> {
       entityManager().clear();
+      /*
       if(request.session().attribute("user_id")== null)
-        response.redirect("/login");
+        response.redirect("/login");*/
     });
   }
 
