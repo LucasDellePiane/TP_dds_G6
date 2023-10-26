@@ -67,3 +67,14 @@ footer {
 .input:active{
     border-color: 9B74C6;
 }
+
+.content-card {
+    width: 502.73px;
+    height: 546px;
+    left: 0px;
+    top: 0px;
+    position: absolute;
+    background: #F5F1F9;
+    border-radius: 20%;
+    border-bottom: 1px solid #9B74C6;
+}

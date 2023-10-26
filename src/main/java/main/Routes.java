@@ -31,13 +31,13 @@ public class Routes implements WithSimplePersistenceUnit {
       response.redirect("/500"); //TODO
     });
 
-    Spark.before((request, response) -> {
-      if ( !(request.pathInfo().startsWith("/login") || request.pathInfo().startsWith("/styles"))
-          && (request.session().attribute("user_id") == null) ) {
-        response.redirect("/login");
-      }
-      entityManager().clear();
-    });
+//    Spark.before((request, response) -> {
+//      if ( !(request.pathInfo().startsWith("/login") || request.pathInfo().startsWith("/styles"))
+//          && (request.session().attribute("user_id") == null) ) {
+//        response.redirect("/login");
+//      }
+//      entityManager().clear();
+//    });
   }
 
 

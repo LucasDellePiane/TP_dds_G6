@@ -1,10 +1,13 @@
 {{#partial "principal" }}
     <h1>Establecimientos</h1>
-    <ul>
-        {{#establecimientos}}
-            <li><a href="/establecimiento/{{id}}">{{nombre}}</a></li>
-        {{/establecimientos}}
-    </ul>
+    <div class='content-card'>
+        <ul>
+            {{#establecimientos}}
+                <li><a href="/establecimiento/{{id}}">{{nombre}}</a></li>
+            {{/establecimientos}}
+        </ul>
+    </div>
+
 {{/partial}}
 
 {{> layout.html.hbs }}
