@@ -32,9 +32,8 @@ public class Routes implements WithSimplePersistenceUnit {
     });
 
     Spark.before((request, response) -> {
-      if (request.pathInfo().startsWith("/login") || request.pathInfo().startsWith("/styles")) {
-        // Si la ruta es "/login", no hagas ninguna redirección
-      } else if (request.session().attribute("user_id") == null) {
+      if ( !(request.pathInfo().startsWith("/login") || request.pathInfo().startsWith("/styles"))
+          && (request.session().attribute("user_id") == null) ) {
         response.redirect("/login");
       }
       entityManager().clear();
