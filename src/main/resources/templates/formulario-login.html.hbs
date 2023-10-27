@@ -1,23 +1,31 @@
 {{#partial "principal" }}
 
-    <div id="formularioDiv">
-    <form id="formulario" method="POST" action="/login">
-        <div class="label">
-        <label for="nombre">Nombre</label>
-        <input class="input"  id="nombre"  type="text" name="nombre" placeholder="Nombre">
-        </div>
-        <div class="label">
-        <label for="contraseña">Contraseña</label>
-        <input  class="input" id="contraseña"  type="password" name="contrasenia" placeholder="Contraseña">
-            <a href="/login">¿Olvidaste tu contraseña?</a>
-        </div>
-        <div>
-        <input id= "botonEnviar" type="submit">
-        </div>
+    <div class="formularioDiv">
 
-    </form>
+        <img height="160px" src="/imagenes/LogoFondoOscuro.jpg" alt="Logo">
+
+        <form class="formulario" id="formulario" method="POST" action="/login">
+
+            <div class="label">
+                <label class="labelForm" for="nombre">Email</label>
+
+                <input class="inputForm"  id="nombre"  type="text" name="nombre" placeholder="Email">
+            </div>
+
+            <div class="label">
+                <label class="labelForm" for="contraseña">Contraseña</label>
+
+                <input  class="inputForm" id="contraseña"  type="password" name="contrasenia" placeholder="Contraseña">
+                <a class="TextForm" href="/login">¿Olvidaste tu contraseña?</a>
+            </div>
+            <div class="boton">
+                <button class="ButtonForm" id= "botonEnviar" type="submit"> Ingresar </button>
+            </div>
+        </form>
+
+        <a class="linkRegistrar" class="TextForm" href="/login">¿Todavía no te sumaste a nuestra comunidad? <br> Registrate</a>
+
     </div>
-
 
 {{/partial}}
 
