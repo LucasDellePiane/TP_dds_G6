@@ -1,12 +1,14 @@
 {{#partial "principal" }}
-    <h1>Establecimientos</h1>
-    <div class='content-card'>
-        <ul>
-            {{#establecimientos}}
-                <li><a href="/establecimiento/{{id}}">{{nombre}}</a></li>
-            {{/establecimientos}}
-        </ul>
-    </div>
+   <div>
+     <h1>Establecimientos</h1>
+        <div class='content-card'>
+            <ul>
+                {{#establecimientos}}
+                    <li><a href="/establecimiento/{{id}}">{{nombre}}</a></li>
+                {{/establecimientos}}
+            </ul>
+        </div>
+   </div>
 
 {{/partial}}
 
