@@ -52,12 +52,16 @@ public class Comunidad {
   private List<Usuario> administradores;
   @OneToMany
   private List<Servicio> serviciosDeInteres;
+  @Getter
+  @Column(name = "nombre", columnDefinition = "VARCHAR(100)")
+  private String nombre;
 
-  public Comunidad(List<Usuario> miembros, List<Usuario> administradores, List<Servicio> serviciosDeInteres) {
+  public Comunidad(List<Usuario> miembros, List<Usuario> administradores, List<Servicio> serviciosDeInteres, String nombre) {
     //VERIFICAR
     this.miembros = miembros;
     this.administradores = administradores;
     this.serviciosDeInteres = serviciosDeInteres;
+    this.nombre = nombre;
   }
   public void reportarIncidente(Incidente incidente) {
     this.miembros.forEach(miembro -> miembro.notificarIncidente(incidente));

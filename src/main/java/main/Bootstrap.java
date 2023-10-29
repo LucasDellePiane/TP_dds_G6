@@ -41,7 +41,7 @@ public class Bootstrap implements WithSimplePersistenceUnit {
       servciosDeInteres.add(servicio2);
       servciosDeInteres.add(servicio3);
 
-      Comunidad com1 = new Comunidad(usuariosMiembros, usuariosAdmin, servciosDeInteres);
+      Comunidad com1 = new Comunidad(usuariosMiembros, usuariosAdmin, servciosDeInteres,"comunidad prueba 1");
       persist(com1);
 //      Comunidad com2 = new Comunidad(usuariosMiembros, usuariosAdmin, servciosDeInteres);
 //      persist(com2);

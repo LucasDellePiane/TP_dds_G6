@@ -39,14 +39,21 @@ public class RepositorioComunidad implements WithSimplePersistenceUnit {
     comunidades.add(comunidad);
   }
 
-  public List<Comunidad> comunidadesALasQuePertenece(Usuario usuario){
-    return this.getComunidades().stream().filter(c -> {
-      return c.usuarioEsParte(usuario);
-    }).collect(Collectors.toList());
-  }
+//  public List<Comunidad> comunidadesALasQuePertenece(Usuario usuario){
+//    return this.getComunidades().stream().filter(c -> {
+//      return c.usuarioEsParte(usuario);
+//    }).collect(Collectors.toList());
+//  }
 
   public List<Comunidad> obtenerTodos() {
     return entityManager().createQuery("from Comunidad ", Comunidad.class).getResultList();
+  }
+
+  public List<Comunidad> comunidadesALasQuePertenece(Usuario usuario) { // creo que esto es asi
+    String idUser = usuario.getId_usuario().toString();
+    return entityManager().createQuery("from Comunidad c Join Usuario u on :idUser", Comunidad.class)
+        .setParameter("idUser", "%" + idUser + "%")
+        .getResultList();
   }
 
 }
