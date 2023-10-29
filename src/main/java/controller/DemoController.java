@@ -40,4 +40,10 @@ public class DemoController implements WithSimplePersistenceUnit {
     modelo.put("establecimientos", RepositorioEstablecimientos.getInstancia().obtenerTodos());
     return new ModelAndView(modelo, "index.html.hbs"); // cambiar esto del index
   }
+
+  public ModelAndView servicios(Request request, Response response) {
+    Map<String, Object> modelo = new HashMap<>();
+//    modelo.put("establecimientos", RepositorioEstablecimientos.getInstancia().obtenerTodos());
+    return new ModelAndView(modelo, "servicios_establecimiento.html.hbs"); // cambiar esto del index
+  }
 }
