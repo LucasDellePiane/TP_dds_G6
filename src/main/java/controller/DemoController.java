@@ -12,6 +12,7 @@ import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,11 +25,13 @@ public class DemoController implements WithSimplePersistenceUnit {
 //    Integer id = request.session().attribute("user_id");
 //    Usuario usuario = RepositorioDeUsuarios.getINSTANCE().findById(id);
 //    List<Comunidad> comunidades = RepositorioComunidad.getInstancia().comunidadesALasQuePertenece(usuario);
-//    List<List<Incidente>> listaincidentes = comunidades.stream().map(comunidad -> {
+    List<Comunidad> comunidades = RepositorioComunidad.getInstancia().obtenerTodos();
+    List<Incidente> listaincidentes = comunidades.stream().map(comunidad -> {
 //      EstadoIncidente estado = EstadoIncidente.valueOf(request.queryParams("estadoIncidentes"));;
 //      return comunidad.consultarIncidentesPorEstado(estado);
-//    }).toList();
-//    modelo.put("incidentes", listaincidentes);
+        return comunidad.incidentesReportados();
+    }).flatMap(Collection::stream).toList();
+    modelo.put("incidentes", listaincidentes);
     return new ModelAndView(modelo, "index.html.hbs");
   }
 

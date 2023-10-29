@@ -1,9 +1,11 @@
 package ar.edu.utn.frba.dds.domain.repositorios;
 
 import ar.edu.utn.frba.dds.domain.Comunidad.Comunidad;
+import ar.edu.utn.frba.dds.domain.establecimiento.Establecimiento;
 import ar.edu.utn.frba.dds.domain.servicio.Incidente;
 import ar.edu.utn.frba.dds.domain.servicio.Servicio;
 import ar.edu.utn.frba.dds.domain.usuario.Usuario;
+import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 import lombok.Getter;
 
 import java.util.ArrayList;
@@ -11,7 +13,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class RepositorioComunidad {
+public class RepositorioComunidad implements WithSimplePersistenceUnit {
   @Getter
   private List<Comunidad> comunidades;
   private static RepositorioComunidad repositorioComunidad;
@@ -41,6 +43,10 @@ public class RepositorioComunidad {
     return this.getComunidades().stream().filter(c -> {
       return c.usuarioEsParte(usuario);
     }).collect(Collectors.toList());
+  }
+
+  public List<Comunidad> obtenerTodos() {
+    return entityManager().createQuery("from Comunidad ", Comunidad.class).getResultList();
   }
 
 }
