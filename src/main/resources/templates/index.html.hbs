@@ -1,14 +1,36 @@
 {{#partial "principal" }}
-   <div>
-     <h1>Establecimientos</h1>
-        <div class='content-card'>
-            <ul>
-                {{#establecimientos}}
-                    <li><a href="/establecimiento/{{id}}">{{nombre}}</a></li>
-                {{/establecimientos}}
-            </ul>
-        </div>
-   </div>
+   <div class="contenedor">
+           <div class="filter">
+               <h3>Filtros:</h3>
+               <a href="#" class="filtro_desactivado">Cerrado</a>
+               <a href="#"class="filtro">Abierto</a>
+           </div>
+           <div class="cards">
+               <ul>
+                   <div class='card'>
+                       <li>
+                           <div class="titulo_comunidad">
+                               <h1>{{nombre_comunidad}}</h1>
+                           </div>
+                           <div class = "incidentes">
+                               <ul>
+                                   <li>
+                                       <div class = "incidente">
+                                           <h2>{{nombre_incidente}}</h2>
+                                           <form method="post" action="#">
+                                               <button type="submit" class="boton_enviar">
+                                                   Cerrar
+                                               </button>
+                                           </form>
+                                       </div>
+                                   </li>
+                               </ul>
+                           </div>
+                       </li>
+                   </div>
+               </ul>
+           </div>
+       <div>
 
 {{/partial}}
 
