@@ -138,6 +138,19 @@ public class RankingTests {
     assertEquals(2, servicioDeLa1.getIncidentes().size());
   }
 
+  @Test
+  public void listasRankings() {
+    List<Entidad> entidadesRanking = RepositorioDeEntidades.getInstancia().calcularRankingCantidad();
+    assertEquals("SuperHeroes", entidadesRanking.get(0).getNombreEntidad());
+    assertEquals("SuperVillanos", entidadesRanking.get(1).getNombreEntidad());
+  }
+
+  @Test
+  public void listasRankingsCierre() {
+    List<Entidad> entidadesRanking = RepositorioDeEntidades.getInstancia().calcularRankingCierre();
+    assertEquals("SuperHeroes", entidadesRanking.get(1).getNombreEntidad());
+    assertEquals("SuperVillanos", entidadesRanking.get(0).getNombreEntidad());
+  }
   @Test public void elTiempoDeCierreEstaBien() {
     assertEquals(5, servicioDeLa1.getIncidentes().get(0).tiempoCierre());
   }

@@ -2,6 +2,7 @@ package main;
 
 import controller.ComunidadesController;
 import controller.EstablecimientosController;
+import controller.RankingsController;
 import controller.SessionController;
 import io.github.flbulgarelli.jpa.extras.perthread.PerThreadEntityManagerAccess;
 import io.github.flbulgarelli.jpa.extras.perthread.PerThreadEntityManagerProperties;
@@ -28,6 +29,7 @@ public class Routes implements WithSimplePersistenceUnit {
     EstablecimientosController establecimientosController = new EstablecimientosController();
     SessionController sessionController = new SessionController();
     ComunidadesController comunidadesController = new ComunidadesController();
+    RankingsController rankingsController = new RankingsController();
 
     Spark.get("/establecimientos", establecimientosController::establecimientos, engine);
     Spark.get("/establecimientos/:id", establecimientosController::servicios, engine);
@@ -36,6 +38,7 @@ public class Routes implements WithSimplePersistenceUnit {
     Spark.get("/loginError", sessionController::mostrarLoginError, engine);
     Spark.post("/login", sessionController::iniciarSesion);
     Spark.get("/comunidades", comunidadesController::listar, engine); // son incidentes x comunidad
+    Spark.get("/rankings", rankingsController::rankings, engine);
 
     Spark.exception(PersistenceException.class, (e, request, response) -> {
       response.redirect("/500"); //TODO

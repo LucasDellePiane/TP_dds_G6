@@ -2,6 +2,7 @@ package ar.edu.utn.frba.dds.domain.repositorios;
 
 import ar.edu.utn.frba.dds.domain.Ranking.Criterio;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.io.File;
 import java.util.stream.Collectors;
@@ -42,6 +43,20 @@ public class RepositorioDeEntidades {
 
   public List<Establecimiento> obtenerEstablecimientos(){
    return this.entidades.stream().flatMap(entidad -> entidad.getEstablecimientos().stream()).toList();
+  }
+
+  public List<Entidad> calcularRankingCantidad() {
+    List<Entidad> entidadesDelRanking = this.entidades;
+    entidadesDelRanking.sort(Comparator.comparingInt(Entidad::cantidadIncidentesEnUnaSemana).reversed());
+    int numeroMinimo = Math.min(entidades.size(), 9);
+    return entidadesDelRanking.subList(0, numeroMinimo);
+  }
+
+  public List<Entidad> calcularRankingCierre() {
+    List<Entidad> entidadesDelRanking = this.entidades;
+    entidadesDelRanking.sort(Comparator.comparingDouble(Entidad::promedioDeCierreIncidente).reversed());
+    int numeroMinimo = Math.min(entidades.size(), 9);
+    return entidadesDelRanking.subList(0, numeroMinimo);
   }
 
   public void eliminarRankingsAntiguos() {

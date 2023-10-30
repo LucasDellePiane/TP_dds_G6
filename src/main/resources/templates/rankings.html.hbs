@@ -1,0 +1,31 @@
+ {{#partial "principal" }}
+<body>
+  <div class="container">
+    <div class="card_ranking_cantidad">
+      <div class="card_ranking_titulo">
+        <div class = "titulo_ranking">
+            <h2>Ranking por cantidad de incidentes</h2>
+        </div>
+      </div>
+            <ul>
+                {{#each rankingCantidad}}
+                  <li>{{this}}</li>
+                {{/each}}
+            </ul>
+        </div>
+        <div class="card_ranking_cierre">
+            <div class="card_ranking_titulo">
+                <div class="titulo_ranking">
+                  <h2>Ranking por promedio de tiempo de cierre</h2>
+                </div>
+            </div>
+            <ul>
+                {{#each rankingCierre}}
+                  <li>{{this}}</li>
+                {{/each}}
+            </ul>
+        </div>
+    </div>
+</body>
+ {{/partial}}
+ {{> layoutConBarra.html.hbs }}
