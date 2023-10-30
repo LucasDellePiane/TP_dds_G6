@@ -48,7 +48,7 @@ public class ValidacionComunidad {
     List<Usuario> miembros = new ArrayList<>(Arrays.asList(luki, lucho));
     List<Usuario> administradores = new ArrayList<>(Arrays.asList(luki));
     List<Servicio> servicios = new ArrayList<>(Arrays.asList(servicioDeLa1, servicioDeLa2));
-    rockandrolleros =new Comunidad(miembros, administradores, servicios);
+    rockandrolleros =new Comunidad(miembros, administradores, servicios, "RockAndRolleros");
     incidente1dela1 = new Incidente("Se tapo el baño", rockandrolleros);
     incidente2dela1 = new Incidente("No hay agua", rockandrolleros);
     incidente1dela2 = new Incidente("no anda la cadena", rockandrolleros);

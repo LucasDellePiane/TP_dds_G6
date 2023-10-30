@@ -23,7 +23,7 @@ public class Bootstrap implements WithSimplePersistenceUnit {
   public void run() {
     withTransaction(() -> {
 
-      Usuario usuarioPrueba = new Usuario("usuario1","estaEsUNCOntra");
+      Usuario usuarioPrueba = new Usuario("usuario1","elmascapodelmundo");
       persist(usuarioPrueba);
 
       Servicio servicio1 = new Servicio(TipoServicio.BAÑO);

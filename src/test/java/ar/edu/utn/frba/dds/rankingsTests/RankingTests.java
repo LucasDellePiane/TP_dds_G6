@@ -53,7 +53,7 @@ public class RankingTests {
     List<Usuario> miembros = new ArrayList<>(Arrays.asList(luki, lucho));
     List<Usuario> administradores = new ArrayList<>(Arrays.asList(luki));
     List<Servicio> servicios = new ArrayList<>(Arrays.asList(servicioDeLa1, servicioDeLa2));
-    rockandrolleros =new Comunidad(miembros, administradores, servicios);
+    rockandrolleros =new Comunidad(miembros, administradores, servicios,"RockAndRolleros");
 
 
     RepositorioComunidad.getInstancia().aniadirComunidad(rockandrolleros);

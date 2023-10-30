@@ -6,6 +6,7 @@ import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 import lombok.Getter;
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.commons.codec.digest.DigestUtils;
 
 public class RepositorioDeUsuarios implements WithSimplePersistenceUnit {
   @Getter
@@ -16,8 +17,17 @@ public class RepositorioDeUsuarios implements WithSimplePersistenceUnit {
   public void aniadirUsuario(Usuario usuario) {
     usuariosDeLaPlataforma.add(usuario);
   }
+
   public Usuario findById(Integer id) {
     return (Usuario) usuariosDeLaPlataforma.stream().filter(usuario -> usuario.getId_usuario().equals(id));
   }
 
+  public Usuario buscarPorUsuarioYContrasenia(String nombreUsuario, String contrasenia) {
+    return entityManager()
+        .createQuery("from Usuario where nombreUsuario = :nombreUsuario and hashContrasenia = :hashContrasenia", Usuario.class)
+        .setParameter("nombreUsuario", nombreUsuario)
+        .setParameter("hashContrasenia", DigestUtils.sha256Hex(contrasenia))
+        .getResultList()
+        .get(0);
+  }
 }

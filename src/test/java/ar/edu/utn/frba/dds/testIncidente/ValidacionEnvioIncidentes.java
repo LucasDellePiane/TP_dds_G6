@@ -30,7 +30,7 @@ public class ValidacionEnvioIncidentes {
   MedioComunicacion whatsApp = new WhatsApp();
   MedioComunicacion email = new MedioEmail();
   List<MedioComunicacion> mediosComunicacion = new ArrayList<>(Arrays.asList(whatsApp,email));
-  Comunidad comunidad = new Comunidad(miembros, administradores, servicios);
+  Comunidad comunidad = new Comunidad(miembros, administradores, servicios, "RockAndRolleros");
   List<Comunidad> comunidades = new ArrayList<>(Arrays.asList(comunidad));
   boolean repositorioComunidad = RepositorioComunidad.getInstancia().getComunidades().add(comunidad);
 

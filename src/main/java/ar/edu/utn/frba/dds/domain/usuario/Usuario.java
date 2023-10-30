@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.apache.commons.codec.digest.DigestUtils;
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
@@ -56,7 +57,6 @@ public class Usuario{
   @Column(name = "telefono", columnDefinition = "VARCHAR(10)")
   private String telefono;
 
-  @Embedded
   @ElementCollection
   private List<RangoHorario> horariosNotificacion = new ArrayList<>();
   @ManyToOne
@@ -65,10 +65,10 @@ public class Usuario{
   @Column(name = "ultimaHoraNotificacion", columnDefinition = "DATE")
   private LocalDateTime ultimaHoraNotificacion;
 
-  @Column(name = "nombreUsuario", columnDefinition = "VARCHAR(20)")
+  @Column(name = "nombreUsuario", columnDefinition = "VARCHAR(255)")
   private String nombreUsuario;
-  @Column(name = "contrasenia", columnDefinition = "VARCHAR(20)")
-  private String contrasenia;
+  @Column(name = "contrasenia", columnDefinition = "VARCHAR(255)")
+  private String hashContrasenia;
   @Column(name = "localizacion")
   @Embedded
   @AttributeOverrides({
@@ -103,7 +103,11 @@ public class Usuario{
   public Usuario(String nombreUsuario, String contrasenia) {
     validador.validarContrasenia(nombreUsuario,contrasenia);
     this.nombreUsuario = nombreUsuario;
-    this.contrasenia = contrasenia;
+    this.setContrasenia(contrasenia);
+  }
+
+  public void setContrasenia(String contrasenia) {
+    this.hashContrasenia = DigestUtils.sha256Hex(contrasenia);
   }
 
   // ============== Notificar incidentes

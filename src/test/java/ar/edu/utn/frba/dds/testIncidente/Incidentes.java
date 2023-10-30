@@ -47,9 +47,9 @@ public class Incidentes {
     servicioElevacion = new Servicio(TipoServicio.ELEVACION);
     serviciosInteres1 = new ArrayList<>(Arrays.asList(servicioBaño, servicioElevacion));
     serviciosInteres2 = new ArrayList<>(Arrays.asList(servicioElevacion));
-    comunidad1 = new Comunidad(miembros1, administradores1, serviciosInteres1);
-    comunidad2 = new Comunidad(miembros2, administradores2, serviciosInteres2);
-    comunidad3 = new Comunidad(miembros2, administradores2, serviciosInteres1);
+    comunidad1 = new Comunidad(miembros1, administradores1, serviciosInteres1, "RockAndRolleros");
+    comunidad2 = new Comunidad(miembros2, administradores2, serviciosInteres2, "RockAndRolleros");
+    comunidad3 = new Comunidad(miembros2, administradores2, serviciosInteres1, "RockAndRolleros");
     //ESTO NO TENDRIA QUE HACERCE AUTOMATICAMENTE AL CREAR UNA COMUNIDAD??
     RepositorioComunidad.getInstancia().aniadirComunidad(comunidad1);
     RepositorioComunidad.getInstancia().aniadirComunidad(comunidad2);

@@ -14,5 +14,8 @@ public class RepositorioEstablecimientos implements WithSimplePersistenceUnit {
   public List<Establecimiento> obtenerTodos() {
     return entityManager().createQuery("from Establecimiento", Establecimiento.class).getResultList();
   }
+  public Establecimiento buscar(long id) {
+    return entityManager().find(Establecimiento.class, id);
+  }
 
 }

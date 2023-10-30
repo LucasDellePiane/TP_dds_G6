@@ -50,9 +50,9 @@ public class RepositorioComunidad implements WithSimplePersistenceUnit {
   }
 
   public List<Comunidad> comunidadesALasQuePertenece(Usuario usuario) { // creo que esto es asi
-    String idUser = usuario.getId_usuario().toString();
-    return entityManager().createQuery("from Comunidad c Join Usuario u on :idUser", Comunidad.class)
-        .setParameter("idUser", "%" + idUser + "%")
+    String id_usuario = usuario.getId_usuario().toString();
+    return entityManager().createQuery("from Comunidad c Join Usuario u on :id_usuario", Comunidad.class)
+        .setParameter("id_usuario", "%" + id_usuario + "%")
         .getResultList();
   }
 
