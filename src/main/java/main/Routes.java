@@ -3,10 +3,13 @@ package main;
 import controller.ComunidadesController;
 import controller.EstablecimientosController;
 import controller.SessionController;
+import io.github.flbulgarelli.jpa.extras.perthread.PerThreadEntityManagerAccess;
+import io.github.flbulgarelli.jpa.extras.perthread.PerThreadEntityManagerProperties;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 import spark.Spark;
 import handlebars.HandlebarsTemplateEngine;
 import javax.persistence.PersistenceException;
+import java.util.Optional;
 
 public class Routes implements WithSimplePersistenceUnit {
 
@@ -32,7 +35,7 @@ public class Routes implements WithSimplePersistenceUnit {
     Spark.get("/login", sessionController::mostrarLogin, engine);
     Spark.get("/loginError", sessionController::mostrarLoginError, engine);
     Spark.post("/login", sessionController::iniciarSesion);
-    Spark.get("/comunidades", comunidadesController::listar, engine);
+    Spark.get("/comunidades", comunidadesController::listar, engine); // son incidentes x comunidad
 
     Spark.exception(PersistenceException.class, (e, request, response) -> {
       response.redirect("/500"); //TODO
@@ -44,7 +47,15 @@ public class Routes implements WithSimplePersistenceUnit {
         response.redirect("/login");
       }
       entityManager().clear();
+
     });
+
+    Spark.after((request, response) -> {
+      System.out.println(request.url());
+      System.out.println(Optional.ofNullable(request.session().attribute("user_id")));
+      entityManager().clear();
+    });
+
   }
 
 

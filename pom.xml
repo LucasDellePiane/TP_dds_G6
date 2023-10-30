@@ -144,7 +144,12 @@
       <artifactId>commons-codec</artifactId>
       <version>1.15</version>
     </dependency>
-
+<!--    &lt;!&ndash; JPA Persistence Dependencies &ndash;&gt;-->
+<!--    <dependency>-->
+<!--      <groupId>org.uqbar-project</groupId>-->
+<!--      <artifactId>jpa-java8-extras</artifactId>-->
+<!--      <version>1.0-alpha-1</version>-->
+<!--    </dependency>-->
 
   </dependencies>
   <build>

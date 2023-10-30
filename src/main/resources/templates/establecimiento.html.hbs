@@ -1,5 +1,33 @@
 {{#partial "principal" }}
     <h1>ESTABLECIMIENTOS</h1>
+    <div class="contenedor"> contenedor, titulo, cards
+               <div class="titulo">
+                   <h1>Servicios de {{ nombre }}</h1>
+               </div>
+               <div class="cards_servicio">
+                   <ul>
+                {{#servicios}}
+                       <div class='card_servicio'>
+                           <li>
+                               <div class="titulo_servicio">
+                                   <h1>Servicios</h1>
+                               </div>
+                               <div class = "servicios">
+                                   <ul>
+                                       <li>
+                                           <div class = "servicio">
+                                               <h2>Servicio {{id_servicio}}</h2>
+                                               <a href="/servicio/{{id_servicio}}/abrirIncidente">Abrir incidente</a>
+                                           </div>
+                                       </li>
+                                   </ul>
+                               </div>
+                           </li>
+                       </div>
+                    {{/servicios}}
+                   </ul>
+               </div>
+        </div>
 {{/partial}}
 
 {{> layoutConBarra.html.hbs }}

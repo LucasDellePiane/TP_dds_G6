@@ -22,6 +22,13 @@ public class RepositorioDeUsuarios implements WithSimplePersistenceUnit {
     return (Usuario) usuariosDeLaPlataforma.stream().filter(usuario -> usuario.getId_usuario().equals(id));
   }
 
+  public Usuario buscarPorId(Integer id) {
+    return entityManager().createQuery("from Usuario where id_usuario = :idUser", Usuario.class)
+        .setParameter("idUser", id)
+        .getResultList()
+        .get(0);
+  }
+
   public Usuario buscarPorUsuarioYContrasenia(String nombreUsuario, String contrasenia) {
     return entityManager()
         .createQuery("from Usuario where nombreUsuario = :nombreUsuario and hashContrasenia = :hashContrasenia", Usuario.class)

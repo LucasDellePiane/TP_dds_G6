@@ -24,6 +24,7 @@
     justify-content: center;
     align-items: center;
     margin-bottom: 1rem;
+    color: white;
 }
 
 .cards{
@@ -41,7 +42,7 @@
     background: var(--color-cards);
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: center;
 }
 
 .boton{
@@ -90,8 +91,8 @@
     margin-bottom: 1rem;
 }
 
-x
-.filtro_desactivado {
+
+.desactivado {
     margin-left: 1rem ;
     color:white;
     border-radius: 8px;
@@ -102,7 +103,7 @@ x
 .filtro{
     margin-left: 1rem;
     color:white;
-    border-radius: 8px;
-    border: 1px solid #af90d1;
+    border-radius: 10px;
+    border: 10px solid #af90d1;
     background: #af90d1;
 }

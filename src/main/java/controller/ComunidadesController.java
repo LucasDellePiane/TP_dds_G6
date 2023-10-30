@@ -16,21 +16,17 @@ import java.util.Map;
 public class ComunidadesController {
   public ModelAndView listar(Request request, Response response) {
     Map<String, Object> modelo = new HashMap<>();
-    request.queryParams("estadoIncidente");
+    request.queryParams("estadoIncidentes");
 
-    // Descomentar cuando el login este hecho
-    //Integer id = request.session().attribute("id_usuario");
-    //Usuario usuario = RepositorioDeUsuarios.getINSTANCE().findById(id);
-    //List<Comunidad> comunidades = RepositorioComunidad.getInstancia().comunidadesALasQuePertenece(usuario);
-
-    List<Comunidad> comunidades = RepositorioComunidad.getInstancia().obtenerTodos(); // para probar
+    Integer id = request.session().attribute("user_id");
+    Usuario usuario = RepositorioDeUsuarios.getINSTANCE().buscarPorId(id);
+    List<Comunidad> comunidades = RepositorioComunidad.getInstancia().comunidadesALasQuePertenece(usuario);
     List<List<Incidente>> listaincidentes = comunidades.stream().map(comunidad -> {
-
-      // Descomentar cuando el login este hecho
-      //EstadoIncidente estado = EstadoIncidente.valueOf(request.queryParams("estadoIncidentes"));;
-      //return comunidad.consultarIncidentesPorEstado(estado);
-
-      return comunidad.incidentesReportados(); // para probar
+      if(request.queryParams("estadoIncidentes") != null) {
+        EstadoIncidente estado = EstadoIncidente.valueOf(request.queryParams("estadoIncidentes"));
+        return comunidad.consultarIncidentesPorEstado(estado);
+      }
+      return comunidad.incidentesReportados();
     }).toList();
     modelo.put("incidentes", listaincidentes);
     return new ModelAndView(modelo, "comunidades.html.hbs");
