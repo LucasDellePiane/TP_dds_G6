@@ -5,11 +5,19 @@
 }
 
 .titulo_ranking{
-    margin-left: 1rem;
+    margin-left: 0.5rem;
     margin-top: 1rem;
     margin-bottom: 1rem;
     font-size: 20px;
     color: var(--color-cards);
+}
+
+.contenido_ranking{
+    margin-left: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-size: 25px;
+    color: var(--color-fondo);
 }
 
 .card_ranking_cantidad,
