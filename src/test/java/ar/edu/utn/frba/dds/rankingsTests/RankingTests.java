@@ -29,7 +29,6 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class RankingTests {
-  //private RepositorioDeEntidades repoEntidades;
   private Entidad entidad1, entidad2;
   private Establecimiento establecimientoDeLa1, establecimientoDeLa2;
   private Servicio servicioDeLa1, servicioDeLa2;
@@ -140,16 +139,16 @@ public class RankingTests {
 
   @Test
   public void listasRankings() {
-    List<Entidad> entidadesRanking = RepositorioDeEntidades.getInstancia().calcularRankingCantidad();
-    assertEquals("SuperHeroes", entidadesRanking.get(0).getNombreEntidad());
-    assertEquals("SuperVillanos", entidadesRanking.get(1).getNombreEntidad());
+    List<String> entidadesRanking = RepositorioDeEntidades.getInstancia().calcularRankingCantidad();
+    assertEquals("SuperHeroes", entidadesRanking.get(0));
+    assertEquals("SuperVillanos", entidadesRanking.get(1));
   }
 
   @Test
   public void listasRankingsCierre() {
-    List<Entidad> entidadesRanking = RepositorioDeEntidades.getInstancia().calcularRankingCierre();
-    assertEquals("SuperHeroes", entidadesRanking.get(1).getNombreEntidad());
-    assertEquals("SuperVillanos", entidadesRanking.get(0).getNombreEntidad());
+    List<String> entidadesRanking = RepositorioDeEntidades.getInstancia().calcularRankingCierre();
+    assertEquals("SuperHeroes", entidadesRanking.get(1));
+    assertEquals("SuperVillanos", entidadesRanking.get(0));
   }
   @Test public void elTiempoDeCierreEstaBien() {
     assertEquals(5, servicioDeLa1.getIncidentes().get(0).tiempoCierre());
