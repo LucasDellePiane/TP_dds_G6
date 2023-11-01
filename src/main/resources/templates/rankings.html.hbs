@@ -26,9 +26,14 @@
                   <h2>Ranking por promedio de tiempo de cierre</h2>
                 </div>
             </div>
-          <div class = "contenido_ranking">
-            <ul>
+          <div class = "card_ranking">
+            <ul class = "contenido_ranking">
                 {{#each rankingCierre}}
+                  <li>{{this}}</li>
+                {{/each}}
+            </ul>
+            <ul class="contenido_ranking">
+                {{#each promedios}}
                   <li>{{this}}</li>
                 {{/each}}
             </ul>
