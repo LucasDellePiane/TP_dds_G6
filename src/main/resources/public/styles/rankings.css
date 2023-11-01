@@ -4,22 +4,6 @@
     align-items: center;
 }
 
-.titulo_ranking{
-    margin-left: 0.5rem;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-    font-size: 20px;
-    color: var(--color-cards);
-}
-
-.contenido_ranking{
-    margin-left: 1rem;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-    font-size: 25px;
-    color: var(--color-fondo);
-}
-
 .card_ranking_cantidad,
 .card_ranking_cierre{
     margin: 0 10px;
@@ -32,6 +16,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
 }
 
 .card_ranking_titulo{
@@ -45,6 +30,32 @@
     justify-content: center;
     align-items: center;
 }
+
+.titulo_ranking{
+    margin-left: 0.5rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-size: 20px;
+    color: var(--color-cards);
+}
+
+.card_ranking{
+    height: 5rem;
+    min-width: 100%;
+    border-radius: 20px;
+    border-bottom: 1px solid var(--color-iconos);
+    background: var(--color-iconos);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.contenido_ranking{
+    margin: 1rem;
+    font-size: 25px;
+    color: var(--color-fondo);
+}
+
 
 ul {
     list-style-type: none;

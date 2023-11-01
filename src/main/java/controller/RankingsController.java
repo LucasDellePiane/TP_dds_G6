@@ -1,5 +1,6 @@
 package controller;
 
+import ar.edu.utn.frba.dds.domain.entidad.Entidad;
 import ar.edu.utn.frba.dds.domain.repositorios.RepositorioDeEntidades;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 import spark.ModelAndView;
@@ -13,8 +14,14 @@ import java.util.Map;
 public class RankingsController implements WithSimplePersistenceUnit {
   public ModelAndView rankings(Request request, Response response) {
     Map<String, Object> modelo = new HashMap<>();
-    modelo.put("rankingCantidad", new ArrayList<>(RepositorioDeEntidades.getInstancia().calcularRankingCantidad()));
-    modelo.put("rankingCierre", new ArrayList<>(RepositorioDeEntidades.getInstancia().calcularRankingCierre()));
+    modelo.put("rankingCantidad", new ArrayList<>(RepositorioDeEntidades.getInstancia().calcularRankingCantidad().stream()
+        .map(Entidad::getNombreEntidad).toList()));
+    modelo.put("rankingCierre", new ArrayList<>(RepositorioDeEntidades.getInstancia().calcularRankingCierre().stream()
+        .map(Entidad::getNombreEntidad).toList()));
+    modelo.put("cantidades", new ArrayList<>(RepositorioDeEntidades.getInstancia().calcularRankingCantidad()
+        .stream().map(Entidad::cantidadIncidentesEnUnaSemana).toList()));
+    modelo.put("promedios", new ArrayList<>(RepositorioDeEntidades.getInstancia().calcularRankingCantidad()
+        .stream().map(Entidad::promedioDeCierreIncidente).toList()));
     return new ModelAndView(modelo, "rankings.html.hbs");
   }
 }

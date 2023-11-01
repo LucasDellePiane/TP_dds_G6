@@ -7,12 +7,17 @@
             <h2>Ranking por cantidad de incidentes</h2>
         </div>
       </div>
-      <div class = "contenido_ranking">
-            <ul>
+      <div class = "card_ranking">
+        <ul class = "contenido_ranking">
                 {{#each rankingCantidad}}
                   <li>{{this}}</li>
                 {{/each}}
-            </ul>
+        </ul>
+        <ul class="contenido_ranking">
+                {{#each cantidades}}
+                  <li>{{this}}</li>
+                {{/each}}
+        </ul>
       </div>
     </div>
         <div class="card_ranking_cierre">

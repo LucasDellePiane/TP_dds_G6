@@ -139,14 +139,16 @@ public class RankingTests {
 
   @Test
   public void listasRankings() {
-    List<String> entidadesRanking = RepositorioDeEntidades.getInstancia().calcularRankingCantidad();
+    List<String> entidadesRanking = RepositorioDeEntidades.getInstancia().calcularRankingCantidad()
+        .stream().map(Entidad::getNombreEntidad).toList();
     assertEquals("SuperHeroes", entidadesRanking.get(0));
     assertEquals("SuperVillanos", entidadesRanking.get(1));
   }
 
   @Test
   public void listasRankingsCierre() {
-    List<String> entidadesRanking = RepositorioDeEntidades.getInstancia().calcularRankingCierre();
+    List<String> entidadesRanking = RepositorioDeEntidades.getInstancia().calcularRankingCierre()
+        .stream().map(Entidad::getNombreEntidad).toList();
     assertEquals("SuperHeroes", entidadesRanking.get(1));
     assertEquals("SuperVillanos", entidadesRanking.get(0));
   }

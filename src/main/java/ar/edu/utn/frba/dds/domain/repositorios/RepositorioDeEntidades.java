@@ -45,18 +45,18 @@ public class RepositorioDeEntidades {
    return this.entidades.stream().flatMap(entidad -> entidad.getEstablecimientos().stream()).toList();
   }
 
-  public List<String> calcularRankingCantidad() {
+  public List<Entidad> calcularRankingCantidad() {
     List<Entidad> entidadesDelRanking = this.entidades;
     entidadesDelRanking.sort(Comparator.comparingInt(Entidad::cantidadIncidentesEnUnaSemana).reversed());
     int numeroMinimo = Math.min(entidades.size(), 9);
-    return entidadesDelRanking.subList(0, numeroMinimo).stream().map(Entidad::getNombreEntidad).toList();
+    return entidadesDelRanking.subList(0, numeroMinimo);
   }
 
-  public List<String> calcularRankingCierre() {
+  public List<Entidad> calcularRankingCierre() {
     List<Entidad> entidadesDelRanking = this.entidades;
     entidadesDelRanking.sort(Comparator.comparingDouble(Entidad::promedioDeCierreIncidente).reversed());
     int numeroMinimo = Math.min(entidades.size(), 9);
-    return entidadesDelRanking.subList(0, numeroMinimo).stream().map(Entidad::getNombreEntidad).toList();
+    return entidadesDelRanking.subList(0, numeroMinimo);
   }
 
   public void eliminarRankingsAntiguos() {
