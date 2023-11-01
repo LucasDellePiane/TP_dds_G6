@@ -2,12 +2,15 @@ package ar.edu.utn.frba.dds.domain.establecimiento;
 
 import ar.edu.utn.frba.dds.domain.Comunidad.Comunidad;
 import ar.edu.utn.frba.dds.domain.localizacion.Localizacion;
+import ar.edu.utn.frba.dds.domain.localizacion.division.Division;
+import ar.edu.utn.frba.dds.domain.localizacion.division.TipoDivision;
 import ar.edu.utn.frba.dds.domain.repositorios.RepositorioComunidad;
 import ar.edu.utn.frba.dds.domain.servicio.EstadoIncidente;
 import ar.edu.utn.frba.dds.domain.servicio.Servicio;
 import ar.edu.utn.frba.dds.domain.usuario.Usuario;
 import java.util.ArrayList;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -31,6 +34,7 @@ import java.util.stream.Collectors;
 @Table(name = "Establecimientos")
 @Getter
 @Setter
+@NoArgsConstructor
 public class Establecimiento  {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -51,10 +55,17 @@ public class Establecimiento  {
       @AttributeOverride(name = "latitud", column = @Column(name = "establecimiento_latitud")),
       @AttributeOverride(name = "longitud", column = @Column(name = "establecimiento_longitud")),
   })
-  private Localizacion localizacion; //Es Localizacion
+  private Localizacion localizacion;
   @OneToMany
-  private List<Servicio> servicios = new ArrayList<>();
+  private List<Servicio> servicios;
 
+  public Establecimiento(String nombre, TipoEstablecimiento tipoEstablecimiento, Localizacion localizacion) {
+    this.nombre = nombre;
+    this.tipoEstablecimiento = tipoEstablecimiento;
+    this.servicios = new ArrayList<>();
+    this.localizacion = localizacion;
+
+  }
 
   // Metodos
 

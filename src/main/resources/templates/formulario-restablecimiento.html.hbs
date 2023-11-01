@@ -5,13 +5,13 @@
         <div class="BoxLogo">
             <img height="160px" max-width="235" style="margin-top: 40px" src="/imagenes/LogoFondoOscuro.jpg" alt="Logo">
         </div>
-        <form class="formulario" id="formulario" method="POST" action="/registro">
+        <form class="formulario" id="formulario" method="POST" action="/restablecerContrasenia">
 
             <div class="label">
 
                 <label class="labelForm" for="nombre">Usuario</label>
 
-                {{#if tieneErrores}}
+                {{#if tieneErroresRestablecimiento}}
                     <div class="ErrorContainer">
                         <input class="inputFormError"  id="nombreUsuario"  type="text" name="nombreUsuario" placeholder="Usuario">
                         <svg class="iconError" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -27,7 +27,7 @@
             <div class="label">
                 <label class="labelForm" for="contraseña"> Nueva contraseña </label>
 
-                {{#if tieneErrores}}
+                {{#if tieneErroresRestablecimiento}}
                     <div class="ErrorContainer">
                         <input  class="inputFormError" id="contrasenia"  type="password" name="contrasenia" placeholder="Contraseña">
                         <svg  class="iconError" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -44,7 +44,7 @@
             <div class="label">
                 <label class="labelForm" for="contraseña"> Repita su contraseña</label>
 
-                {{#if tieneErrores}}
+                {{#if tieneErroresRestablecimiento}}
                     <div class="ErrorContainer">
                         <input  class="inputFormError" id="OtraContrasenia"  type="password" name="OtraContrasenia" placeholder="Contraseña">
                         <svg  class="iconError" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -58,11 +58,6 @@
 
             </div>
 
-
-            {{#if errorYaExiste}}
-                <div class="textoError">  Ya existe un usuario con ese nombre </div>
-            {{/if}}
-
             {{#if errorContrasenia}}
                 <div class="textoError"> Las contraseñas no coinciden </div>
             {{/if}}
@@ -71,9 +66,13 @@
                 <div class="textoError">  La contraseña es invalida </div>
             {{/if}}
 
+            {{#if noExisteUsuario}}
+                <div class="textoError">  No existe un usuario con ese nombre </div>
+            {{/if}}
+
 
             <div class="boton">
-                <button class="ButtonForm" id= "botonEnviar" type="submit"> Registrarse </button>
+                <button class="ButtonForm" id= "botonEnviar" type="submit"> Cambiar contraseña </button>
             </div>
         </form>
 

@@ -5,6 +5,10 @@ import ar.edu.utn.frba.dds.domain.Ranking.RankingPorCantidad;
 import ar.edu.utn.frba.dds.domain.Ranking.RankingPorPromedioCierre;
 import ar.edu.utn.frba.dds.domain.entidad.Entidad;
 import ar.edu.utn.frba.dds.domain.establecimiento.Establecimiento;
+import ar.edu.utn.frba.dds.domain.establecimiento.TipoEstablecimiento;
+import ar.edu.utn.frba.dds.domain.localizacion.Localizacion;
+import ar.edu.utn.frba.dds.domain.localizacion.division.Division;
+import ar.edu.utn.frba.dds.domain.localizacion.division.TipoDivision;
 import ar.edu.utn.frba.dds.domain.repositorios.RepositorioDeEntidades;
 import ar.edu.utn.frba.dds.domain.repositorios.RepositorioComunidad;
 import ar.edu.utn.frba.dds.domain.servicio.Incidente;
@@ -34,7 +38,10 @@ public class RankingTests {
   private Servicio servicioDeLa1, servicioDeLa2;
   private Usuario luki, lucho;
   private Comunidad rockandrolleros;
+  private Localizacion localizacion;
+  private Localizacion localizacion2;
   RankingPorCantidad rankingCantidad;
+  private Division division;
   RankingPorPromedioCierre rankingPromedio;
   @BeforeEach
   public void setUp() {
@@ -43,8 +50,10 @@ public class RankingTests {
     entidad1.setearNombre("SuperHeroes");
     entidad2 = new Entidad();
     entidad2.setearNombre("SuperVillanos");
-    establecimientoDeLa1 = new Establecimiento();
-    establecimientoDeLa2 = new Establecimiento();
+    establecimientoDeLa1 = new Establecimiento("establecimientoDeLa1", TipoEstablecimiento.SUCURSAL,
+        localizacion);
+    establecimientoDeLa2 = new Establecimiento("establecimientoDeLa1", TipoEstablecimiento.SUCURSAL,
+        localizacion2);
     servicioDeLa1 = new Servicio(TipoServicio.BAÑO);
     servicioDeLa2 = new Servicio(TipoServicio.BAÑO);
     luki = new Usuario("usuario1", "elmascapodelmundo");
@@ -53,7 +62,13 @@ public class RankingTests {
     List<Usuario> administradores = new ArrayList<>(Arrays.asList(luki));
     List<Servicio> servicios = new ArrayList<>(Arrays.asList(servicioDeLa1, servicioDeLa2));
     rockandrolleros =new Comunidad(miembros, administradores, servicios,"RockAndRolleros");
-
+    division = new Division("Monte Grande", TipoDivision.MUNICIPIO);
+    localizacion = new Localizacion("Buenos Aires", division);
+    localizacion.setLatitud(100.00);
+    localizacion.setLongitud(100.00);
+    localizacion2 = new Localizacion("Buenos Aires", division);
+    localizacion2.setLatitud(90.00);
+    localizacion2.setLongitud(90.00);
 
     RepositorioComunidad.getInstancia().aniadirComunidad(rockandrolleros);
 

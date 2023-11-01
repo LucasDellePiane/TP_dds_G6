@@ -29,6 +29,13 @@ public class Localizacion {
     this.provincia = provincia;
   }
 
+  public Localizacion(String provincia, Division division, Double latitud, Double longitud) {
+    this.provincia = provincia;
+    this.division = division;
+    this.latitud = latitud;
+    this.longitud = longitud;
+  }
+
   public boolean estaCerca(Localizacion localizacion) {
     double distanciaLatitud = this.getLatitud()- localizacion.getLatitud();
     double distanciaLongitud = this.getLongitud() - localizacion.getLongitud();

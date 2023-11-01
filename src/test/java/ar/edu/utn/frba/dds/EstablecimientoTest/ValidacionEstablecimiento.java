@@ -1,19 +1,23 @@
 package ar.edu.utn.frba.dds.EstablecimientoTest;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import ar.edu.utn.frba.dds.domain.Comunidad.Comunidad;
 import ar.edu.utn.frba.dds.domain.establecimiento.Establecimiento;
+import ar.edu.utn.frba.dds.domain.establecimiento.TipoEstablecimiento;
 import ar.edu.utn.frba.dds.domain.localizacion.Localizacion;
 import ar.edu.utn.frba.dds.domain.localizacion.division.Division;
 import ar.edu.utn.frba.dds.domain.localizacion.division.TipoDivision;
 import ar.edu.utn.frba.dds.domain.medioComunicacion.MedioEmail;
+import ar.edu.utn.frba.dds.domain.repositorios.RepositorioEstablecimientos;
 import ar.edu.utn.frba.dds.domain.servicio.Incidente;
 import ar.edu.utn.frba.dds.domain.servicio.Servicio;
 import ar.edu.utn.frba.dds.domain.servicio.TipoServicio;
 import ar.edu.utn.frba.dds.domain.usuario.RangoHorario;
 import ar.edu.utn.frba.dds.domain.usuario.Usuario;
 import ar.edu.utn.frba.dds.exceptions.SeEnvioEmailException;
+import org.hibernate.type.TypeFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
@@ -40,8 +44,10 @@ public class ValidacionEstablecimiento {
 
   @BeforeEach
   public void setUp() {
-    establecimientoDeLa1 = new Establecimiento();
-    establecimientoDeLa2 = new Establecimiento();
+    establecimientoDeLa1 = new Establecimiento("establecimientoDeLa1", TipoEstablecimiento.SUCURSAL,
+        localizacion);
+    establecimientoDeLa2 = new Establecimiento("establecimientoDeLa1", TipoEstablecimiento.SUCURSAL,
+        localizacion2);
     servicioDeLa1 = new Servicio(TipoServicio.BAÑO);
     servicioDeLa2 = new Servicio(TipoServicio.BAÑO);
     luki = new Usuario("usuario1", "elmascapodelmundo");
@@ -65,6 +71,7 @@ public class ValidacionEstablecimiento {
     horario = new RangoHorario(00,24);
     horariosNotificacion = new ArrayList<>(Arrays.asList(horario));
     medioEmail = new MedioEmail();
+    RepositorioEstablecimientos.getInstancia().aniadirEstablecimiento(establecimientoDeLa1);
   }
 
   @Test
@@ -80,6 +87,12 @@ public class ValidacionEstablecimiento {
     luki.setEmail("luki@gmail.com");
     assertThrows(SeEnvioEmailException.class, ()->{rockandrolleros.reportarIncidente(incidente1dela1);}, "" +
         "Error al enviar el correo electrónico: luki@gmail.com");
+  }
+
+  @Test
+  public void obtenerTodosEstablecimientos(){
+    List<Establecimiento> establecimientos = RepositorioEstablecimientos.getInstancia().obtenerTodos();
+    assertEquals(1,establecimientos.size());
   }
 
 }

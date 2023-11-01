@@ -7,15 +7,15 @@ import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class EstablecimientosController implements WithSimplePersistenceUnit {
 
-
-
   public ModelAndView establecimientos(Request request, Response response) {
     Map<String, Object> modelo = new HashMap<>();
-    modelo.put("establecimientos", RepositorioEstablecimientos.getInstancia().obtenerTodos());
+    List<Establecimiento> establecimientos = RepositorioEstablecimientos.getInstancia().obtenerTodos();
+    modelo.put("establecimientos", establecimientos);
     return new ModelAndView(modelo, "establecimiento.html.hbs"); // cambiar esto del index
   }
 

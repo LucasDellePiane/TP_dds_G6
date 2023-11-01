@@ -3,8 +3,14 @@ package main;
 import ar.edu.utn.frba.dds.domain.Comunidad.Comunidad;
 import ar.edu.utn.frba.dds.domain.entidad.Entidad;
 import ar.edu.utn.frba.dds.domain.establecimiento.Establecimiento;
+import ar.edu.utn.frba.dds.domain.establecimiento.TipoEstablecimiento;
+import ar.edu.utn.frba.dds.domain.localizacion.Localizacion;
+import ar.edu.utn.frba.dds.domain.localizacion.Provincia;
+import ar.edu.utn.frba.dds.domain.localizacion.division.Division;
+import ar.edu.utn.frba.dds.domain.localizacion.division.TipoDivision;
 import ar.edu.utn.frba.dds.domain.repositorios.RepositorioComunidad;
 import ar.edu.utn.frba.dds.domain.repositorios.RepositorioDeEntidades;
+import ar.edu.utn.frba.dds.domain.repositorios.RepositorioEstablecimientos;
 import ar.edu.utn.frba.dds.domain.servicio.Incidente;
 import ar.edu.utn.frba.dds.domain.servicio.Servicio;
 import ar.edu.utn.frba.dds.domain.servicio.TipoServicio;
@@ -64,6 +70,8 @@ public class Bootstrap implements WithSimplePersistenceUnit {
       servicio1.aniadirIncidente(incidente2Servicio1);
 //      servicio2.aniadirIncidente(incidente1Servicio2);
 //      servicio3.aniadirIncidente(incidente1Servicio3);
+      Division division = new Division("CABA", TipoDivision.MUNICIPIO);
+      Localizacion localizacion = new Localizacion("Buenos Aires", division, 10.00, 11.00);
 
 
       //---------------PRUEBAS RANKINGS-----------------------//
@@ -71,10 +79,12 @@ public class Bootstrap implements WithSimplePersistenceUnit {
       entidad1.setearNombre("SuperHeroes");
       Entidad entidad2 = new Entidad();
       entidad2.setearNombre("SuperVillanos");
-      Establecimiento establecimientoDeLa1 = new Establecimiento();
-      Establecimiento establecimientoDeLa2 = new Establecimiento();
       Servicio servicioDeLa1 = new Servicio(TipoServicio.BAÑO);
       Servicio servicioDeLa2 = new Servicio(TipoServicio.BAÑO);
+      Establecimiento establecimientoDeLa1 = new Establecimiento("establecimientoDeLa1",
+          TipoEstablecimiento.SUCURSAL, localizacion);
+      Establecimiento establecimientoDeLa2 = new Establecimiento("establecimientoDeLa2",
+          TipoEstablecimiento.SUCURSAL, localizacion);
       Usuario luki = new Usuario("usuario1", "elmascapodelmundo");
       Usuario lucho = new Usuario("usuario2", "elmascapodelmundo");
       List<Usuario> miembros = new ArrayList<>(Arrays.asList(luki, lucho));
@@ -82,6 +92,8 @@ public class Bootstrap implements WithSimplePersistenceUnit {
       List<Servicio> servicios = new ArrayList<>(Arrays.asList(servicioDeLa1, servicioDeLa2));
       Comunidad rockandrolleros =new Comunidad(miembros, administradores, servicios,"RockAndRolleros");
 
+      RepositorioEstablecimientos.getInstancia().aniadirEstablecimiento(establecimientoDeLa1);
+      RepositorioEstablecimientos.getInstancia().aniadirEstablecimiento(establecimientoDeLa2);
 
       RepositorioComunidad.getInstancia().aniadirComunidad(rockandrolleros);
 
