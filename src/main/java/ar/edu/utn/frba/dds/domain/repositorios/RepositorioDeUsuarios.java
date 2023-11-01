@@ -37,4 +37,12 @@ public class RepositorioDeUsuarios implements WithSimplePersistenceUnit {
         .getResultList()
         .get(0);
   }
+
+  public Usuario buscarPorUsuario(String nombreUsuario) {
+    return entityManager()
+        .createQuery("from Usuario where nombreUsuario = :nombreUsuario", Usuario.class)
+        .setParameter("nombreUsuario", nombreUsuario)
+        .getResultList()
+        .get(0);
+  }
 }

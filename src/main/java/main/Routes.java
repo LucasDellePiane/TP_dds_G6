@@ -35,8 +35,9 @@ public class Routes implements WithSimplePersistenceUnit {
     Spark.get("/establecimientos/:id", establecimientosController::servicios, engine);
     Spark.get("/servicios/:id/abrirIncidente", establecimientosController::abrirIncidente, engine);
     Spark.get("/login", sessionController::mostrarLogin, engine);
-    Spark.get("/loginError", sessionController::mostrarLoginError, engine);
     Spark.post("/login", sessionController::iniciarSesion);
+    Spark.get("/registro", sessionController::mostrarRegistro, engine);
+    Spark.post("/registro", sessionController::registrar);
     Spark.get("/comunidades", comunidadesController::listar, engine); // son incidentes x comunidad
     Spark.get("/rankings", rankingsController::rankings, engine);
 
@@ -45,7 +46,8 @@ public class Routes implements WithSimplePersistenceUnit {
     });
 
     Spark.before((request, response) -> {
-      if ( !(request.pathInfo().startsWith("/login") || request.pathInfo().startsWith("/styles"))
+      if ( !(request.pathInfo().startsWith("/login") || request.pathInfo().startsWith("/styles")
+      ||request.pathInfo().startsWith("/registro"))
           && (request.session().attribute("user_id") == null) ) {
         response.redirect("/login");
       }

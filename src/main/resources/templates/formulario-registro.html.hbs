@@ -1,0 +1,86 @@
+{{#partial "principal" }}
+
+    <div class="formularioDiv">
+
+        <div class="BoxLogo">
+            <img height="160px" max-width="235" style="margin-top: 40px" src="/imagenes/LogoFondoOscuro.jpg" alt="Logo">
+        </div>
+        <form class="formulario" id="formulario" method="POST" action="/registro">
+
+            <div class="label">
+
+                <label class="labelForm" for="nombre">Usuario</label>
+
+                {{#if tieneErrores}}
+                    <div class="ErrorContainer">
+                        <input class="inputFormError"  id="nombreUsuario"  type="text" name="nombreUsuario" placeholder="Usuario">
+                        <svg class="iconError" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M1.67982 16H14.3202C15.6128 16 16.4185 14.4289 15.7722 13.1777L9.45205 0.93841C8.80576 -0.312803 7.19424 -0.312803 6.54795 0.93841L0.227771 13.1777C-0.418516 14.4289 0.387244 16 1.67982 16ZM8 9.41467C7.53837 9.41467 7.16067 8.99133 7.16067 8.47391V6.59239C7.16067 6.07497 7.53837 5.65162 8 5.65162C8.46163 5.65162 8.83933 6.07497 8.83933 6.59239V8.47391C8.83933 8.99133 8.46163 9.41467 8 9.41467ZM8.83933 13.1777H7.16067V11.2962H8.83933V13.1777Z" fill="#B72525"/>
+                        </svg>
+                    </div>
+                {{else}}
+                    <input class="inputForm"  id="nombreUsuario"  type="text" name="nombreUsuario" placeholder="Usuario">
+                {{/if}}
+
+            </div>
+
+            <div class="label">
+                <label class="labelForm" for="contraseña"> Nueva contraseña </label>
+
+                {{#if tieneErrores}}
+                    <div class="ErrorContainer">
+                        <input  class="inputFormError" id="contrasenia"  type="password" name="contrasenia" placeholder="Contraseña">
+                        <svg  class="iconError" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M1.67982 16H14.3202C15.6128 16 16.4185 14.4289 15.7722 13.1777L9.45205 0.93841C8.80576 -0.312803 7.19424 -0.312803 6.54795 0.93841L0.227771 13.1777C-0.418516 14.4289 0.387244 16 1.67982 16ZM8 9.41467C7.53837 9.41467 7.16067 8.99133 7.16067 8.47391V6.59239C7.16067 6.07497 7.53837 5.65162 8 5.65162C8.46163 5.65162 8.83933 6.07497 8.83933 6.59239V8.47391C8.83933 8.99133 8.46163 9.41467 8 9.41467ZM8.83933 13.1777H7.16067V11.2962H8.83933V13.1777Z" fill="#B72525"/>
+                        </svg>
+                    </div>
+
+                {{else}}
+                    <input  class="inputForm" id="contrasenia"  type="password" name="contrasenia" placeholder="Contraseña">
+                {{/if}}
+
+            </div>
+
+            <div class="label">
+                <label class="labelForm" for="contraseña"> Repita su contraseña</label>
+
+                {{#if tieneErrores}}
+                    <div class="ErrorContainer">
+                        <input  class="inputFormError" id="OtraContrasenia"  type="password" name="OtraContrasenia" placeholder="Contraseña">
+                        <svg  class="iconError" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M1.67982 16H14.3202C15.6128 16 16.4185 14.4289 15.7722 13.1777L9.45205 0.93841C8.80576 -0.312803 7.19424 -0.312803 6.54795 0.93841L0.227771 13.1777C-0.418516 14.4289 0.387244 16 1.67982 16ZM8 9.41467C7.53837 9.41467 7.16067 8.99133 7.16067 8.47391V6.59239C7.16067 6.07497 7.53837 5.65162 8 5.65162C8.46163 5.65162 8.83933 6.07497 8.83933 6.59239V8.47391C8.83933 8.99133 8.46163 9.41467 8 9.41467ZM8.83933 13.1777H7.16067V11.2962H8.83933V13.1777Z" fill="#B72525"/>
+                        </svg>
+                    </div>
+
+                {{else}}
+                    <input  class="inputForm" id="OtraContrasenia"  type="password" name="OtraContrasenia" placeholder="Contraseña">
+                {{/if}}
+
+            </div>
+
+
+            {{#if errorYaExiste}}
+                <div class="textoError">  Ya existe un usuario con ese nombre </div>
+            {{/if}}
+
+            {{#if errorContrasenia}}
+                <div class="textoError"> Las contraseñas no coinciden </div>
+            {{/if}}
+
+            {{#if errorInvalida}}
+                <div class="textoError">  La contraseña es invalida </div>
+            {{/if}}
+
+
+            <div class="boton">
+                <button class="ButtonForm" id= "botonEnviar" type="submit"> Ingresar </button>
+            </div>
+        </form>
+
+        <a class="linkRegistrar" class="TextForm" href="/login">¿Ya tenes una cuenta? <br> Inicia sesion </a>
+
+    </div>
+
+{{/partial}}
+
+{{> layout.html.hbs }}

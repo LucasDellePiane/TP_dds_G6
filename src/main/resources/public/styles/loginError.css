@@ -20,7 +20,7 @@
     border-color: red;
 }
 
-.errorLogin {
+.textoError {
     color: red;
     margin-bottom: 30px;
     font-weight: bold;
