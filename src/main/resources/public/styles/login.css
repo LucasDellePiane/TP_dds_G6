@@ -17,15 +17,17 @@
 }
 
 .BoxLogo{
-    margin-top: 50px
+    margin-top: 50px;
 }
 
 .boton{
     text-align: center;
     justify-content: center;
+    margin-top: 25px;
 }
 
 #botonEnviar{
+    margin-top: 10px;
     color: white;
     font-size: 13px;
     background-color: #F394B6;
@@ -33,7 +35,6 @@
     border-color: #F394B6;
     padding: 10px;
     width: 130px;
-    margin-top: 25px;
 }
 
 #botonEnviar:hover{
@@ -88,7 +89,7 @@
     text-align: center;
     font-weight: bold;
     text-decoration: none;
-    padding-top:5;
+    padding-top:5px;
 }
 
 .content-card {
