@@ -16,6 +16,7 @@ public class EstablecimientosController implements WithSimplePersistenceUnit {
     Map<String, Object> modelo = new HashMap<>();
     List<Establecimiento> establecimientos = RepositorioEstablecimientos.getInstancia().obtenerTodos();
     modelo.put("establecimientos", establecimientos);
+    modelo.put("path","establecimientos");
     return new ModelAndView(modelo, "establecimiento.html.hbs"); // cambiar esto del index
   }
 
@@ -28,6 +29,6 @@ public class EstablecimientosController implements WithSimplePersistenceUnit {
 
   public ModelAndView abrirIncidente(Request request, Response response){
     Map<String, Object> modelo = new HashMap<>();
-    return new ModelAndView(modelo, "abrir_incidente.html.hbs");
+    return new ModelAndView(modelo, "apertura_incidente.hbs");
   }
 }

@@ -14,6 +14,7 @@ import java.util.Map;
 public class RankingsController implements WithSimplePersistenceUnit {
   public ModelAndView rankings(Request request, Response response) {
     Map<String, Object> modelo = new HashMap<>();
+    request.session().attribute("path","rankings");;
     modelo.put("rankingCantidad", new ArrayList<>(RepositorioDeEntidades.getInstancia().calcularRankingCantidad().stream()
         .map(Entidad::getNombreEntidad).toList()));
     modelo.put("rankingCierre", new ArrayList<>(RepositorioDeEntidades.getInstancia().calcularRankingCierre().stream()
@@ -22,6 +23,7 @@ public class RankingsController implements WithSimplePersistenceUnit {
         .stream().map(Entidad::cantidadIncidentesEnUnaSemana).toList()));
     modelo.put("promedios", new ArrayList<>(RepositorioDeEntidades.getInstancia().calcularRankingCantidad()
         .stream().map(Entidad::promedioDeCierreIncidente).toList()));
+    modelo.put("path","rankings");
     return new ModelAndView(modelo, "rankings.html.hbs");
   }
 }

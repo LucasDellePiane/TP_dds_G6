@@ -15,6 +15,7 @@ import java.util.Map;
 
 public class ComunidadesController {
   public ModelAndView listar(Request request, Response response) {
+    request.session().attribute("path","comunidades");;
     Map<String, Object> modelo = new HashMap<>();
     request.queryParams("estadoIncidentes");
 
@@ -29,6 +30,7 @@ public class ComunidadesController {
       return comunidad.incidentesReportados();
     }).toList();
     modelo.put("incidentes", listaincidentes);
+    modelo.put("path","comunidades");
     return new ModelAndView(modelo, "comunidades.html.hbs");
   }
 }

@@ -19,6 +19,7 @@ package handlebars;
 import com.github.jknack.handlebars.Handlebars;
 import com.github.jknack.handlebars.Template;
 import com.github.jknack.handlebars.cache.GuavaTemplateCache;
+import com.github.jknack.handlebars.helper.ConditionalHelpers;
 import com.github.jknack.handlebars.io.ClassPathTemplateLoader;
 import com.github.jknack.handlebars.io.TemplateLoader;
 import com.github.jknack.handlebars.io.TemplateSource;
@@ -63,6 +64,7 @@ public class HandlebarsTemplateEngine extends TemplateEngine {
         .maximumSize(1000).build();
 
     handlebars = handlebars.with(new GuavaTemplateCache(cache));
+    handlebars.registerHelper("eq", ConditionalHelpers.eq);
   }
 
   @Override
