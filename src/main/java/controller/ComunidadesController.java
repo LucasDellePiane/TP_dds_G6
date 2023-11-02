@@ -15,7 +15,6 @@ import java.util.Map;
 
 public class ComunidadesController {
   public ModelAndView listar(Request request, Response response) {
-    request.session().attribute("path","comunidades");;
     Map<String, Object> modelo = new HashMap<>();
     request.queryParams("estadoIncidentes");
 
@@ -33,4 +32,24 @@ public class ComunidadesController {
     modelo.put("path","comunidades");
     return new ModelAndView(modelo, "comunidades.html.hbs");
   }
+
+//  public ModelAndView listarSugerenciaRevisionDeIncidentes(Request request, Response response) {
+//    Map<String, Object> modelo = new HashMap<>();
+//    request.queryParams("estadoIncidentes");
+//
+//    Integer id = request.session().attribute("user_id");
+//    Usuario usuario = RepositorioDeUsuarios.getINSTANCE().buscarPorId(id);
+//    List<Comunidad> comunidades = RepositorioComunidad.getInstancia().comunidadesALasQuePertenece(usuario);
+//    List<List<Incidente>> listaincidentes = comunidades.stream().map(comunidad -> {
+//      if(request.queryParams("estadoIncidentes") != null) {
+//        EstadoIncidente estado = EstadoIncidente.valueOf(request.queryParams("estadoIncidentes"));
+//        return comunidad.
+//      }
+//      return comunidad.incidentesReportados();
+//    }).toList();
+//    modelo.put("incidentes", listaincidentes);
+//    modelo.put("path","sugerencias");
+//    return new ModelAndView(modelo, "sugerencia_revision_incidentes.html.hbs");
+//  }
+
 }

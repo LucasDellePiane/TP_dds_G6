@@ -3,6 +3,7 @@ package ar.edu.utn.frba.dds.domain.repositorios;
 import ar.edu.utn.frba.dds.domain.Comunidad.Comunidad;
 import ar.edu.utn.frba.dds.domain.entidad.Entidad;
 import ar.edu.utn.frba.dds.domain.establecimiento.Establecimiento;
+import ar.edu.utn.frba.dds.domain.usuario.Usuario;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 import lombok.Getter;
 import java.util.ArrayList;
@@ -28,8 +29,11 @@ public class RepositorioEstablecimientos implements WithSimplePersistenceUnit {
   }
 
 
-  public Establecimiento buscar(long id) {
-    return entityManager().find(Establecimiento.class, id);
+  public Establecimiento buscar(Integer id) {
+    return entityManager().createQuery("from Establecimiento where id_establecimiento = :idEst", Establecimiento.class)
+        .setParameter("idEst", id)
+        .getResultList()
+        .get(0);
   }
 
 }

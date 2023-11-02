@@ -85,8 +85,7 @@ public class Establecimiento  {
     this.servicios.remove(servicioObsoleto);
   }
 
-  // con un repo incidentes esto es mas facil xd
-  public void estaCerca(Usuario usuario) {
+  public List<Servicio>  estaCerca(Usuario usuario) {
 
     if(this.localizacion.estaCerca(usuario.getLocalizacion())){
 
@@ -101,8 +100,9 @@ public class Establecimiento  {
       if(!serviciosConIncidentes.isEmpty()){
         usuario.notificarServiciosCercanos(serviciosConIncidentes);
       }
+      return serviciosConIncidentes;
     }
-
+  return null;
   }
 
 }
