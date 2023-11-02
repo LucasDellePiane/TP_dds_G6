@@ -33,6 +33,7 @@
     border-color: #F394B6;
     padding: 10px;
     width: 130px;
+    margin-top: 25px;
 }
 
 #botonEnviar:hover{
@@ -81,13 +82,13 @@
 }
 
 .linkRegistrar{
-    margin-top: 30px;
     color: #9B74C6;
     font-size: 16px;
     justify-content: center;
     text-align: center;
     font-weight: bold;
     text-decoration: none;
+    padding-top:5;
 }
 
 .content-card {

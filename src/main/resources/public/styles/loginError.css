@@ -20,9 +20,9 @@
     border-color: red;
 }
 
-.textoError {
+.mensajeError{
     color: red;
-    margin-bottom: 30px;
+    margin-bottom: 3px;
     font-weight: bold;
 }
 
