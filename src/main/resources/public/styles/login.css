@@ -17,15 +17,17 @@
 }
 
 .BoxLogo{
-    margin-top: 50px
+    margin-top: 50px;
 }
 
 .boton{
     text-align: center;
     justify-content: center;
+    margin-top: 25px;
 }
 
 #botonEnviar{
+    margin-top: 10px;
     color: white;
     font-size: 13px;
     background-color: #F394B6;
@@ -81,13 +83,13 @@
 }
 
 .linkRegistrar{
-    margin-top: 30px;
     color: #9B74C6;
     font-size: 16px;
     justify-content: center;
     text-align: center;
     font-weight: bold;
     text-decoration: none;
+    padding-top:5px;
 }
 
 .content-card {

@@ -18,6 +18,8 @@ public class SessionController {
 
   public ModelAndView mostrarLogin(Request request, Response response) {
     Map<String, Object> modelo = new HashMap<>();
+    modeloErrorRegistro.remove("mantenerError");
+    modeloErrorRestablecimiento.remove("mantenerError");
     if(!modeloErrorLogin.containsKey("mantenerError")) {
       modeloErrorLogin.put("error", false);
     }
@@ -51,9 +53,14 @@ public class SessionController {
   public ModelAndView mostrarRegistro(Request request, Response response) {
     Map<String, Object> modelo = new HashMap<>();
     modeloErrorLogin.remove("mantenerError");
+    modeloErrorRestablecimiento.remove("mantenerError");
     boolean tieneErrores = modeloErrorRegistro.containsKey("errorYaExiste") ||
                            modeloErrorRegistro.containsKey("errorContrasenia") ||
                            modeloErrorRegistro.containsKey("errorInvalida");
+
+    if(!modeloErrorRegistro.containsKey("mantenerError")) {
+      tieneErrores = false;
+    }
 
     modeloErrorRegistro.put("tieneErrores", tieneErrores);
 
@@ -87,6 +94,7 @@ public class SessionController {
       }
       catch (Exception e) {
         modeloErrorRegistro.replace("errorInvalida", false, true);
+        modeloErrorRegistro.put("mantenerError", true);
         response.redirect("/registro");
         return null;
       }
@@ -96,9 +104,14 @@ public class SessionController {
   public ModelAndView mostrarRestablecimiento(Request request, Response response) {
     Map<String, Object> modelo = new HashMap<>();
     modeloErrorLogin.remove("mantenerError");
+    modeloErrorRegistro.remove("mantenerError");
     boolean tieneErroresRestablecimiento = modeloErrorRestablecimiento.containsKey("noExisteUsuario") ||
         modeloErrorRestablecimiento.containsKey("errorContrasenia") ||
         modeloErrorRestablecimiento.containsKey("errorInvalida");
+
+    if(!modeloErrorRestablecimiento.containsKey("mantenerError")) {
+      tieneErroresRestablecimiento = false;
+    }
 
     modeloErrorRestablecimiento.put("tieneErrores", tieneErroresRestablecimiento);
 
@@ -109,13 +122,12 @@ public class SessionController {
   }
 
   public Void restablecimiento(Request request, Response response) {
+    Usuario usuario = RepositorioDeUsuarios.getINSTANCE().buscarPorUsuario(
+        request.queryParams("nombreUsuario"));
 
     modeloErrorRestablecimiento.put("noExisteUsuario", false);
     modeloErrorRestablecimiento.put("errorContrasenia", false);
     modeloErrorRestablecimiento.put("errorInvalida", false);
-
-    Usuario usuario = RepositorioDeUsuarios.getINSTANCE().buscarPorUsuario(
-        request.queryParams("nombreUsuario"));
 
     if(usuario == null){
       modeloErrorRestablecimiento.replace("noExisteUsuario", false, true);
@@ -125,13 +137,13 @@ public class SessionController {
       modeloErrorRestablecimiento.replace("errorContrasenia", false, true);
 
     try{
-      Usuario usuarioNuevo = new Usuario(request.queryParams("nombreUsuario"), request.queryParams("contrasenia"));
-      RepositorioDeUsuarios.getINSTANCE().aniadirUsuario(usuarioNuevo);
+      usuario.setContrasenia(request.queryParams("contrasenia"));
       response.redirect("/login");
       return null;
     }
     catch (Exception e) {
       modeloErrorRestablecimiento.replace("errorInvalida", false, true);
+      modeloErrorRestablecimiento.put("mantenerError", true);
       response.redirect("/restablecerContrasenia");
       return null;
     }
