@@ -10,7 +10,9 @@ import ar.edu.utn.frba.dds.domain.localizacion.division.Division;
 import ar.edu.utn.frba.dds.domain.localizacion.division.TipoDivision;
 import ar.edu.utn.frba.dds.domain.repositorios.RepositorioComunidad;
 import ar.edu.utn.frba.dds.domain.repositorios.RepositorioDeEntidades;
+import ar.edu.utn.frba.dds.domain.repositorios.RepositorioDeUsuarios;
 import ar.edu.utn.frba.dds.domain.repositorios.RepositorioEstablecimientos;
+import ar.edu.utn.frba.dds.domain.servicio.EstadoIncidente;
 import ar.edu.utn.frba.dds.domain.servicio.Incidente;
 import ar.edu.utn.frba.dds.domain.servicio.Servicio;
 import ar.edu.utn.frba.dds.domain.servicio.TipoServicio;
@@ -36,49 +38,60 @@ public class Bootstrap implements WithSimplePersistenceUnit {
   public void run() {
     withTransaction(() -> {
 
+      Division division = new Division("CABA", TipoDivision.MUNICIPIO);
+      Localizacion localizacion = new Localizacion("Buenos Aires", division, 10.00, 11.00);
+
       Usuario usuarioAdmin = new Usuario("usuario1","elmascapodelmundo");
-      persist(usuarioAdmin);
       Usuario usuarioPrueba2 = new Usuario("usuario2","elmascapodelmundo");
-      persist(usuarioPrueba2);
       Usuario usuarioPrueba3 = new Usuario("usuario3","elmascapodelmundo");
-      persist(usuarioPrueba3);
+
+      Entidad entidad = new Entidad();
+      entidad.setearNombre("EntidadGenerica");
+      RepositorioDeEntidades.getInstancia().aniadirEntidad(entidad);
 
       Servicio servicio1 = new Servicio(TipoServicio.BAÑO);
-      persist(servicio1);
       Servicio servicio2 = new Servicio(TipoServicio.ELEVACION);
-      persist(servicio2);
       Servicio servicio3 = new Servicio(TipoServicio.BAÑO);
-      persist(servicio3);
 
       List<Usuario> usuariosMiembros = new ArrayList<>();
       usuariosMiembros.add(usuarioPrueba2);
       usuariosMiembros.add(usuarioPrueba3);
+      usuariosMiembros.add(usuarioAdmin);
       List<Usuario> usuariosAdmin = new ArrayList<>();
       usuariosAdmin.add(usuarioAdmin);
       List<Servicio> servciosDeInteres = new ArrayList<>();
       servciosDeInteres.add(servicio1);
       servciosDeInteres.add(servicio2);
       servciosDeInteres.add(servicio3);
-
       Comunidad com1 = new Comunidad(usuariosMiembros, usuariosAdmin, servciosDeInteres,"comunidad prueba 1");
+      RepositorioComunidad.getInstancia().aniadirComunidad(com1);
+
+
+      Establecimiento establecimiento = new Establecimiento("parada de tren",TipoEstablecimiento.ESTACION, localizacion);
+      RepositorioEstablecimientos.getInstancia().aniadirEstablecimiento(establecimiento);
+      establecimiento.darAltaServicio(servicio1);
+      establecimiento.darAltaServicio(servicio2);
+      establecimiento.darAltaServicio(servicio3);
+
+      servicio1.informarNoFuncionamiento("no hay agua");
+      servicio2.informarNoFuncionamiento("rotas las escaleras");
+      servicio3.informarNoFuncionamiento("mse tapo el banio");
+
+      servicio1.getIncidentes().get(0).setEstado(EstadoIncidente.RESUELTO);
+      servicio1.getIncidentes().get(0).setHorarioCierre(LocalDateTime.now().plusHours(5));
+
+      persist(usuarioAdmin);
+      persist(usuarioPrueba2);
+      persist(usuarioPrueba3);
       persist(com1);
-//      Comunidad com2 = new Comunidad(usuariosMiembros, usuariosAdmin, servciosDeInteres);
-//      persist(com2);
-
-      Incidente incidente1Servicio1 = new Incidente("Incidente1 Servicio 1", com1);
-      persist(incidente1Servicio1);
-      Incidente incidente2Servicio1 = new Incidente("Incidente2 Servicio 1", com1);
-      persist(incidente2Servicio1);
-//      Incidente incidente1Servicio2 = new Incidente("usuario1", com2);
-//      Incidente incidente1Servicio3 = new Incidente("usuario1", com2);
-//
-      servicio1.aniadirIncidente(incidente1Servicio1);
-      servicio1.aniadirIncidente(incidente2Servicio1);
-//      servicio2.aniadirIncidente(incidente1Servicio2);
-//      servicio3.aniadirIncidente(incidente1Servicio3);
-      Division division = new Division("CABA", TipoDivision.MUNICIPIO);
-      Localizacion localizacion = new Localizacion("Buenos Aires", division, 10.00, 11.00);
-
+      persist(servicio1.getIncidentes().get(0));
+      persist(servicio2.getIncidentes().get(0));
+      persist(servicio3.getIncidentes().get(0));
+      persist(servicio1);
+      persist(servicio2);
+      persist(servicio3);
+      persist(establecimiento);
+      persist(entidad);
 
       //---------------PRUEBAS RANKINGS-----------------------//
       Entidad entidad1 = new Entidad();
@@ -96,8 +109,8 @@ public class Bootstrap implements WithSimplePersistenceUnit {
           TipoEstablecimiento.SUCURSAL, localizacion);
       Establecimiento establecimientoDeLa2 = new Establecimiento("establecimientoDeLa2",
           TipoEstablecimiento.SUCURSAL, localizacion);
-      Usuario luki = new Usuario("usuario1", "elmascapodelmundo");
-      Usuario lucho = new Usuario("usuario2", "elmascapodelmundo");
+      Usuario luki = new Usuario("usuarioX", "elmascapodelmundo");
+      Usuario lucho = new Usuario("usuarioY", "elmascapodelmundo");
       List<Usuario> miembros = new ArrayList<>(Arrays.asList(luki, lucho));
       List<Usuario> administradores = new ArrayList<>(Arrays.asList(luki));
       List<Servicio> servicios = new ArrayList<>(Arrays
@@ -125,9 +138,9 @@ public class Bootstrap implements WithSimplePersistenceUnit {
       banioDeEstacion.informarNoFuncionamiento("Se tapo");
       servicioDeLa2.informarNoFuncionamiento("No anda la cadena");
 
-      servicioDeLa1.getIncidentes().get(0).cerrarIncidente();
-      servicioDeLa1.getIncidentes().get(1).cerrarIncidente();
-      servicioDeLa2.getIncidentes().get(0).cerrarIncidente();
+      servicioDeLa1.getIncidentes().get(0).setEstado(EstadoIncidente.RESUELTO);
+      servicioDeLa1.getIncidentes().get(1).setEstado(EstadoIncidente.RESUELTO);
+      servicioDeLa2.getIncidentes().get(0).setEstado(EstadoIncidente.RESUELTO);
 
       servicioDeLa1.getIncidentes().get(0).setHorarioCierre(LocalDateTime.now().plusHours(5));
       servicioDeLa1.getIncidentes().get(1).setHorarioCierre(LocalDateTime.now().plusHours(5));

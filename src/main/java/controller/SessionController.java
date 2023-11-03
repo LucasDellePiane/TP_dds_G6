@@ -86,7 +86,7 @@ public class SessionController {
         modeloErrorRegistro.replace("errorYaExiste", false, true);
       }
 
-      if(request.queryParams("contrasenia").equals(request.queryParams("otraContrasenia")))
+      if(!request.queryParams("contrasenia").equals(request.queryParams("otraContrasenia")))
         modeloErrorRegistro.replace("errorContrasenia", false, true);
 
       try{
@@ -136,11 +136,12 @@ public class SessionController {
       modeloErrorRestablecimiento.replace("noExisteUsuario", false, true);
     }
 
-    if(request.queryParams("contrasenia") != request.queryParams("otraContrasenia"))
+    if(!request.queryParams("contrasenia").equals(request.queryParams("otraContrasenia")))
       modeloErrorRestablecimiento.replace("errorContrasenia", false, true);
 
     try{
-      usuario.setContrasenia(request.queryParams("contrasenia"));
+      String nuevaContrasenia = request.queryParams("contrasenia");
+      RepositorioDeUsuarios.getINSTANCE().modificarUsuario(usuario, nuevaContrasenia);
       response.redirect("/login");
       return null;
     }
@@ -160,6 +161,7 @@ public class SessionController {
     List<Comunidad> comunidades = RepositorioComunidad.getInstancia().obtenerTodos();
     List<Comunidad> comunidadesAdmin = comunidades.stream().filter(comunidad-> comunidad.getAdministradores().contains(usuario)).toList();
     modelo.put("comunidadesAdmin", comunidadesAdmin);
+    modelo.put("path","administracion");
     return new ModelAndView(modelo, "perfil.html.hbs");
   }
 

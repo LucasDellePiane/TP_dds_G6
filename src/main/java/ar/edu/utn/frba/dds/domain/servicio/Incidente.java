@@ -29,6 +29,7 @@ public class Incidente{
   private String observaciones;
   @Getter
   @Enumerated
+  @Setter
   private EstadoIncidente estado;
   @Getter
   @ManyToOne

@@ -58,7 +58,7 @@ public class Servicio {
    {
     Incidente incidente = new Incidente(observaciones, comunidad);
     this.incidentes.add(incidente);
-    comunidad.reportarIncidente(incidente);
+    //comunidad.reportarIncidente(incidente);
     });
   }
 

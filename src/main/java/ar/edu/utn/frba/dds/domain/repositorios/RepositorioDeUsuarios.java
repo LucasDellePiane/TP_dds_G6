@@ -30,6 +30,20 @@ public class RepositorioDeUsuarios implements WithSimplePersistenceUnit {
     }
   }
 
+  public Void modificarUsuario(Usuario usuario, String contrasenia) {
+    EntityTransaction transaction = entityManager().getTransaction();
+    try {
+      transaction.begin();
+      usuario.setContrasenia(contrasenia);
+      entityManager().flush();
+    }catch (Exception e) {
+      if (transaction != null && transaction.isActive()) {
+        transaction.rollback();
+      }
+    }
+    return null;
+  }
+
   public Usuario findById(Integer id) {
     return (Usuario) usuariosDeLaPlataforma.stream().filter(usuario -> usuario.getId_usuario().equals(id));
   }

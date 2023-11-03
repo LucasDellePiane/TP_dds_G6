@@ -2,11 +2,11 @@
 
 <div class="contenedor">
     <div class="titulo_apertura">
-        <h1>Apertura de incidente del servicio {{servicio.[nombre]}}</h1>
+        <h1>Apertura de incidente del servicio servicio{{id_servicio}}</h1>
     </div>
     <div>
        <div class="form_apertura_incidente">
-            <form class="new_incidente_form" id="campo_observacion" method="POST" action="/establecimientos">
+           <form class="new_incidente_form" id="campo_observacion" method="POST" action={{path}}>
                 <h2 class="subtitulo_apertura">Apertura incidente</h2>
                 <div class="comentario">
                     <label class="labelForm" for="comentario">Observaciones</label>

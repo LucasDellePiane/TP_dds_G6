@@ -3,9 +3,11 @@ package ar.edu.utn.frba.dds.domain.repositorios;
 import ar.edu.utn.frba.dds.domain.Comunidad.Comunidad;
 import ar.edu.utn.frba.dds.domain.entidad.Entidad;
 import ar.edu.utn.frba.dds.domain.establecimiento.Establecimiento;
+import ar.edu.utn.frba.dds.domain.servicio.Servicio;
 import ar.edu.utn.frba.dds.domain.usuario.Usuario;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 import lombok.Getter;
+import javax.persistence.EntityTransaction;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,4 +38,24 @@ public class RepositorioEstablecimientos implements WithSimplePersistenceUnit {
         .get(0);
   }
 
+  public void reportarIncidente(Integer id_est, Integer id_serv, String observaciones) {
+    EntityTransaction transaction = entityManager().getTransaction();
+    try {
+      transaction.begin();
+      Servicio servicio = establecimientos.stream().flatMap(establecimiento -> establecimiento.getServicios().stream()).
+          filter(unServicio-> unServicio.getId_servicio().equals(id_serv)).toList().get(0);
+      servicio.informarNoFuncionamiento(observaciones);
+      Integer cantElementos= servicio.getIncidentes().size();
+      entityManager().persist(servicio.getIncidentes().get(cantElementos-1));
+      entityManager().flush();
+      transaction.commit();
+    }catch (Exception e) {
+      if (transaction != null && transaction.isActive()) {
+        transaction.rollback();
+      }
+    }
+  }
+
 }
+
+

@@ -35,6 +35,10 @@ public class RepositorioComunidad implements WithSimplePersistenceUnit {
   //return this.comunidades.stream().filter(comunidad -> comunidad.getServiciosDeInteres().contains(servicio)).toList();
   //}
 
+//  public Comunidad getComunidades() {
+//
+//  }
+
   public void aniadirComunidad(Comunidad comunidad) {
     comunidades.add(comunidad);
   }

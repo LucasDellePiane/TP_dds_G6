@@ -8,6 +8,10 @@
             <a href="/comunidades" class="filtro">Todos</a>
         </div>
 
+    {{#if ErrorIncidente}}
+        <div class="mensajeError"> No se puede cerrar el incidente  </div>
+    {{/if}}
+
         <div class="cards">
             <ul>
                 {{#each incidentes}}
