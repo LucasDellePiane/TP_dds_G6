@@ -21,7 +21,6 @@ public class ComunidadesController {
     Integer id = request.session().attribute("user_id");
     Usuario usuario = RepositorioDeUsuarios.getINSTANCE().buscarPorId(id);
     List<Comunidad> comunidades = RepositorioComunidad.getInstancia().comunidadesALasQuePertenece(usuario);
-    System.out.println(comunidades);
     List<List<Incidente>> listaincidentes = comunidades.stream().map(comunidad -> {
       if(request.queryParams("estadoIncidentes") != null) {
         EstadoIncidente estado = EstadoIncidente.valueOf(request.queryParams("estadoIncidentes"));

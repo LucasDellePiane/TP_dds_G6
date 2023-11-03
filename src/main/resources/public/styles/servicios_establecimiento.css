@@ -43,6 +43,15 @@
 
 }
 
+.comunidad_select{
+    margin-bottom: 10px;
+    margin-top: 10px;
+    outline: 0;
+    border: 1px solid crimson;
+    padding: 4px;
+    border-radius: 9px;
+}
+
 .servicios::-webkit-scrollbar {
     width: 12px;
 }

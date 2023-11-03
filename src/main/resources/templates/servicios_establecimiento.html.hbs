@@ -1,11 +1,10 @@
  {{#partial "principal" }}
     <div class="contenedor">
            <div class="titulo">
-               <h1>Sugerencia revision incidentes</h1>
+               <h1>Servicios de {{ establecimiento.[nombre] }}</h1>
            </div>
            <div class="cards_servicio">
                <ul>
-            {{#incidentes}}
                    <div class='card_servicio'>
                        <li>
                            <div class="titulo_servicio">
@@ -13,17 +12,24 @@
                            </div>
                            <div class = "servicios">
                                <ul>
+                       {{#each establecimiento.[servicios]}}
                                    <li>
                                        <div class = "servicio">
                                            <h2>Servicio {{id_servicio}}</h2>
-                                           <a href="/servicio/{{id_servicio}}/abrirIncidente">Abrir incidente</a>
+                                           <div class="botonServicio">
+                                               <a class="boton_enviar"
+                                                  href="/establecimientos/{{establecimiento.[id_establecimiento]}}/servicios/{{id_servicio}}/incidentes/abrir">
+                                                   Abrir incidente
+                                               </a>
+                                           </div>
                                        </div>
                                    </li>
+                       {{/each}}
                                </ul>
                            </div>
                        </li>
                    </div>
-                {{/incidentes}}
+
                </ul>
            </div>
     </div>

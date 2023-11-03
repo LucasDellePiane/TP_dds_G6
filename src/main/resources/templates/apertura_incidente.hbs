@@ -2,7 +2,7 @@
 
 <div class="contenedor">
     <div class="titulo_apertura">
-        <h1>Apertura de incidente del servicio {{servicio}}</h1>
+        <h1>Apertura de incidente del servicio {{servicio.[nombre]}}</h1>
     </div>
     <div>
        <div class="form_apertura_incidente">
@@ -10,15 +10,24 @@
                 <h2 class="subtitulo_apertura">Apertura incidente</h2>
                 <div class="comentario">
                     <label class="labelForm" for="comentario">Observaciones</label>
-                    <textarea class="observaciones"  id="comentario" rows="8" cols="60" ></textarea>
+                    <textarea name="observaciones" class="observaciones"  id="comentario" rows="8" cols="60" ></textarea>
                 </div>
+<!--                <div class="comunidad_select">-->
+<!--                    <label for="lang">Compartir con la/las comunidad/es</label>-->
+<!--                    <select name="id_com" id="lang">-->
+<!--                        <option value="Todas">Todas</option>-->
+<!--                        {{#comunidades}}-->
+<!--                        <option value={{id_comunidad}}>{{nombre}}</option>-->
+<!--                        {{/comunidades}}-->
+<!--                    </select>-->
+<!--                </div>-->
                 <div class="boton">
                     <button class="ButtonForm" id= "botonEnviar" type="submit"> Abrir </button>
                 </div>
             </form>
        </div>
     </div>
-<div>
+</div>
 
 
 {{/partial}}

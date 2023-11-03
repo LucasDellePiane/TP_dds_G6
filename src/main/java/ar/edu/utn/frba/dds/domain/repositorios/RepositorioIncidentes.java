@@ -9,7 +9,7 @@ public class RepositorioIncidentes implements WithSimplePersistenceUnit {
   @Getter
   private static final RepositorioIncidentes INSTANCE = new RepositorioIncidentes();
 
-  public Incidente buscarPorId(String id) {
+  public Incidente buscarPorId(Integer id) {
     return entityManager().createQuery("from Incidente where id_incidente = :idInc", Incidente.class)
         .setParameter("idInc", id)
         .getResultList()

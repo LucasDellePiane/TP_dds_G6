@@ -1,6 +1,8 @@
 package controller;
 
+import ar.edu.utn.frba.dds.domain.Comunidad.Comunidad;
 import ar.edu.utn.frba.dds.domain.establecimiento.Establecimiento;
+import ar.edu.utn.frba.dds.domain.repositorios.RepositorioComunidad;
 import ar.edu.utn.frba.dds.domain.repositorios.RepositorioDeUsuarios;
 import ar.edu.utn.frba.dds.domain.repositorios.RepositorioEstablecimientos;
 import ar.edu.utn.frba.dds.domain.servicio.Servicio;
@@ -13,6 +15,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class EstablecimientosController implements WithSimplePersistenceUnit {
 
@@ -21,35 +24,64 @@ public class EstablecimientosController implements WithSimplePersistenceUnit {
     List<Establecimiento> establecimientos = RepositorioEstablecimientos.getInstancia().obtenerTodos();
     modelo.put("establecimientos", establecimientos);
     modelo.put("path","establecimientos");
-    return new ModelAndView(modelo, "establecimiento.html.hbs"); // cambiar esto del index
+    return new ModelAndView(modelo, "establecimientos.html.hbs"); // cambiar esto del index
   }
 
   public ModelAndView serviciosCercanos(Request request, Response response) {
     Map<String, Object> modelo = new HashMap<>();
-    List<Establecimiento> establecimientos = RepositorioEstablecimientos.getInstancia().obtenerTodos();
-    List<Servicio> serviciosSugeridos = establecimientos.stream().map(establecimiento -> {
-      Integer id = request.session().attribute("user_id");
-      Usuario usuario = RepositorioDeUsuarios.getINSTANCE().buscarPorId(id);
-      List<Servicio> servicios = establecimiento.estaCerca(usuario);
-      return servicios;
-    }).flatMap(Collection::stream).toList();
-    System.out.println(serviciosSugeridos);
-    modelo.put("servicios", serviciosSugeridos);
-    modelo.put("path","establecimientos");
-    return new ModelAndView(modelo, "establecimiento.html.hbs"); // cambiar esto del index
+//    List<Establecimiento> establecimientos = RepositorioEstablecimientos.getInstancia().obtenerTodos();
+//    List<Servicio> serviciosSugeridos = establecimientos.stream().map(establecimiento -> {
+//      Integer id = request.session().attribute("user_id");
+//      Usuario usuario = RepositorioDeUsuarios.getINSTANCE().buscarPorId(id);
+//      List<Servicio> servicios = establecimiento.estaCerca(usuario);
+//      return servicios;
+//    }).flatMap(Collection::stream).toList();
+//    System.out.println(serviciosSugeridos);
+//    modelo.put("servicios", serviciosSugeridos);
+//    modelo.put("path","sugerencias");
+    return new ModelAndView(modelo, "sugerencia_revision_incidentes.html.hbs"); // cambiar esto del index
   }
 
   public ModelAndView servicios(Request request, Response response) {
     Map<String, Object> modelo = new HashMap<>();
-//    Establecimiento establecimiento = RepositorioEstablecimientos.getInstancia().buscar(request.params("id"));
-//    modelo.put("establecimiento", establecimiento);
-    System.out.println(request.params("id"));
+    request.params("id");
+    Establecimiento establecimiento = RepositorioEstablecimientos.getInstancia().buscar(Integer.parseInt(request.params("id")));
+    modelo.put("establecimiento", establecimiento);
+    System.out.println(establecimiento);
     modelo.put("path","establecimientos");
     return new ModelAndView(modelo, "servicios_establecimiento.html.hbs"); // cambiar esto del index
   }
 
-  public ModelAndView abrirIncidente(Request request, Response response){
+  public ModelAndView formularioAperturaIncidente(Request request, Response response){
     Map<String, Object> modelo = new HashMap<>();
+    request.params("id_est");
+    request.params("id_serv");
+    Establecimiento establecimiento = RepositorioEstablecimientos.getInstancia().buscar(Integer.parseInt(request.params("id_est")));
+    Servicio s = establecimiento.getServicios().stream().filter(servicio -> servicio.getId_servicio().equals(Integer.parseInt(request.params("id_serv"))))
+        .toList()
+        .get(0);
+    modelo.put("servicio","s");
+
+//    Integer id = request.session().attribute("user_id");
+//    Usuario usuario = RepositorioDeUsuarios.getINSTANCE().buscarPorId(id);
+//    List<Comunidad> comunidades = RepositorioComunidad.getInstancia().comunidadesALasQuePertenece(usuario);
+//    modelo.put("comunidades",comunidades);
     return new ModelAndView(modelo, "apertura_incidente.hbs");
+  }
+
+  public ModelAndView aperturaIncidente(Request request, Response response){
+    Map<String, Object> modelo = new HashMap<>();
+//    request.params("id_com");
+    request.params("observaciones");
+    request.params("id_est");
+    request.params("id_serv");
+    Establecimiento establecimiento = RepositorioEstablecimientos.getInstancia().buscar(Integer.parseInt(request.params("id_est")));
+    Servicio s = establecimiento.getServicios().stream().filter(servicio -> servicio.getId_servicio().equals(Integer.parseInt(request.params("id_serv"))))
+        .toList()
+        .get(0);
+    modelo.put("servicio","s");
+    s.informarNoFuncionamiento(request.params("observaciones"));
+    response.redirect("/establecimientos");
+    return null;
   }
 }

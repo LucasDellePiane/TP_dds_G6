@@ -16,9 +16,9 @@ public class IncidentesController {
 
   public ModelAndView cerrar(Request request, Response response) {
     Map<String, Object> modelo = new HashMap<>();
-    request.queryParams("incidenteId");
+    request.params("id_inc");
 
-    Incidente incidente = RepositorioIncidentes.getINSTANCE().buscarPorId(request.queryParams("incidenteId"));
+    Incidente incidente = RepositorioIncidentes.getINSTANCE().buscarPorId(Integer.parseInt(request.params("id_inc")));
     incidente.cerrarIncidente();
     response.redirect("/establecimientos");
     return null;
