@@ -1,4 +1,3 @@
-
 .formularioDiv{
     display: flex;
     flex-direction: column;
@@ -13,7 +12,7 @@
     flex-direction: column;
     background-color: white;
     border-radius: 20px;
-    padding: 25px 35px 35px 30px;
+    padding: 25px;
 }
 
 .BoxLogo{
@@ -23,7 +22,7 @@
 .boton{
     text-align: center;
     justify-content: center;
-    margin-top: 25px;
+    margin-top: 5px;
 }
 
 #botonEnviar{
@@ -34,7 +33,7 @@
     border-radius: 10px;
     border-color: #F394B6;
     padding: 10px;
-    width: 130px;
+    width: 140px;
 }
 
 #botonEnviar:hover{
@@ -57,8 +56,15 @@
 
 .TextForm{
     font-size: 13px;
-    margin-bottom: 25px;
     text-decoration: none;
+    display:flex;
+    justify-content: center;
+}
+
+.TextForm:hover{
+    font-size: 13px;
+    text-decoration: none;
+    color: #9B74C6;
 }
 
 .inputForm{
@@ -89,7 +95,7 @@
     text-align: center;
     font-weight: bold;
     text-decoration: none;
-    padding-top:5px;
+    padding-top:15px;
 }
 
 .content-card {

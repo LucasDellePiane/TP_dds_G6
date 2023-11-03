@@ -40,9 +40,7 @@ public class RepositorioComunidad implements WithSimplePersistenceUnit {
   }
 
   public List<Comunidad> comunidadesALasQuePertenece(Usuario usuario){
-    return this.obtenerTodos().stream().filter(c -> {
-      return c.usuarioEsParte(usuario);
-    }).collect(Collectors.toList());
+    return this.obtenerTodos().stream().filter(c -> c.usuarioEsParte(usuario)).collect(Collectors.toList());
   }
 
   public List<Comunidad> obtenerTodos() {

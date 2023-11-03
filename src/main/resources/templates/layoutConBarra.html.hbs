@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="/styles/rankings.css">
     <link rel="stylesheet" type="text/css" href="/styles/establecimiento.css">
     <link rel="stylesheet" type="text/css" href="/styles/apertura_incidente.css">
+    <link rel="stylesheet" type="text/css" href="/styles/perfil.css">
 
     {{!-- Fonts --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -99,13 +100,23 @@
                             </svg>
                         </a>
                     </li>
+                {{#if (eq path 'perfil')}}
                     <li class="nav__items">
-                        <a class="nav__link" href="#">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 40 41" fill="none">
-                                <path d="M17 14.0693C14.2164 14.0693 12 11.8755 12 9.24298C12 6.61051 14.2164 4.41666 17 4.41666C19.7836 4.41666 22 6.61051 22 9.24298C22 11.8755 19.7836 14.0693 17 14.0693ZM28 26.7219V27.0167H27.6667H6V26.7219C6 22.3052 9.71115 18.6588 14.3333 18.6588H19.6667C24.2876 18.6588 28 22.3053 28 26.7219Z" stroke="#9B74C6" stroke-width="2"/>
+                        <a class="nav__link" href="/perfil">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="41" viewBox="0 0 40 41" fill="none">
+                                <path d="M11 9.243C11 12.4552 13.692 15.0693 17 15.0693C20.308 15.0693 23 12.4552 23 9.243C23 6.03076 20.308 3.41669 17 3.41669C13.692 3.41669 11 6.03076 11 9.243ZM27.6667 28.0167H29V26.722C29 21.7256 24.812 17.6588 19.6667 17.6588H14.3333C9.18667 17.6588 5 21.7256 5 26.722V28.0167H27.6667Z" fill="#9B74C6"/>
                             </svg>
                         </a>
                     </li>
+                {{else}}
+                        <li class="nav__items">
+                            <a class="nav__link" href="/perfil">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="41" viewBox="0 0 40 41" fill="none">
+                                    <path d="M17 14.0693C14.2164 14.0693 12 11.8755 12 9.243C12 6.61053 14.2164 4.41669 17 4.41669C19.7836 4.41669 22 6.61053 22 9.243C22 11.8755 19.7836 14.0693 17 14.0693ZM28 26.722V27.0167H27.6667H6V26.722C6 22.3052 9.71115 18.6588 14.3333 18.6588H19.6667C24.2876 18.6588 28 22.3053 28 26.722Z" stroke="#9B74C6" stroke-width="2"/>
+                                </svg>
+                            </a>
+                        </li>
+                {{/if}}
                 </ul>
             </nav>
         </header>

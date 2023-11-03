@@ -20,6 +20,7 @@ import ar.edu.utn.frba.dds.domain.usuario.Usuario;
 import ar.edu.utn.frba.dds.exceptions.SeEnvioEmailException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestTemplate;
 import javax.mail.MessagingException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -93,5 +94,13 @@ public class ValidacionComunidad {
   public void agregarComunidad(){
     RepositorioComunidad.getInstancia().aniadirComunidad(rockandrolleros);
     assertEquals(RepositorioComunidad.getInstancia().getComunidades().size(),1 );
+  }
+
+  @Test
+  public void esAdmin(){
+    RepositorioComunidad.getInstancia().aniadirComunidad(rockandrolleros);
+    List<Comunidad> comunidades = RepositorioComunidad.getInstancia().comunidadesALasQuePertenece(luki);
+   // List<Comunidad> comunidadesAdmin = comunidades.stream().filter(comunidad-> comunidad.getAdministradores().contains(luki)).toList();
+    assertEquals(comunidades.size(),1 );
   }
 }
