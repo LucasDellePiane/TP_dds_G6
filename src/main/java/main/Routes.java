@@ -40,6 +40,7 @@ public class Routes implements WithSimplePersistenceUnit {
     Spark.post("/registro", sessionController::registrar);
     Spark.get("/comunidades", comunidadesController::listar, engine); // son incidentes x comunidad
     Spark.get("/rankings", rankingsController::rankings, engine);
+    Spark.get("/incidentes/:id/cerrar", rankingsController::rankings, engine);
     Spark.get("/restablecerContrasenia", sessionController::mostrarRestablecimiento, engine);
     Spark.post("/restablecerContrasenia", sessionController::restablecimiento);
     Spark.get("/sugerencias", establecimientosController::serviciosCercanos, engine);

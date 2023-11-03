@@ -22,6 +22,7 @@ public class Incidente{
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id_incidente")
+  @Getter
   private Integer id_incidente;
   @Getter
   @Column(name = "observaciones", columnDefinition = "VARCHAR(250)")

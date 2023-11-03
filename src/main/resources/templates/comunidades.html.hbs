@@ -3,8 +3,9 @@
 
         <div class="filter">
             <h3>Filtros:</h3>
-            <a href="/comunidades?estadoIncidentes=RESULTO" class="filtro">Cerrado</a>
+            <a href="/comunidades?estadoIncidentes=RESUELTO" class="filtro">Cerrado</a>
             <a href="/comunidades?estadoIncidentes=ACTIVO" class="filtro">Abierto</a>
+            <a href="/comunidades" class="filtro">Todos</a>
         </div>
 
         <div class="cards">
@@ -21,7 +22,7 @@
                                         <li>
                                             <div class = "incidente">
                                                 <h2>{{observaciones}}</h2>
-                                                <form method="post" action="#">
+                                                <form method="POST" action="/incidentes/{{id_incidente}}/cerrar">
                                                     <button type="submit" class="boton_enviar">
                                                         Cerrar
                                                     </button>

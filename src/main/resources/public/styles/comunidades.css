@@ -53,11 +53,13 @@
 .boton_enviar{
     color: white;
     font-size: 13px;
+    display: flex;
     background-color: var(--color-boton-activado);
     border-radius: 10px;
     /*border-color: ;*/
     padding: 10px;
     width: 130px;
+    justify-content: space-around;
 }
 
 .boton_enviar:hover{

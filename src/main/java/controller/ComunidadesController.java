@@ -30,6 +30,7 @@ public class ComunidadesController {
     }).toList();
     modelo.put("incidentes", listaincidentes);
     modelo.put("path","comunidades");
+    System.out.println(listaincidentes.get(0).get(0).getId_incidente());
     return new ModelAndView(modelo, "comunidades.html.hbs");
   }
 
