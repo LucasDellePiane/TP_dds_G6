@@ -87,6 +87,11 @@ public class Bootstrap implements WithSimplePersistenceUnit {
       entidad2.setearNombre("SuperVillanos");
       Servicio servicioDeLa1 = new Servicio(TipoServicio.BAÑO);
       Servicio servicioDeLa2 = new Servicio(TipoServicio.BAÑO);
+      Servicio banioDeEstacion = new Servicio(TipoServicio.BAÑO);
+      Servicio elevadorDeEstacion = new Servicio(TipoServicio.ELEVACION);
+
+      Establecimiento paradaDeSubte = new Establecimiento("Parada de Subte X",
+          TipoEstablecimiento.ESTACION, localizacion);
       Establecimiento establecimientoDeLa1 = new Establecimiento("establecimientoDeLa1",
           TipoEstablecimiento.SUCURSAL, localizacion);
       Establecimiento establecimientoDeLa2 = new Establecimiento("establecimientoDeLa2",
@@ -95,8 +100,9 @@ public class Bootstrap implements WithSimplePersistenceUnit {
       Usuario lucho = new Usuario("usuario2", "elmascapodelmundo");
       List<Usuario> miembros = new ArrayList<>(Arrays.asList(luki, lucho));
       List<Usuario> administradores = new ArrayList<>(Arrays.asList(luki));
-      List<Servicio> servicios = new ArrayList<>(Arrays.asList(servicioDeLa1, servicioDeLa2));
-      Comunidad rockandrolleros =new Comunidad(miembros, administradores, servicios,"RockAndRolleros");
+      List<Servicio> servicios = new ArrayList<>(Arrays
+          .asList(servicioDeLa1, servicioDeLa2, banioDeEstacion, elevadorDeEstacion));
+      Comunidad rockandrolleros = new Comunidad(miembros, administradores, servicios,"RockAndRolleros");
 
       RepositorioEstablecimientos.getInstancia().aniadirEstablecimiento(establecimientoDeLa1);
       RepositorioEstablecimientos.getInstancia().aniadirEstablecimiento(establecimientoDeLa2);
@@ -107,22 +113,17 @@ public class Bootstrap implements WithSimplePersistenceUnit {
       RepositorioDeEntidades.getInstancia().aniadirEntidad(entidad2);
 
       entidad1.aniadirEstablecimiento(establecimientoDeLa1);
+      entidad1.aniadirEstablecimiento(paradaDeSubte);
       entidad2.aniadirEstablecimiento(establecimientoDeLa2);
       establecimientoDeLa1.darAltaServicio(servicioDeLa1);
+      paradaDeSubte.darAltaServicio(banioDeEstacion);
+      paradaDeSubte.darAltaServicio(elevadorDeEstacion);
       establecimientoDeLa2.darAltaServicio(servicioDeLa2);
 
-      /*servicioDeLa1.informarNoFuncionamiento("Se tapo el baño");
+      servicioDeLa1.informarNoFuncionamiento("Se tapo el baño");
       servicioDeLa1.informarNoFuncionamiento("No hay agua");
-      servicioDeLa2.informarNoFuncionamiento("No anda la cadena");*/
-
-      Incidente incidenteDeLa1 = new Incidente("Se tapo el baño", rockandrolleros);
-      Incidente incidenteDeLa2 = new Incidente("No hay agua", rockandrolleros);
-      Incidente incidente2DeLa1 = new Incidente("No anda la cadena", rockandrolleros);
-
-      //ya se que esta mal pero queria mirar rapido si funcionaba
-      servicioDeLa1.aniadirIncidente(incidenteDeLa1);
-      servicioDeLa1.aniadirIncidente(incidente2DeLa1);
-      servicioDeLa2.aniadirIncidente(incidenteDeLa2);
+      banioDeEstacion.informarNoFuncionamiento("Se tapo");
+      servicioDeLa2.informarNoFuncionamiento("No anda la cadena");
 
       servicioDeLa1.getIncidentes().get(0).cerrarIncidente();
       servicioDeLa1.getIncidentes().get(1).cerrarIncidente();
@@ -137,10 +138,14 @@ public class Bootstrap implements WithSimplePersistenceUnit {
       persist(rockandrolleros);
       persist(servicioDeLa1.getIncidentes().get(0));
       persist(servicioDeLa1.getIncidentes().get(1));
+      persist(banioDeEstacion.getIncidentes().get(0));
       persist(servicioDeLa2.getIncidentes().get(0));
       persist(servicioDeLa1);
       persist(servicioDeLa2);
+      persist(banioDeEstacion);
+      persist(elevadorDeEstacion);
       persist(establecimientoDeLa1);
+      persist(paradaDeSubte);
       persist(establecimientoDeLa2);
       persist(entidad1);
       persist(entidad2);
