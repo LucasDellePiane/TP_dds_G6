@@ -7,6 +7,7 @@ import lombok.Getter;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.codec.digest.DigestUtils;
+import javax.persistence.EntityTransaction;
 
 public class RepositorioDeUsuarios implements WithSimplePersistenceUnit {
   @Getter
@@ -15,7 +16,18 @@ public class RepositorioDeUsuarios implements WithSimplePersistenceUnit {
   @Getter
   private static final RepositorioDeUsuarios INSTANCE = new RepositorioDeUsuarios();
   public void aniadirUsuario(Usuario usuario) {
+    EntityTransaction transaction = entityManager().getTransaction();
+    try {
+      transaction.begin();
     usuariosDeLaPlataforma.add(usuario);
+    entityManager().persist(usuario);
+    entityManager().flush();
+    transaction.commit();
+  }catch (Exception e) {
+      if (transaction != null && transaction.isActive()) {
+        transaction.rollback();
+      }
+    }
   }
 
   public Usuario findById(Integer id) {

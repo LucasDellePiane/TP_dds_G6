@@ -15,12 +15,12 @@ public class ValidacionRegistroDeUsuario {
   public void comienzo(){
     ValidadorPeorContrasenia.getINSTANCE().setNombreArchivo("contraseniasPeligrosas.txt");
   }
-  /*@Test
+  @Test
   public void unUsuarioSeRegistraSiSeValidaCorrectamenteLaContrasenia() {
     Usuario usuario = new Usuario("soybatman", "elmascapodelmundo");
     repousers.aniadirUsuario(usuario);
-    Assertions.assertTrue(repousers.getUsuariosDeLaPlataforma().stream().anyMatch(  u -> u.getNombreUsuario().equals("soybatman")  && u.getContrasenia().equals("elmascapodelmundo")));
-}*/
+    Assertions.assertTrue(repousers.getUsuariosDeLaPlataforma().stream().anyMatch(  u -> u.getNombreUsuario().equals("soybatman") ));
+}
 
   /*@Test // Esta forma es la correcta? --> Preguntar a Rolli
   public void unUsuarioNoSeRegistraSiNoSeValidaCorrectamenteLaContrasenia() {

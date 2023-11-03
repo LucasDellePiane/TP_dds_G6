@@ -86,7 +86,7 @@ public class SessionController {
         modeloErrorRegistro.replace("errorYaExiste", false, true);
       }
 
-      if(request.queryParams("contrasenia") != request.queryParams("otraContrasenia"))
+      if(request.queryParams("contrasenia").equals(request.queryParams("otraContrasenia")))
         modeloErrorRegistro.replace("errorContrasenia", false, true);
 
       try{
