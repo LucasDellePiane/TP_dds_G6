@@ -65,9 +65,9 @@ public class Bootstrap implements WithSimplePersistenceUnit {
 //      Comunidad com2 = new Comunidad(usuariosMiembros, usuariosAdmin, servciosDeInteres);
 //      persist(com2);
 
-      Incidente incidente1Servicio1 = new Incidente("usuario1", com1);
+      Incidente incidente1Servicio1 = new Incidente("Incidente1 Servicio 1", com1);
       persist(incidente1Servicio1);
-      Incidente incidente2Servicio1 = new Incidente("usuario1", com1);
+      Incidente incidente2Servicio1 = new Incidente("Incidente2 Servicio 1", com1);
       persist(incidente2Servicio1);
 //      Incidente incidente1Servicio2 = new Incidente("usuario1", com2);
 //      Incidente incidente1Servicio3 = new Incidente("usuario1", com2);
