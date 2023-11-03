@@ -19,6 +19,10 @@
                                     Ver incidentes
                                 </a>
                             </div>
+                            <form class = botonServicio action="/incidentes/{{id_establecimiento}}/cerrar">
+                                <input name="incidenteId" type="hidden" value={{id_establecimiento}} />
+                                <button class="boton_enviar" type="submit"> Ver incidentes </button>
+                            </form>
                         </li>
                     </div>
                 {{/establecimientos}}

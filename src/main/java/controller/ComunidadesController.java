@@ -21,6 +21,7 @@ public class ComunidadesController {
     Integer id = request.session().attribute("user_id");
     Usuario usuario = RepositorioDeUsuarios.getINSTANCE().buscarPorId(id);
     List<Comunidad> comunidades = RepositorioComunidad.getInstancia().comunidadesALasQuePertenece(usuario);
+    System.out.println(comunidades);
     List<List<Incidente>> listaincidentes = comunidades.stream().map(comunidad -> {
       if(request.queryParams("estadoIncidentes") != null) {
         EstadoIncidente estado = EstadoIncidente.valueOf(request.queryParams("estadoIncidentes"));
@@ -30,7 +31,6 @@ public class ComunidadesController {
     }).toList();
     modelo.put("incidentes", listaincidentes);
     modelo.put("path","comunidades");
-    System.out.println(listaincidentes.get(0).get(0).getId_incidente());
     return new ModelAndView(modelo, "comunidades.html.hbs");
   }
 

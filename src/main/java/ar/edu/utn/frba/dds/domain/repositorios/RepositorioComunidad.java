@@ -44,7 +44,7 @@ public class RepositorioComunidad implements WithSimplePersistenceUnit {
   }
 
   public List<Comunidad> obtenerTodos() {
-    return entityManager().createQuery("from Comunidad ", Comunidad.class).getResultList();
+    return entityManager().createQuery("from Comunidad", Comunidad.class).getResultList();
   }
 
 

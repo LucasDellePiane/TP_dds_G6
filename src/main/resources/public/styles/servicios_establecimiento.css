@@ -52,3 +52,13 @@
     border-radius: 20px;
     border: 3px solid var(--color-boton-activado-hover);
 }
+
+.incidentes::-webkit-scrollbar {
+    width: 12px;               /* width of the entire scrollbar */
+}
+
+.incidentes::-webkit-scrollbar-thumb {
+    background-color:	var(--color-boton-activado);    /* color of the scroll thumb */
+    border-radius: 20px;       /* roundness of the scroll thumb */
+    border: 3px solid var(--color-boton-activado-hover);  /* creates padding around scroll thumb */
+}
