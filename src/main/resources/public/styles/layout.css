@@ -182,3 +182,19 @@ header {
     position: relative;
     z-index: 0;
 }
+
+.containerLogo{
+    display: flex;
+    align-items: center;
+}
+
+.conectados{
+    color: #4e2d86;
+    font-size: 30px;
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+.perfilLogo{
+    margin-top: 8px;
+}

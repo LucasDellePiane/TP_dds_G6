@@ -1,23 +1,25 @@
 {{#partial "principal" }}
     <div class="contenedor">
-        <h1 class="tituloEstablecimiento">Mi Perfil</h1>
         <div class="cardsEstablecimiento">
             <ul>
                 {{#if comunidadesAdmin.length}}
+                    <div class="tituloAdmin"> Administración de usuarios </div>
                     {{#comunidadesAdmin}}
                         <div class='cardComunidadAdmin'>
                             <li class="containerAdmin">
                                 <div class="bodyCardEstablecimiento">
 
-                                    <div class="titulo_comunidadAdmin">
-                                        <div>{{nombre}}</div>
+                                    <div class="titulo_comunidadAdmin"> {{nombre}}</div>
+
+                                    <div class="dataComunidad">
                                         <div class="tituloMiembros"> Miembros: </div>
-                                    </div>
-                                    {{#miembros}}
                                         <div class="nombreMiembro">
-                                            <div>{{nombreUsuario}}</div>
+                                            {{#miembros}}
+                                                <div>{{nombreUsuario}}</div>
+                                            {{/miembros}}
                                         </div>
-                                    {{/miembros}}
+                                    </div>
+
                                 </div>
                             </li>
                         </div>

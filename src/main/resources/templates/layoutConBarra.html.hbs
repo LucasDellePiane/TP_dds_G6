@@ -22,16 +22,26 @@
 {{!--     {{#if user_id}} --}}
         <header class="hero">
             <!-- Nav -->
-            <nav class="nav container">
-                <div class="nav__logo">
-                    <h1 class="logo"> Conectados </h1>
+            <nav class="nav container ">
+                <div class="nav__logo containerLogo">
+                    <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <rect width="80" height="80" fill="url(#pattern0)"/>
+                        <defs>
+                            <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
+                                <use xlink:href="#image0_678_238" transform="scale(0.0125)"/>
+                            </pattern>
+                            <image id="image0_678_238" width="80" height="80" xlink:href="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/2wBDAAMCAgMCAgMDAwMEAwMEBQgFBQQEBQoHBwYIDAoMDAsKCwsNDhIQDQ4RDgsLEBYQERMUFRUVDA8XGBYUGBIUFRT/2wBDAQMEBAUEBQkFBQkUDQsNFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBT/wAARCABQAFADASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD9E6KKa8ixozuwVVGSxOAK9M6B1FeX+Jf2hfDHh+5e3hM2pyocN9mA2g/7x4NZlj+1B4cuJFW4sr60XuzKGA/I1s6NRK7R6NPLsXWjzU6bZ7HRXIaH8WvCniAqtrrEAkbpHMdjfka6PUdYstJsXvbu5jgtVG4yuwC4rHyOaph61GShUg033TLlFeM6/wDtOaFp9w0WnWdxqIU483hEP0zzS+HP2m9C1S5SDUbSfTCxx5rYdB9cciqcXHc9OOS5hKn7SNF2/H7tz2WiorW6hvbeOeCRZoZF3JIhyGB7ipak8Vpp2YV4/wDtHeL59D8O22mWshilv2IkZTg+WOo/HivYK8D/AGpNLleLRtQCkxIXhY+hOCP5V3YGMZYiKkdGHSdWNw+DfwT0vUtBg1rXYftb3OWht2JCKucZOOprutT+A3gzUlIGmG0P963kKn9c1a+C+sRax8OdKaMjfAhgkX0YH/AitnxFqWqvmy0S3V7tuGup+Iofc+p9hSrTqTqyTfU65YvFQrPlqONn3seI+KPhj4L+F19HqN/fTaiR80OlNjdI3bJHasn+wfG3xsvI5JIjp2iocRKwKQxr2wP4jivZNB+D2l2d8dU1mR9e1dzuae65QH0VfSu9RFjUKihVUYCqMAVPtIU/g1ff/I9GpnVZ8spS55rZvZei/U8r8Ofs5eGNJhQ6gsuqXGPmMjbUz7Af41lfEn9n3RZ9CubzQIDY30CGQRKxKSADJHPQ16kmvrb+Im0m6IjllTzbZjwJFH3l+o/rUvijUE0vw3qd3JwkNu7H/vk1zz5vtdTDDZtmEMTCpGq27rS+j8rbHjX7Lviy4vrHUdCuJGkW1Amh3H7qk4I/PFe8181/sq2skniDW7w/cFuqH6lgf6V9KVlHY7+KqdOlm1VU1a9m/VpXCsHxt4Ut/Gfhu70u4GPMXMb/ANxx0P51vVwfxs8SzeF/h/fXFtK0N1IViidTggk9RWkW4yTjufOYWlOvXhSg7NtI8m+C2uXfw88e3fhjVcwx3L+XtboJB91h7Efzr6Vr54utFvvi58PbTxTDb+T4j09ihkTj7SqYOfrXr3w18Wjxj4TtLxuLtB5Nyh6rIvBz/OurESVW1Vb9fU9HMKDTc/tRfLL1XX5lb4j/ABP074c2sD3UclzcT58uCPGSB1Jz2qf4d/ETT/iNpUl3ZI8MkLbJYZMbkJ6dOxrI+LXwnT4kW9q8V0LO9tshHcEqVPUHFWfhT8MovhrpNxB9o+1Xdy4eaQDC8dAPzrGXJyR5d+plGOC+pScm/bX0/r0J/il4cn1vw611YEx6tp7fabWReu5eo/EVw+teN7n4lfBzVF06LdrEaLHeWq/eC5+YgdwRmvaSAwIIyK+a/G8d38HPigurWCkadfEyNEPuupPzof5/jXZh4LEwdF/EtV+qMMHW9jWhUSu4tNfLodr+zLoZ03wTcXrptkvLg9RztUYH8zXsFZXhe+07U9CtLvSlRLKZfMRYxgAk5Ix65JrVrzeVx0ZWY4t47F1MTJW5n93YK8F/an1MrY6NpwbAkdpmH0GP6171Xgv7UWjyyw6NqSqTFEXhc46E4I/lXXhIKpWjFhl9VUcTGo+n+R6d8K9IXRfh/otsFwTAJG9y3zf1FNtfDf8Awi3iqXULBNun6kcXUK9El7SD69D9aqfCnx1p3ijwnYJHcRpd2sKwzQMwDAqMA/Q4rpdY8TaVoVq9xf30FvEoydzj+VROE41HBrUxlWn7Sbf2r3NSsvXvE2l+GbU3GpXkVrH23tyfYDvXjHir9oW71W6/s7wlZPJLIdi3Ei5Yn/ZX/Gl8LaDo+k69Fe+P9dhudekHmR2V1LlYs9M9s+1dP1T2UefEO3l1f+QU8NUqaKLb7LVnrHh7X73xQwu4bRrHSuqSXAxJN7hf4R9aw/jZ4Xi8SeBL5igNzZqbiFu4I6j8RXZ2mpWV3GptrmGVMceW4IxXG/GDxtp3hnwffxy3EbXlzE0UMAYFmJ4zj0Fc9ObVWMoK1mTSpVJ1VCMdbnB/sw+IpZodU0aRi0cQFxGPTJwR/Kvea+ev2W9Fm+1avqrKRB5Yt1bHBbIJx+VfQtbY6UZV5OJpjKfsa0odgrN8ReHrLxTpE+nahF5tvMMH1B7Ee4rSorhUnF3W5xHzTr37OniHSbx5NCu0u4c/L+88qQD0P/1qq6Z+z34t1i4U6nNHaR55kmm8xsewFfUFFeqs0xCVtL97HR7eZxvgf4V6N4FtCLWMzXrrh7yQDf8A8B9K4jxV+zPYa3dT3lrrF1FdSsXY3OJQSfU9a9pory6k5VZc03dnXg8yxeXzc8NPlb321+8+YZv2cPF+kyN/Z2pwSDsYZmiJ/lVrR/2avEGq3yS6/qkcUQPzYcyyEegPSvpSiiMnHZns1OJ8wqxs+W/flV/6+Rl+G/Dlj4T0eDTdPi8q3hGPdj3J9Sa1KKKnc+VlKU5OUnds/9k="/>
+                        </defs>
+                    </svg>
+
+                    <a class="logo conectados" href="/establecimientos"> Conectados </a>
                 </div>
 
                 <ul class="nav__links">
                 {{#if (eq path 'establecimientos')}}
                     <li class="nav__items">
                         <a class="nav__link" href="/establecimientos">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 30 30" fill="none">
                                 <path d="M12.6557 0.782584C13.3206 0.276023 14.147 0 14.9989 0C15.8508 0 16.6773 0.276023 17.3421 0.782584L28.5921 9.34237C29.4814 10.019 30 11.0441 30 12.1284V26.4334C30 27.3793 29.6049 28.2865 28.9017 28.9554C28.1984 29.6242 27.2446 30 26.25 30H18.75C18.3238 30 17.915 29.839 17.6136 29.5523C17.3122 29.2656 17.1429 28.8769 17.1429 28.4715V17.7717H12.8571V28.4715C12.8571 28.8769 12.6878 29.2656 12.3864 29.5523C12.085 29.839 11.6762 30 11.25 30H3.75C2.75544 30 1.80161 29.6242 1.09835 28.9554C0.395088 28.2865 0 27.3793 0 26.4334V12.1263C0 11.0441 0.518571 10.019 1.40786 9.34237L12.6557 0.782584Z" fill="#9B74C6"/>
                             </svg>
                         </a>
@@ -39,7 +49,7 @@
                  {{else}}
                     <li class="nav__items">
                         <a class="nav__link" href="/establecimientos">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 30 30" fill="none">
                                 <path d="M12.6557 0.782584C13.3206 0.276023 14.147 0 14.9989 0C15.8508 0 16.6773 0.276023 17.3421 0.782584L28.5921 9.34237C29.4814 10.019 30 11.0441 30 12.1284V26.4334C30 27.3793 29.6049 28.2865 28.9017 28.9554C28.1984 29.6242 27.2446 30 26.25 30H18.75C18.3238 30 17.915 29.839 17.6136 29.5523C17.3122 29.2656 17.1429 28.8769 17.1429 28.4715V17.7717H12.8571V28.4715C12.8571 28.8769 12.6878 29.2656 12.3864 29.5523C12.085 29.839 11.6762 30 11.25 30H3.75C2.75544 30 1.80161 29.6242 1.09835 28.9554C0.395088 28.2865 0 27.3793 0 26.4334V12.1263C0 11.0441 0.518571 10.019 1.40786 9.34237L12.6557 0.782584ZM15.3343 3.16914C15.2394 3.09704 15.1215 3.05777 15 3.05777C14.8785 3.05777 14.7606 3.09704 14.6657 3.16914L3.41571 11.7289C3.35269 11.7768 3.30184 11.8376 3.26696 11.9067C3.23209 11.9759 3.21408 12.0517 3.21429 12.1284V26.4334C3.21429 26.7147 3.45429 26.9429 3.75 26.9429H9.64286V16.2432C9.64286 15.8378 9.81218 15.449 10.1136 15.1624C10.415 14.8757 10.8238 14.7147 11.25 14.7147H18.75C19.1762 14.7147 19.585 14.8757 19.8864 15.1624C20.1878 15.449 20.3571 15.8378 20.3571 16.2432V26.9429H26.25C26.3921 26.9429 26.5283 26.8893 26.6288 26.7937C26.7293 26.6981 26.7857 26.5686 26.7857 26.4334V12.1263C26.7856 12.05 26.7674 11.9746 26.7326 11.9058C26.6977 11.837 26.647 11.7766 26.5843 11.7289L15.3343 3.16914Z" fill="#9B74C6"/>
                             </svg>
                         </a>
@@ -48,7 +58,7 @@
                  {{#if (eq path 'comunidades')}}
                  <li class="nav__items">
                      <a class="nav__link" href="/comunidades">
-                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24" fill="none">
                          <path d="M9 2C6.38 2 4.25 4.13 4.25 6.75C4.25 9.32 6.26 11.4 8.88 11.49C8.96 11.48 9.04 11.48 9.1 11.49C9.12 11.49 9.13 11.49 9.15 11.49C9.16 11.49 9.16 11.49 9.17 11.49C11.73 11.4 13.74 9.32 13.75 6.75C13.75 4.13 11.62 2 9 2Z" fill="#9B74C6"/>
                          <path d="M14.08 14.15C11.29 12.29 6.73996 12.29 3.92996 14.15C2.65996 15 1.95996 16.15 1.95996 17.38C1.95996 18.61 2.65996 19.75 3.91996 20.59C5.31996 21.53 7.15996 22 8.99996 22C10.84 22 12.68 21.53 14.08 20.59C15.34 19.74 16.04 18.6 16.04 17.36C16.03 16.13 15.34 14.99 14.08 14.15Z" fill="#9B74C6"/>
                          <path d="M19.9899 7.33998C20.1499 9.27998 18.7699 10.98 16.8599 11.21C16.8499 11.21 16.8499 11.21 16.8399 11.21H16.8099C16.7499 11.21 16.6899 11.21 16.6399 11.23C15.6699 11.28 14.7799 10.97 14.1099 10.4C15.1399 9.47998 15.7299 8.09998 15.6099 6.59998C15.5399 5.78998 15.2599 5.04998 14.8399 4.41998C15.2199 4.22998 15.6599 4.10998 16.1099 4.06998C18.0699 3.89998 19.8199 5.35998 19.9899 7.33998Z" fill="#9B74C6"/>
@@ -59,7 +69,7 @@
                  {{else}}
                  <li class="nav__items">
                      <a class="nav__link" href="/comunidades">
-                         <svg xmlns="http://www.w3.org/2000/svg" width="60" height="57" viewBox="0 0 54 47" fill="none">
+                         <svg xmlns="http://www.w3.org/2000/svg" width="61" height="61" viewBox="0 0 54 47" fill="none">
                              <path d="M24.1601 22.87C24.0601 22.86 23.9401 22.86 23.8301 22.87C21.4501 22.79 19.5601 20.84 19.5601 18.44C19.5601 15.99 21.5401 14 24.0001 14C26.4501 14 28.4401 15.99 28.4401 18.44C28.4301 20.84 26.5401 22.79 24.1601 22.87Z" stroke="#9B74C6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                              <path d="M31.4098 16C33.3498 16 34.9098 17.57 34.9098 19.5C34.9098 21.39 33.4098 22.93 31.5398 23C31.4598 22.99 31.3698 22.99 31.2798 23" stroke="#9B74C6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                              <path d="M19.1602 26.56C16.7402 28.18 16.7402 30.82 19.1602 32.43C21.9102 34.27 26.4202 34.27 29.1702 32.43C31.5902 30.81 31.5902 28.17 29.1702 26.56C26.4302 24.73 21.9202 24.73 19.1602 26.56Z" stroke="#9B74C6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -71,7 +81,7 @@
                  {{#if (eq path 'rankings')}}
                  <li class="nav__items">
                      <a class="nav__link" href="/rankings">
-                         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
+                         <svg xmlns="http://www.w3.org/2000/svg" width="31" height="31" viewBox="0 0 30 30" fill="none">
                              <path d="M18 4H21C21.2652 4 21.5196 4.10536 21.7071 4.29289C21.8946 4.48043 22 4.73478 22 5V8C22 9.06087 21.5786 10.0783 20.8284 10.8284C20.0783 11.5786 19.0609 12 18 12H16.46C15.5555 13.0091 14.3359 13.6824 13 13.91V16H14C14.7956 16 15.5587 16.3161 16.1213 16.8787C16.6839 17.4413 17 18.2044 17 19V21C17 21.2652 16.8946 21.5196 16.7071 21.7071C16.5196 21.8946 16.2652 22 16 22H8C7.73478 22 7.48043 21.8946 7.29289 21.7071C7.10536 21.5196 7 21.2652 7 21V19C7 18.2044 7.31607 17.4413 7.87868 16.8787C8.44129 16.3161 9.20435 16 10 16H11V13.91C9.66406 13.6824 8.44453 13.0091 7.54 12H6C4.93913 12 3.92172 11.5786 3.17157 10.8284C2.42143 10.0783 2 9.06087 2 8V5C2 4.73478 2.10536 4.48043 2.29289 4.29289C2.48043 4.10536 2.73478 4 3 4H6V3C6 2.73478 6.10536 2.48043 6.29289 2.29289C6.48043 2.10536 6.73478 2 7 2H17C17.2652 2 17.5196 2.10536 17.7071 2.29289C17.8946 2.48043 18 2.73478 18 3V4Z" fill="#9B74C6"/>
                          </svg>
                      </a>
@@ -133,15 +143,15 @@
                     {{/if}}
                     {{#if (eq path 'administracion')}}
                     <li class="nav__items">
-                        <a class="nav__link" href="#">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
+                        <a class="nav__link perfilLogo" href="perfil">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 25" fill="none">
                             <path d="M6 6.01758C6 9.15148 8.692 11.7018 12 11.7018C15.308 11.7018 18 9.15148 18 6.01758C18 2.88369 15.308 0.333374 12 0.333374C8.692 0.333374 6 2.88369 6 6.01758ZM22.6667 24.3334H24V23.0702C24 18.1957 19.812 14.2281 14.6667 14.2281H9.33333C4.18667 14.2281 0 18.1957 0 23.0702V24.3334H22.6667Z" fill="#9B74C6"/>
                             </svg>
                         </a>
                     </li>
                     {{else}}
                     <li class="nav__items">
-                        <a class="nav__link" href="#">
+                        <a class="nav__link" href="perfil">
                             <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 40 41" fill="none">
                                 <path d="M17 14.0693C14.2164 14.0693 12 11.8755 12 9.24298C12 6.61051 14.2164 4.41666 17 4.41666C19.7836 4.41666 22 6.61051 22 9.24298C22 11.8755 19.7836 14.0693 17 14.0693ZM28 26.7219V27.0167H27.6667H6V26.7219C6 22.3052 9.71115 18.6588 14.3333 18.6588H19.6667C24.2876 18.6588 28 22.3053 28 26.7219Z" stroke="#9B74C6" stroke-width="2"/>
                             </svg>

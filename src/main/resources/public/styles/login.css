@@ -26,7 +26,6 @@
 }
 
 #botonEnviar{
-    margin-top: 10px;
     color: white;
     font-size: 13px;
     background-color: #F394B6;
@@ -59,12 +58,14 @@
     text-decoration: none;
     display:flex;
     justify-content: center;
+    margin-bottom: 15px;
 }
 
 .TextForm:hover{
     font-size: 13px;
     text-decoration: none;
     color: #9B74C6;
+
 }
 
 .inputForm{
@@ -96,6 +97,7 @@
     font-weight: bold;
     text-decoration: none;
     padding-top:15px;
+
 }
 
 .content-card {

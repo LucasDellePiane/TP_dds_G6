@@ -15,24 +15,40 @@
 }
 
 .botonCerrarSesion{
-    margin-top: 25;
+    margin-top: 25px;
 }
 
 .tituloMiembros{
     margin-top: 10px;
     margin-bottom:10px;
     font-size: 19px;
-    color: #7A28EB
+    color: #7A28EB;
+    margin-right: 15px;
 }
 
 .titulo_comunidadAdmin{
     font-size: 20px;
-    color:#5806B9
+    color:#5806B9;
+    font-weight: bold;
 }
 
 
 .nombreMiembro{
     font-size: 18px;
-    color: #7A28EB
+    color: #7A28EB;
+    list-style-type: circle;
 }
 
+.tituloAdmin{
+    font-size: 25px;
+    color: white;
+    display: flex;
+    justify-content: center;
+}
+
+.dataComunidad{
+    font-size: 10px;
+    display: flex;
+    align-items: baseline;
+
+}

@@ -22,8 +22,10 @@
 
 .mensajeError{
     color: red;
-    margin-bottom: 3px;
+    margin-bottom: 5px;
     font-weight: bold;
+    display: flex;
+    justify-content: center;
 }
 
 .ErrorContainer{
