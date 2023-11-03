@@ -3,6 +3,7 @@ package ar.edu.utn.frba.dds.domain.entidad;
 
 import ar.edu.utn.frba.dds.domain.establecimiento.Establecimiento;
 import ar.edu.utn.frba.dds.domain.localizacion.Localizacion;
+import ar.edu.utn.frba.dds.domain.servicio.EstadoIncidente;
 import ar.edu.utn.frba.dds.domain.servicio.Incidente;
 import ar.edu.utn.frba.dds.domain.servicio.Servicio;
 
@@ -88,20 +89,18 @@ public class Entidad {
   }  
               
   public double promedioDeCierreIncidente() {
-    /*return this.incidentesSemanales().stream()
-              .mapToLong(incidente -> incidente.tiempoCierre()) // Mapear a una lista de enteros
-              .average()                                                // Calcula directamente el promedio, es como hacer sum y dividir por la cant. de elementos
-              .orElse(0);         */
     // En caso de que no haya elementos devuelve 0
     if (incidentesSemanales().isEmpty()) {
       return 0;
     }
     float sumaTiempoDeCierre = 0;
     // Recorremos la lista y sumamos los tiempos de cierre
-    for (Incidente incidente : incidentesSemanales()) {
+    List<Incidente> incidentesCerrados = this.incidentesSemanales().stream().
+        filter(incidente -> incidente.suEstadoEs(EstadoIncidente.RESUELTO)).toList();
+    for (Incidente incidente : incidentesCerrados) {
       sumaTiempoDeCierre += incidente.tiempoCierre();
     }
-    float promedio = sumaTiempoDeCierre / incidentesSemanales().size();
+    float promedio = sumaTiempoDeCierre / incidentesCerrados.size();
     return promedio;
   }
 

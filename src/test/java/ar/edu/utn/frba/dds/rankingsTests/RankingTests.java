@@ -83,6 +83,7 @@ public class RankingTests {
     servicioDeLa1.informarNoFuncionamiento("Se tapo el baño");
     servicioDeLa1.informarNoFuncionamiento("No hay agua");
     servicioDeLa2.informarNoFuncionamiento("No anda la cadena");
+    servicioDeLa1.informarNoFuncionamiento("cacas everywhere");
 
     servicioDeLa1.getIncidentes().get(0).cerrarIncidente();
     servicioDeLa1.getIncidentes().get(1).cerrarIncidente();
@@ -141,15 +142,15 @@ public class RankingTests {
     assertEquals(5, entidad1.promedioDeCierreIncidente());
   }
   @Test public void cantidadDeIncidentesSemanales() {
-    assertEquals(2, entidad1.cantidadIncidentesEnUnaSemana());
+    assertEquals(3, entidad1.cantidadIncidentesEnUnaSemana());
   }
   @Test public void cantidadDeIncidentes() {
-    assertEquals(2, entidad1.cantidadIncidentesEntidad());
+    assertEquals(3, entidad1.cantidadIncidentesEntidad());
   }
 
   @Test
   public void cantidadDeIncidentesDeUnServicio() {
-    assertEquals(2, servicioDeLa1.getIncidentes().size());
+    assertEquals(3, servicioDeLa1.getIncidentes().size());
   }
 
   @Test
