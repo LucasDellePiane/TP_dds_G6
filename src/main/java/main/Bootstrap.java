@@ -36,8 +36,12 @@ public class Bootstrap implements WithSimplePersistenceUnit {
   public void run() {
     withTransaction(() -> {
 
-      Usuario usuarioPrueba = new Usuario("usuario1","elmascapodelmundo");
-      persist(usuarioPrueba);
+      Usuario usuarioAdmin = new Usuario("usuario1","elmascapodelmundo");
+      persist(usuarioAdmin);
+      Usuario usuarioPrueba2 = new Usuario("usuario2","elmascapodelmundo");
+      persist(usuarioPrueba2);
+      Usuario usuarioPrueba3 = new Usuario("usuario3","elmascapodelmundo");
+      persist(usuarioPrueba3);
 
       Servicio servicio1 = new Servicio(TipoServicio.BAÑO);
       persist(servicio1);
@@ -47,8 +51,10 @@ public class Bootstrap implements WithSimplePersistenceUnit {
       persist(servicio3);
 
       List<Usuario> usuariosMiembros = new ArrayList<>();
-      usuariosMiembros.add(usuarioPrueba);
+      usuariosMiembros.add(usuarioPrueba2);
+      usuariosMiembros.add(usuarioPrueba3);
       List<Usuario> usuariosAdmin = new ArrayList<>();
+      usuariosAdmin.add(usuarioAdmin);
       List<Servicio> servciosDeInteres = new ArrayList<>();
       servciosDeInteres.add(servicio1);
       servciosDeInteres.add(servicio2);

@@ -1,5 +1,7 @@
 package controller;
 
+import ar.edu.utn.frba.dds.domain.Comunidad.Comunidad;
+import ar.edu.utn.frba.dds.domain.repositorios.RepositorioComunidad;
 import ar.edu.utn.frba.dds.domain.repositorios.RepositorioDeUsuarios;
 import ar.edu.utn.frba.dds.domain.usuario.Usuario;
 import spark.ModelAndView;
@@ -8,6 +10,7 @@ import spark.Response;
 import java.net.URLEncoder;
 import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class SessionController {
@@ -148,6 +151,22 @@ public class SessionController {
       return null;
     }
 
+  }
+
+  public ModelAndView mostrarPerfil(Request request, Response response){
+    Map<String, Object> modelo = new HashMap<>();
+    Integer id = request.session().attribute("user_id");
+    Usuario usuario = RepositorioDeUsuarios.getINSTANCE().buscarPorId(id);
+    List<Comunidad> comunidades = RepositorioComunidad.getInstancia().obtenerTodos();
+    List<Comunidad> comunidadesAdmin = comunidades.stream().filter(comunidad-> comunidad.getAdministradores().contains(usuario)).toList();
+    modelo.put("comunidadesAdmin", comunidadesAdmin);
+    return new ModelAndView(modelo, "perfil.html.hbs");
+  }
+
+  public Void cerrarSesion(Request request, Response response){
+    request.session().attribute("user_id", null);
+    response.redirect("/login");
+    return null;
   }
 
 }
