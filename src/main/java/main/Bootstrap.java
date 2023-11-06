@@ -75,7 +75,7 @@ public class Bootstrap implements WithSimplePersistenceUnit {
 
       servicio1.informarNoFuncionamiento("no hay agua");
       servicio2.informarNoFuncionamiento("rotas las escaleras");
-      servicio3.informarNoFuncionamiento("mse tapo el banio");
+      servicio3.informarNoFuncionamiento("se tapo el banio");
 
       servicio1.getIncidentes().get(0).setEstado(EstadoIncidente.RESUELTO);
       servicio1.getIncidentes().get(0).setHorarioCierre(LocalDateTime.now().plusHours(5));
@@ -109,6 +109,7 @@ public class Bootstrap implements WithSimplePersistenceUnit {
           TipoEstablecimiento.SUCURSAL, localizacion);
       Establecimiento establecimientoDeLa2 = new Establecimiento("establecimientoDeLa2",
           TipoEstablecimiento.SUCURSAL, localizacion);
+
       Usuario luki = new Usuario("usuarioX", "elmascapodelmundo");
       Usuario lucho = new Usuario("usuarioY", "elmascapodelmundo");
       List<Usuario> miembros = new ArrayList<>(Arrays.asList(luki, lucho));

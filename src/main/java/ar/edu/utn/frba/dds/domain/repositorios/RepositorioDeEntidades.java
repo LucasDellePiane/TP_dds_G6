@@ -59,6 +59,25 @@ public class RepositorioDeEntidades {
     return entidadesDelRanking.subList(0, numeroMinimo);
   }
 
+  public List<Integer> cantidadRankingCantidad() {
+    int cantidadEntidades = this.calcularRankingCantidad().size();
+    List<Integer> posiciones = new ArrayList<>();
+    for (int i = 1; i <= cantidadEntidades; i++) {
+      posiciones.add(i);
+    }
+    return posiciones;
+  }
+
+  public List<Integer> cantidadRankingCierre() {
+    int cantidadEntidades = this.calcularRankingCierre().size();
+    List<Integer> posiciones = new ArrayList<>();
+    for (int i = 1; i <= cantidadEntidades; i++) {
+      posiciones.add(i);
+    }
+    return posiciones;
+  }
+
+
   public void eliminarRankingsAntiguos() {
     String directorio = "RankingsCSV";
     File directorioAEliminar = new File(directorio);

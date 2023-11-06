@@ -14,7 +14,9 @@ import java.util.Map;
 public class RankingsController implements WithSimplePersistenceUnit {
   public ModelAndView rankings(Request request, Response response) {
     Map<String, Object> modelo = new HashMap<>();
-    request.session().attribute("path","rankings");;
+    request.session().attribute("path","rankings");
+    modelo.put("posicionesRankingCantidad", new ArrayList<>(RepositorioDeEntidades.getInstancia().cantidadRankingCantidad()));
+    modelo.put("posicionesRankingCierre", new ArrayList<>(RepositorioDeEntidades.getInstancia().cantidadRankingCierre()));
     modelo.put("rankingCantidad", new ArrayList<>(RepositorioDeEntidades.getInstancia().calcularRankingCantidad().stream()
         .map(Entidad::getNombreEntidad).toList()));
     modelo.put("rankingCierre", new ArrayList<>(RepositorioDeEntidades.getInstancia().calcularRankingCierre().stream()
