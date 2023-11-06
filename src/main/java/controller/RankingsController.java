@@ -23,7 +23,7 @@ public class RankingsController implements WithSimplePersistenceUnit {
         .map(Entidad::getNombreEntidad).toList()));
     modelo.put("cantidades", new ArrayList<>(RepositorioDeEntidades.getInstancia().calcularRankingCantidad()
         .stream().map(Entidad::cantidadIncidentesEnUnaSemana).toList()));
-    modelo.put("promedios", new ArrayList<>(RepositorioDeEntidades.getInstancia().calcularRankingCantidad()
+    modelo.put("promedios", new ArrayList<>(RepositorioDeEntidades.getInstancia().calcularRankingCierre()
         .stream().map(Entidad::promedioDeCierreIncidente).toList()));
     modelo.put("path","rankings");
     return new ModelAndView(modelo, "rankings.html.hbs");

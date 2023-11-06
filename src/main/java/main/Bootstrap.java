@@ -38,21 +38,67 @@ public class Bootstrap implements WithSimplePersistenceUnit {
   public void run() {
     withTransaction(() -> {
 
+      /*------------DECLARO LOCALIZACION-----------------------*/
       Division division = new Division("CABA", TipoDivision.MUNICIPIO);
       Localizacion localizacion = new Localizacion("Buenos Aires", division, 10.00, 11.00);
 
+      /*------------DECLARO USUARIOS---------------------------*/
       Usuario usuarioAdmin = new Usuario("usuario1","elmascapodelmundo");
       Usuario usuarioPrueba2 = new Usuario("usuario2","elmascapodelmundo");
       Usuario usuarioPrueba3 = new Usuario("usuario3","elmascapodelmundo");
 
+      Usuario luki = new Usuario("usuarioX", "elmascapodelmundo");
+      Usuario lucho = new Usuario("usuarioY", "elmascapodelmundo");
+
+      /*------------DECLARO ENTIDADES--------------------------*/
       Entidad entidad = new Entidad();
       entidad.setearNombre("EntidadGenerica");
       RepositorioDeEntidades.getInstancia().aniadirEntidad(entidad);
 
+      Entidad entidad1 = new Entidad();
+      entidad1.setearNombre("SuperHeroes");
+      Entidad entidad2 = new Entidad();
+      entidad2.setearNombre("SuperVillanos");
+      RepositorioDeEntidades.getInstancia().aniadirEntidad(entidad1);
+      RepositorioDeEntidades.getInstancia().aniadirEntidad(entidad2);
+
+      /*------------DECLARO SERVICIOS-------------------*/
       Servicio servicio1 = new Servicio(TipoServicio.BAÑO);
       Servicio servicio2 = new Servicio(TipoServicio.ELEVACION);
       Servicio servicio3 = new Servicio(TipoServicio.BAÑO);
 
+      Servicio servicioDeLa1 = new Servicio(TipoServicio.BAÑO);
+      Servicio servicioDeLa2 = new Servicio(TipoServicio.BAÑO);
+      Servicio banioDeEstacion = new Servicio(TipoServicio.BAÑO);
+      Servicio elevadorDeEstacion = new Servicio(TipoServicio.ELEVACION);
+
+      /*------------DECLARO ESTABLECIMIENTOS------------*/
+
+      Establecimiento establecimiento = new Establecimiento("parada de tren",TipoEstablecimiento.ESTACION, localizacion);
+      RepositorioEstablecimientos.getInstancia().aniadirEstablecimiento(establecimiento);
+      entidad.aniadirEstablecimiento(establecimiento);
+      establecimiento.darAltaServicio(servicio1);
+      establecimiento.darAltaServicio(servicio2);
+      establecimiento.darAltaServicio(servicio3);
+
+      Establecimiento paradaDeSubte = new Establecimiento("Parada de Subte X",
+          TipoEstablecimiento.ESTACION, localizacion);
+      Establecimiento establecimientoDeLa1 = new Establecimiento("establecimientoDeLa1",
+          TipoEstablecimiento.SUCURSAL, localizacion);
+      Establecimiento establecimientoDeLa2 = new Establecimiento("establecimientoDeLa2",
+          TipoEstablecimiento.SUCURSAL, localizacion);
+      RepositorioEstablecimientos.getInstancia().aniadirEstablecimiento(establecimientoDeLa1);
+      RepositorioEstablecimientos.getInstancia().aniadirEstablecimiento(establecimientoDeLa2);
+      entidad1.aniadirEstablecimiento(establecimientoDeLa1);
+      entidad1.aniadirEstablecimiento(paradaDeSubte);
+      entidad2.aniadirEstablecimiento(establecimientoDeLa2);
+
+      establecimientoDeLa1.darAltaServicio(servicioDeLa1);
+      paradaDeSubte.darAltaServicio(banioDeEstacion);
+      paradaDeSubte.darAltaServicio(elevadorDeEstacion);
+      establecimientoDeLa2.darAltaServicio(servicioDeLa2);
+
+      /*-----------CREO COMUNIDADES-----------------*/
       List<Usuario> usuariosMiembros = new ArrayList<>();
       usuariosMiembros.add(usuarioPrueba2);
       usuariosMiembros.add(usuarioPrueba3);
@@ -66,73 +112,21 @@ public class Bootstrap implements WithSimplePersistenceUnit {
       Comunidad com1 = new Comunidad(usuariosMiembros, usuariosAdmin, servciosDeInteres,"comunidad prueba 1");
       RepositorioComunidad.getInstancia().aniadirComunidad(com1);
 
+      List<Usuario> miembros = new ArrayList<>(Arrays.asList(luki, lucho));
+      List<Usuario> administradores = new ArrayList<>(Arrays.asList(luki));
+      List<Servicio> servicios = new ArrayList<>(Arrays
+          .asList(servicioDeLa1, servicioDeLa2, banioDeEstacion, elevadorDeEstacion));
+      Comunidad rockandrolleros = new Comunidad(miembros, administradores, servicios,"RockAndRolleros");
+      RepositorioComunidad.getInstancia().aniadirComunidad(rockandrolleros);
 
-      Establecimiento establecimiento = new Establecimiento("parada de tren",TipoEstablecimiento.ESTACION, localizacion);
-      RepositorioEstablecimientos.getInstancia().aniadirEstablecimiento(establecimiento);
-      establecimiento.darAltaServicio(servicio1);
-      establecimiento.darAltaServicio(servicio2);
-      establecimiento.darAltaServicio(servicio3);
+      /*-----------REPORTO INCIDENTES----------------*/
 
       servicio1.informarNoFuncionamiento("no hay agua");
       servicio2.informarNoFuncionamiento("rotas las escaleras");
       servicio3.informarNoFuncionamiento("se tapo el banio");
 
       servicio1.getIncidentes().get(0).setEstado(EstadoIncidente.RESUELTO);
-      servicio1.getIncidentes().get(0).setHorarioCierre(LocalDateTime.now().plusHours(5));
-
-      persist(usuarioAdmin);
-      persist(usuarioPrueba2);
-      persist(usuarioPrueba3);
-      persist(com1);
-      persist(servicio1.getIncidentes().get(0));
-      persist(servicio2.getIncidentes().get(0));
-      persist(servicio3.getIncidentes().get(0));
-      persist(servicio1);
-      persist(servicio2);
-      persist(servicio3);
-      persist(establecimiento);
-      persist(entidad);
-
-      //---------------PRUEBAS RANKINGS-----------------------//
-      Entidad entidad1 = new Entidad();
-      entidad1.setearNombre("SuperHeroes");
-      Entidad entidad2 = new Entidad();
-      entidad2.setearNombre("SuperVillanos");
-      Servicio servicioDeLa1 = new Servicio(TipoServicio.BAÑO);
-      Servicio servicioDeLa2 = new Servicio(TipoServicio.BAÑO);
-      Servicio banioDeEstacion = new Servicio(TipoServicio.BAÑO);
-      Servicio elevadorDeEstacion = new Servicio(TipoServicio.ELEVACION);
-
-      Establecimiento paradaDeSubte = new Establecimiento("Parada de Subte X",
-          TipoEstablecimiento.ESTACION, localizacion);
-      Establecimiento establecimientoDeLa1 = new Establecimiento("establecimientoDeLa1",
-          TipoEstablecimiento.SUCURSAL, localizacion);
-      Establecimiento establecimientoDeLa2 = new Establecimiento("establecimientoDeLa2",
-          TipoEstablecimiento.SUCURSAL, localizacion);
-
-      Usuario luki = new Usuario("usuarioX", "elmascapodelmundo");
-      Usuario lucho = new Usuario("usuarioY", "elmascapodelmundo");
-      List<Usuario> miembros = new ArrayList<>(Arrays.asList(luki, lucho));
-      List<Usuario> administradores = new ArrayList<>(Arrays.asList(luki));
-      List<Servicio> servicios = new ArrayList<>(Arrays
-          .asList(servicioDeLa1, servicioDeLa2, banioDeEstacion, elevadorDeEstacion));
-      Comunidad rockandrolleros = new Comunidad(miembros, administradores, servicios,"RockAndRolleros");
-
-      RepositorioEstablecimientos.getInstancia().aniadirEstablecimiento(establecimientoDeLa1);
-      RepositorioEstablecimientos.getInstancia().aniadirEstablecimiento(establecimientoDeLa2);
-
-      RepositorioComunidad.getInstancia().aniadirComunidad(rockandrolleros);
-
-      RepositorioDeEntidades.getInstancia().aniadirEntidad(entidad1);
-      RepositorioDeEntidades.getInstancia().aniadirEntidad(entidad2);
-
-      entidad1.aniadirEstablecimiento(establecimientoDeLa1);
-      entidad1.aniadirEstablecimiento(paradaDeSubte);
-      entidad2.aniadirEstablecimiento(establecimientoDeLa2);
-      establecimientoDeLa1.darAltaServicio(servicioDeLa1);
-      paradaDeSubte.darAltaServicio(banioDeEstacion);
-      paradaDeSubte.darAltaServicio(elevadorDeEstacion);
-      establecimientoDeLa2.darAltaServicio(servicioDeLa2);
+      servicio1.getIncidentes().get(0).setHorarioCierre(LocalDateTime.now().plusHours(2));
 
       servicioDeLa1.informarNoFuncionamiento("Se tapo el baño");
       servicioDeLa1.informarNoFuncionamiento("No hay agua");
@@ -146,6 +140,21 @@ public class Bootstrap implements WithSimplePersistenceUnit {
       servicioDeLa1.getIncidentes().get(0).setHorarioCierre(LocalDateTime.now().plusHours(5));
       servicioDeLa1.getIncidentes().get(1).setHorarioCierre(LocalDateTime.now().plusHours(5));
       servicioDeLa2.getIncidentes().get(0).setHorarioCierre(LocalDateTime.now().plusHours(10));
+
+      /*---------------PERSISTO LAS COSAS EN ORDEN (INCIDENTE->SERVICIO->ESTABLECIMIENTO->ENTIDAD)----*/
+
+      persist(usuarioAdmin);
+      persist(usuarioPrueba2);
+      persist(usuarioPrueba3);
+      persist(com1);
+      persist(servicio1.getIncidentes().get(0));
+      persist(servicio2.getIncidentes().get(0));
+      persist(servicio3.getIncidentes().get(0));
+      persist(servicio1);
+      persist(servicio2);
+      persist(servicio3);
+      persist(establecimiento);
+      persist(entidad);
 
       persist(luki);
       persist(lucho);
