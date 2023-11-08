@@ -30,19 +30,26 @@ public class MedioEmail extends MedioComunicacion {
 
     private final String username = "emailRemitente";
     private final String accessToken = "tokenAcceso";
+    private final String host = "smtp.gmail.com";
+    private final String user = "usuario";
 
+    Properties props = new Properties();
     private void enviarNotificacion(String emailUsuario, String mensaje) {
-        Properties props = new Properties();
-        props.put("mail.smtp.host", "smtp.gmail.com");
-        props.put("mail.smtp.port", "587");
-        props.put("mail.smtp.auth", "true");
+
+        props.put("mail.smtp.host", host);
         props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.mail.sender","emisor@gmail.com");
+        props.put("mail.smtp.user", user);
+        props.put("mail.smtp.port", 587);
+        props.put("mail.smtp.auth", "true");
 
         Session session = Session.getInstance(props, new Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication(username, accessToken);
             }
         });
+
+
 
         try {
             Message message = new MimeMessage(session);
@@ -51,10 +58,16 @@ public class MedioEmail extends MedioComunicacion {
             message.setSubject("Notificación de incidente");
             message.setText(mensaje);
 
-            Transport.send(message);
+            Transport transport = session.getTransport();
+            transport.connect(host, user, accessToken);
+            transport.sendMessage(message, message.getAllRecipients());
+            transport.close();
+
         } catch (MessagingException e) {
             throw new SeEnvioEmailException("Error al enviar el correo electrónico: " + e.getMessage());
         }
+
+
     }
 
     //REVISAR RETURN DE LOCALIZACIÓN

@@ -4,6 +4,7 @@ import ar.edu.utn.frba.dds.domain.localizacion.Localizacion;
 import ar.edu.utn.frba.dds.domain.servicio.Incidente;
 import ar.edu.utn.frba.dds.domain.servicio.Servicio;
 import ar.edu.utn.frba.dds.domain.usuario.Usuario;
+import javax.mail.MessagingException;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
@@ -24,7 +25,7 @@ public abstract class MedioComunicacion {
     @Column(name = "id_medioComunicacion")
     private Integer id_medioComunicacion;
 
-    public Localizacion notificarIncidente(Usuario usuario, Incidente incidente) {
+    public Localizacion notificarIncidente(Usuario usuario, Incidente incidente) throws MessagingException {
         return null;
     }
 
