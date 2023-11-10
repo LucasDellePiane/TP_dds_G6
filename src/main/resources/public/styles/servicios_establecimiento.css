@@ -7,7 +7,6 @@
 
 .card_servicio{
     margin-top: 2rem;
-    height: 35rem;
     min-width: 100%;
     border-radius: 20px;
     border-bottom: 1px solid var(--color-iconos);
@@ -18,10 +17,8 @@
 }
 
 .servicios{
-    overflow-y: auto;
     margin-left: 3%;
     margin-right: 2%;
-    max-height: 30rem;
     margin-top:1rem;
     padding: 0 10px 10px;
 }

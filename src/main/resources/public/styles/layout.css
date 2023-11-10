@@ -38,7 +38,29 @@
     border: 0;
     padding: 0;
 }
-
+.nav__items{
+    display: flex;
+    margin: 0;
+    box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
+    outline: 0;
+    border: 0;
+    padding: 5px;
+    flex-direction: column;
+    align-items: center;
+    justify-content:center;
+}
+.nombresLogo{
+    color: #4e2d86;
+    font-size: 20px;
+    font-weight: bold;
+}
+.nombresLogo:hover{
+    color: #af90d1;
+    font-size: 20px;
+    font-weight: bold;
+}
 html{
     font-size: 15px;
     scroll-behavior: smooth;
@@ -81,7 +103,7 @@ img{
     position: relative;
     background-color:var(--color-barras);
     width: 100%;
-    height: 6rem;
+    height: min-content;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -94,7 +116,6 @@ img{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 100%;
     padding: 0;
 
 }
@@ -111,7 +132,6 @@ img{
 
 .nav__links{
     display: flex;
-    height: 100%;
 }
 
 .nav__link{
@@ -125,13 +145,11 @@ img{
     transition: var(--transition);
 }
 
-.nav__link:hover{
+.nav__items:hover{
     color: var(--color-white);
     background-color: var(--color-violet1);
     border-bottom: 10px solid var(--color-violet2) ;
 }
-
-
 
 footer {
     position: fixed;

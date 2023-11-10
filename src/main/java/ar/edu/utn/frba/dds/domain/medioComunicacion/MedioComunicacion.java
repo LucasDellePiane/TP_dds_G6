@@ -25,7 +25,7 @@ public abstract class MedioComunicacion {
     @Column(name = "id_medioComunicacion")
     private Integer id_medioComunicacion;
 
-    public Localizacion notificarIncidente(Usuario usuario, Incidente incidente) throws MessagingException {
+    public Localizacion notificarIncidente(Usuario usuario, Incidente incidente){
         return null;
     }
 
