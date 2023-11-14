@@ -6,6 +6,9 @@ import ar.edu.utn.frba.dds.domain.repositorios.RepositorioDeUsuarios;
 import ar.edu.utn.frba.dds.domain.servicio.EstadoIncidente;
 import ar.edu.utn.frba.dds.domain.servicio.Incidente;
 import ar.edu.utn.frba.dds.domain.usuario.Usuario;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.JsonArray;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -14,7 +17,24 @@ import java.util.List;
 import java.util.Map;
 
 public class ComunidadesController {
-  public ModelAndView listar(Request request, Response response) {
+  public ModelAndView  listar(Request request, Response response) {
+    Map<String, Object> modelo = new HashMap<>();
+    Integer id = request.session().attribute("user_id");
+    Usuario usuario = RepositorioDeUsuarios.getINSTANCE().buscarPorId(id);
+    List<Comunidad> comunidades = RepositorioComunidad.getInstancia().comunidadesALasQuePertenece(usuario);
+
+    ObjectMapper objectMapper = new ObjectMapper();
+    try {
+      // Convierte la lista a JSON
+      String comunidadesJson = objectMapper.writeValueAsString(comunidades);
+      modelo.put("comunidades", comunidadesJson);
+      return new ModelAndView(modelo,"comunidades.html.hbs");
+    } catch (JsonProcessingException e) {
+      e.printStackTrace();
+      return null;
+    }
+  }
+  public ModelAndView listarIncidentes(Request request, Response response) {
     Map<String, Object> modelo = new HashMap<>();
     request.queryParams("estadoIncidentes");
 
@@ -30,7 +50,7 @@ public class ComunidadesController {
     }).toList();
     modelo.put("incidentes", listaincidentes);
     modelo.put("path","comunidades");
-    return new ModelAndView(modelo, "comunidades.html.hbs");
+    return new ModelAndView(modelo, "incidentes.html.hbs");
   }
 
 //  public ModelAndView listarSugerenciaRevisionDeIncidentes(Request request, Response response) {
