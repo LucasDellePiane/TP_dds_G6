@@ -19,7 +19,7 @@ import java.util.List;
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(discriminatorType = DiscriminatorType.STRING, name = "medioComunicación")
-public abstract class MedioComunicacion {
+public abstract class MedioComunicacion { // esto deberia ser una interfaz?
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_medioComunicacion")
